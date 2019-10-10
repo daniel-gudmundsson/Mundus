@@ -15,7 +15,7 @@ public class Account {
     private String email;
     private String password;
     private String dateOfBirth;
-    private User parent;
+    //private User parent;
 
     public long getId() {
         return id;
@@ -57,11 +57,11 @@ public class Account {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public User getParent() {
+/*    public User getParent() {
         return parent;
     }
 
     public void setParent(User parent) {
         this.parent = parent;
-    }
+    }*/
 }

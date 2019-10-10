@@ -2,14 +2,12 @@ package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Quest {
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
+    @Column(name = "QuestId")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
@@ -19,7 +17,8 @@ public class Quest {
     private int coins;
     private String dateCreated; // Breyta í data format eða e-h þannig
     private String deadline;
-    private User assignee;
+    @ManyToOne
+    private Child assignee;
     private Boolean isDone;
 
     public long getId() {
@@ -78,13 +77,18 @@ public class Quest {
         this.deadline = deadline;
     }
 
-    public User getAssignee() {
+
+    @ManyToOne(fetch = FetchType.EAGER,
+            optional = false)
+    @JoinColumn(name = "PersonId")
+    public Child getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(User assignee) {
+    public void setAssignee(Child assignee) {
         this.assignee = assignee;
     }
+
 
     public Boolean getDone() {
         return isDone;
