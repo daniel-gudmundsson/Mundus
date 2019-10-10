@@ -21,6 +21,17 @@ public class Quest {
     private Child assignee;
     private Boolean isDone;
 
+    public Quest(String name, String description, int xp, int coins, String dateCreated, String deadline, Child assignee, Boolean isDone) {
+        this.name = name;
+        this.description = description;
+        this.xp = xp;
+        this.coins = coins;
+        this.dateCreated = dateCreated;
+        this.deadline = deadline;
+        this.assignee = assignee;
+        this.isDone = isDone;
+    }
+
     public long getId() {
         return id;
     }

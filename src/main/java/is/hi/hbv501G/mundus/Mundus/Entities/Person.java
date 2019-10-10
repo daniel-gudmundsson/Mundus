@@ -13,6 +13,12 @@ public abstract class Person {
     private String name;
     private String pin;
 
+    public Person(String name, String pin) {
+        this.name = name;
+        this.pin = pin;
+    }
+
+
 
     public long getId() {
         return id;

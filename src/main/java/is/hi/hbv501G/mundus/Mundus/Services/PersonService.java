@@ -1,17 +1,14 @@
-package is.hi.hbv501G.mundus.Mundus.Repositories;
+package is.hi.hbv501G.mundus.Mundus.Services;
 
 import is.hi.hbv501G.mundus.Mundus.Entities.Person;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonService {
 
     Person save(Person person);
     void delete(Person person);
     List<Person> findAll();
     Optional<Person> findById(long id);
-
 }
