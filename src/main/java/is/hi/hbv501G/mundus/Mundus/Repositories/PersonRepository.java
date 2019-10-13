@@ -1,5 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Repositories;
 
+import is.hi.hbv501G.mundus.Mundus.Entities.Child;
+import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
 import is.hi.hbv501G.mundus.Mundus.Entities.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Person save(Person person);
     void delete(Person person);
     List<Person> findAll();
-    Optional<Person> findById(long id);
+    Child findChildById(long id);
+    Parent findParentById(long id);
 
 }

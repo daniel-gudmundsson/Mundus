@@ -23,17 +23,21 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @RequestMapping("/test")
-    public String Home(Model model){
-        Child krakki  = new Child("Jón","123", 123, 123);
-        krakki.addQuest(new Quest("Tvo","Cool stuff",10,10,"123","1234",krakki,false));
+    //create child
+    @RequestMapping("/person-test1")
+    public String test1(Model model) {
+        Child krakki = new Child("Jón", "123", 123, 123);
+        krakki.addQuest(new Quest());
         personService.save(krakki);
         return "Welcome";
     }
 
-
-
-
+    //Add quest to child
+    @RequestMapping("/person-test2")
+    public String test12(Model model) {
+        System.out.println(personService.assignQuestToChild(3,6));
+        return "Welcome";
+    }
 
 
 }

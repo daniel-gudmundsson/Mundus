@@ -21,15 +21,28 @@ public class Quest {
     private Child assignee;
     private Boolean isDone;
 
-    public Quest(String name, String description, int xp, int coins, String dateCreated, String deadline, Child assignee, Boolean isDone) {
+    /**
+     * Assignee is null by defult. isDone is false by defult.
+     * @param name
+     * @param description
+     * @param xp
+     * @param coins
+     * @param dateCreated
+     * @param deadline
+     */
+    public Quest(String name, String description, int xp, int coins, String dateCreated, String deadline) {
         this.name = name;
         this.description = description;
         this.xp = xp;
         this.coins = coins;
         this.dateCreated = dateCreated;
         this.deadline = deadline;
-        this.assignee = assignee;
-        this.isDone = isDone;
+        this.assignee = null;
+        this.isDone = false;
+    }
+
+    public Quest() {
+
     }
 
     public long getId() {

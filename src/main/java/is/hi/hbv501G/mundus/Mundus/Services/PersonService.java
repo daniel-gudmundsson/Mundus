@@ -10,5 +10,6 @@ public interface PersonService {
     Person save(Person person);
     void delete(Person person);
     List<Person> findAll();
-    Optional<Person> findById(long id);
+    Person findById(long id);
+    boolean assignQuestToChild(long idOfQuest, long idOfChild);
 }

@@ -18,6 +18,12 @@ public abstract class Person {
         this.pin = pin;
     }
 
+    public Person(){
+
+    }
+
+
+
 
 
     public long getId() {

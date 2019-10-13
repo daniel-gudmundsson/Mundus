@@ -9,7 +9,7 @@ public class Child extends Person {
 
     private int totalCoins;
     private int xp;
-    @OneToMany(cascade=CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private Set<Quest> quests = new HashSet<>();
 
@@ -19,11 +19,16 @@ public class Child extends Person {
         this.xp = xp;
     }
 
+    public Child(){
+
+    }
+
     @OneToMany(mappedBy = "child",
             orphanRemoval = true)
     public Set<Quest> getQuests() {
         return quests;
     }
+
     public void setQuests(Set<Quest> quests) {
         this.quests = quests;
     }
@@ -37,11 +42,12 @@ public class Child extends Person {
         this.totalCoins = totalCoins;
     }
 
-    public int getLevel(){
+    public int getLevel() {
         return 99;
     }
 
-    public void addQuest(Quest quest){
+    public void addQuest(Quest quest) {
+        quest.setAssignee(this);
         quests.add(quest);
     }
 }
