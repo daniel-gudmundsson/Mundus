@@ -20,9 +20,12 @@ public class Quest {
     @ManyToOne
     private Child assignee;
     private Boolean isDone;
+    @ManyToOne
+    private Parent maker;
 
     /**
      * Assignee is null by defult. isDone is false by defult.
+     *
      * @param name
      * @param description
      * @param xp
@@ -30,7 +33,7 @@ public class Quest {
      * @param dateCreated
      * @param deadline
      */
-    public Quest(String name, String description, int xp, int coins, String dateCreated, String deadline) {
+    public Quest(String name, String description, int xp, int coins, String dateCreated, String deadline, Parent maker) {
         this.name = name;
         this.description = description;
         this.xp = xp;
@@ -39,6 +42,7 @@ public class Quest {
         this.deadline = deadline;
         this.assignee = null;
         this.isDone = false;
+        this.maker = maker;
     }
 
     public Quest() {
@@ -101,6 +105,16 @@ public class Quest {
         this.deadline = deadline;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER,
+            optional = false)
+    @JoinColumn(name = "PersonId")
+    public Parent getMaker() {
+        return maker;
+    }
+
+    public void setMaker(Parent maker) {
+        this.maker = maker;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER,
             optional = false)

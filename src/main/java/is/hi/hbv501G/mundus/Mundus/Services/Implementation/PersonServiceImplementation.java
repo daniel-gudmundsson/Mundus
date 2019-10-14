@@ -2,6 +2,7 @@ package is.hi.hbv501G.mundus.Mundus.Services.Implementation;
 
 
 import is.hi.hbv501G.mundus.Mundus.Entities.Child;
+import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
 import is.hi.hbv501G.mundus.Mundus.Entities.Person;
 import is.hi.hbv501G.mundus.Mundus.Entities.Quest;
 import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
@@ -41,19 +42,38 @@ public class PersonServiceImplementation implements PersonService {
     }
 
     @Override
-    public Child findById(long id) {
+    public Child findChildById(long id) {
         return personRepository.findChildById(id);
+    }
+
+    @Override
+    public Parent findParentById(long id) {
+        return personRepository.findParentById(id);
     }
 
     @Override
     public boolean assignQuestToChild(long idOfQuest, long idOfChild) {
         Quest quest = questRepository.findById(idOfQuest);
         Child child = personRepository.findChildById(idOfChild);
-        if(quest == null || child == null){
+        if (quest == null || child == null) {
             return false;
-        }else{
+        } else {
             child.addQuest(quest);
             personRepository.save(child);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean assignChildToParent(long idOfChild, long idOfParent) {
+        Child child = personRepository.findChildById(idOfChild);
+        Parent parent = personRepository.findParentById(idOfParent);
+
+        if (child == null || parent == null) {
+            return false;
+        } else {
+            parent.addChild(child);
+            personRepository.save(parent);
             return true;
         }
     }

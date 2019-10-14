@@ -13,10 +13,14 @@ public class Child extends Person {
             fetch = FetchType.LAZY)
     private Set<Quest> quests = new HashSet<>();
 
-    public Child(String name, String pin, int totalCoins, int xp) {
+    @ManyToOne
+    private Parent parent;
+
+    public Child(String name, String pin, int totalCoins, int xp, Parent parent) {
         super(name, pin);
         this.totalCoins = totalCoins;
         this.xp = xp;
+        this.parent = parent;
     }
 
     public Child(){
@@ -49,5 +53,24 @@ public class Child extends Person {
     public void addQuest(Quest quest) {
         quest.setAssignee(this);
         quests.add(quest);
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER,
+            optional = false)
+    @JoinColumn(name = "PersonId")
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }

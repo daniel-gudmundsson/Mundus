@@ -1,5 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Services;
 
+import is.hi.hbv501G.mundus.Mundus.Entities.Child;
+import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
 import is.hi.hbv501G.mundus.Mundus.Entities.Person;
 
 import java.util.List;
@@ -10,6 +12,8 @@ public interface PersonService {
     Person save(Person person);
     void delete(Person person);
     List<Person> findAll();
-    Person findById(long id);
+    Child findChildById(long id);
+    Parent findParentById(long id);
     boolean assignQuestToChild(long idOfQuest, long idOfChild);
+    boolean assignChildToParent(long idOfChild, long idOfParent);
 }

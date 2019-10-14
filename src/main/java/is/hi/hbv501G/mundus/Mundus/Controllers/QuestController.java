@@ -22,7 +22,7 @@ public class QuestController {
 
     @RequestMapping("/quest-test1")
     public String Home(Model model){
-        Quest quest = new Quest("Borda godan mat","Cool stuff",10,10,"123","1234",null,false);
+        Quest quest = new Quest("Borda godan mat","Cool stuff",10,10,"123","1234",null);
         Quest rquest = questService.save(quest);
         System.out.println(rquest.getId());
         return "Welcome";
