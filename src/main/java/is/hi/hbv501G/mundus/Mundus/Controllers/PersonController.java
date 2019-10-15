@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class PersonController {
     //create child
     @RequestMapping("/person-test1")
     public String test1(Model model) {
-        Child krakki = new Child("Jón", "123", 123, 123, null);
+        Child krakki = new Child("Jón", "123", null);
         personService.save(krakki);
         return "Welcome";
     }
@@ -35,7 +36,7 @@ public class PersonController {
     //Add quest to child
     @RequestMapping("/person-test2")
     public String test2(Model model) {
-        System.out.println(personService.assignQuestToChild(3,6));
+        System.out.println(personService.assignQuestToChild(1,2));
         return "Welcome";
     }
 
@@ -57,12 +58,46 @@ public class PersonController {
     //Get all child of parent
     @RequestMapping("/person-test5")
     public String test5(Model model) {
+        Child child = personService.findChildById(2);
+        System.out.println(child.getName());
+        System.out.println(child.getParent().getName());
+        return "Welcome";
+    }
+
+    //Get all child of parent
+    @RequestMapping("/person-test6")
+    public String test6(Model model) {
         Parent parent = personService.findParentById(1);
         for (Child c : parent.getChildren()) {
             System.out.println(c.getName());
         }
         return "Welcome";
     }
+
+    @RequestMapping(value = "/persons", method = RequestMethod.GET)
+    public String loadpersons(Model model) {
+        Parent parent = personService.findParentById(1);
+        Set<Child> children = parent.getChildren();
+        Set<Person> persons = new HashSet<>();
+
+        persons.addAll(children);
+        persons.add(parent);
+
+        model.addAttribute("persons", persons);
+        return "persons";
+    }
+
+    @RequestMapping(value = "/pin-page", method = RequestMethod.GET)
+    public String loadPin(Model model) {
+
+        return "pinPage";
+    }
+
+
+
+
+
+
 
 
 }

@@ -10,16 +10,16 @@ public class Child extends Person {
     private int totalCoins;
     private int xp;
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY, mappedBy = "assignee")
     private Set<Quest> quests = new HashSet<>();
 
     @ManyToOne
     private Parent parent;
 
-    public Child(String name, String pin, int totalCoins, int xp, Parent parent) {
+    public Child(String name, String pin, Parent parent) {
         super(name, pin);
-        this.totalCoins = totalCoins;
-        this.xp = xp;
+        this.totalCoins = 0;
+        this.xp = 0;
         this.parent = parent;
     }
 
@@ -27,8 +27,7 @@ public class Child extends Person {
 
     }
 
-    @OneToMany(mappedBy = "child",
-            orphanRemoval = true)
+    @OneToMany(orphanRemoval = true)
     public Set<Quest> getQuests() {
         return quests;
     }

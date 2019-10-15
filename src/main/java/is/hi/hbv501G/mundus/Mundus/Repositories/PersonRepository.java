@@ -11,7 +11,9 @@ import java.util.Optional;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-    Person save(Person person);
+    Parent save(Parent parent);
+    Child save(Child child);
+
     void delete(Person person);
     List<Person> findAll();
     Child findChildById(long id);

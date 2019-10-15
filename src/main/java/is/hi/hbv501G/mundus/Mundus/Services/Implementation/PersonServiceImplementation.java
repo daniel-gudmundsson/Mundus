@@ -59,7 +59,9 @@ public class PersonServiceImplementation implements PersonService {
             return false;
         } else {
             child.addQuest(quest);
+            quest.setAssignee(child);
             personRepository.save(child);
+            questRepository.save(quest);
             return true;
         }
     }
@@ -73,6 +75,8 @@ public class PersonServiceImplementation implements PersonService {
             return false;
         } else {
             parent.addChild(child);
+            child.setParent(parent);
+            personRepository.save(child);
             personRepository.save(parent);
             return true;
         }

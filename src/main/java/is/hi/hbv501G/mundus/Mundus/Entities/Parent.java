@@ -11,15 +11,15 @@ import java.util.Set;
 public class Parent extends Person {
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY, mappedBy = "parent")
     private Set<Child> children = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,mappedBy = "maker")
     private Set<Reward> rewards = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,mappedBy = "maker")
     private Set<Quest> quests = new HashSet<>();
 
 
@@ -37,8 +37,7 @@ public class Parent extends Person {
 
 
 
-    @OneToMany(mappedBy = "children",
-            orphanRemoval = true)
+    @OneToMany(orphanRemoval = true)
     public Set<Child> getChildren() {
         return children;
     }
@@ -47,8 +46,7 @@ public class Parent extends Person {
         this.children = children;
     }
 
-    @OneToMany(mappedBy = "rewards",
-            orphanRemoval = true)
+    @OneToMany(orphanRemoval = true)
     public Set<Reward> getRewards() {
         return rewards;
     }
@@ -57,8 +55,7 @@ public class Parent extends Person {
         this.rewards = rewards;
     }
 
-    @OneToMany(mappedBy = "quests",
-            orphanRemoval = true)
+    @OneToMany(orphanRemoval = true)
     public Set<Quest> getQuests() {
         return quests;
     }

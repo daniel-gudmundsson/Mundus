@@ -127,12 +127,11 @@ public class Quest {
         this.assignee = assignee;
     }
 
-
-    public Boolean getDone() {
+    public Boolean getIsDone() {
         return isDone;
     }
 
-    public void setDone(Boolean done) {
+    public void setIsDone(Boolean done) {
         isDone = done;
     }
 }
