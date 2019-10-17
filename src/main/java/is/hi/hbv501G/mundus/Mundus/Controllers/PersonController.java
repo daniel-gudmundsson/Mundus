@@ -36,7 +36,11 @@ public class PersonController {
     //Add quest to child
     @RequestMapping("/person-test2")
     public String test2(Model model) {
-        System.out.println(personService.assignQuestToChild(1,2));
+        try {
+            personService.assignQuestToChild(1,2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "Welcome";
     }
 
@@ -51,7 +55,11 @@ public class PersonController {
     //Add children to parent
     @RequestMapping("/person-test4")
     public String test4(Model model) {
-        System.out.println(personService.assignChildToParent(2,1));
+        try {
+            personService.assignChildToParent(2,1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "Welcome";
     }
 

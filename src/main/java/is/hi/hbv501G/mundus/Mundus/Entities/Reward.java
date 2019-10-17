@@ -17,6 +17,8 @@ public class Reward {
     private String endDate;
     private Boolean visible;
     @ManyToOne
+    private Child buyer;
+    @ManyToOne
     private Parent maker;
 
     public Reward(String name, String description, int price, int levelRequired, boolean autorenew, String endDate, Boolean visible, Parent maker) {
@@ -107,5 +109,16 @@ public class Reward {
 
     public void setMaker(Parent maker) {
         this.maker = maker;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER,
+            optional = false)
+    @JoinColumn(name = "PersonId")
+    public Child getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Child buyer) {
+        this.buyer = buyer;
     }
 }

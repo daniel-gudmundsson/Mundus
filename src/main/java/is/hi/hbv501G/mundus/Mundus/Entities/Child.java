@@ -13,6 +13,10 @@ public class Child extends Person {
             fetch = FetchType.LAZY, mappedBy = "assignee")
     private Set<Quest> quests = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "buyer")
+    private Set<Reward> reward = new HashSet<>();
+
     @ManyToOne
     private Parent parent;
 
@@ -34,6 +38,15 @@ public class Child extends Person {
 
     public void setQuests(Set<Quest> quests) {
         this.quests = quests;
+    }
+
+    @OneToMany(orphanRemoval = true)
+    public Set<Reward> getReward() {
+        return reward;
+    }
+
+    public void setReward(Set<Reward> reward) {
+        this.reward = reward;
     }
 
     public int getTotalCoins() {
@@ -72,4 +85,10 @@ public class Child extends Person {
     public void setParent(Parent parent) {
         this.parent = parent;
     }
+
+
+    public void addXp(int xp){
+        this.xp=this.xp+xp;
+    }
+
 }

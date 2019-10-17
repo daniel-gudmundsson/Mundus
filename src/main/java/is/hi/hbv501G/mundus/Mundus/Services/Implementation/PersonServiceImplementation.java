@@ -52,33 +52,33 @@ public class PersonServiceImplementation implements PersonService {
     }
 
     @Override
-    public boolean assignQuestToChild(long idOfQuest, long idOfChild) {
+    public void assignQuestToChild(long idOfQuest, long idOfChild) throws Exception {
         Quest quest = questRepository.findById(idOfQuest);
         Child child = personRepository.findChildById(idOfChild);
         if (quest == null || child == null) {
-            return false;
+            throw new Exception();
         } else {
             child.addQuest(quest);
             quest.setAssignee(child);
             personRepository.save(child);
             questRepository.save(quest);
-            return true;
         }
     }
 
     @Override
-    public boolean assignChildToParent(long idOfChild, long idOfParent) {
+    public void assignChildToParent(long idOfChild, long idOfParent) throws Exception {
         Child child = personRepository.findChildById(idOfChild);
         Parent parent = personRepository.findParentById(idOfParent);
 
         if (child == null || parent == null) {
-            return false;
+            throw new Exception();
         } else {
             parent.addChild(child);
             child.setParent(parent);
             personRepository.save(child);
             personRepository.save(parent);
-            return true;
         }
     }
+
+
 }

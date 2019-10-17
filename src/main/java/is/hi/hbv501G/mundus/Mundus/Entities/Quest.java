@@ -1,6 +1,5 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
 
@@ -20,6 +19,7 @@ public class Quest {
     @ManyToOne
     private Child assignee;
     private Boolean isDone;
+    private Boolean isConfirmed;
     @ManyToOne
     private Parent maker;
 
@@ -42,6 +42,7 @@ public class Quest {
         this.deadline = deadline;
         this.assignee = null;
         this.isDone = false;
+        this.isConfirmed = false;
         this.maker = maker;
     }
 
@@ -133,5 +134,13 @@ public class Quest {
 
     public void setIsDone(Boolean done) {
         isDone = done;
+    }
+
+    public Boolean getIsConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setIsConfirmed(Boolean confirmed) {
+        isConfirmed = confirmed;
     }
 }
