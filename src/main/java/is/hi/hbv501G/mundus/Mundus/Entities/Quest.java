@@ -2,8 +2,7 @@ package is.hi.hbv501G.mundus.Mundus.Entities;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class Quest {
@@ -16,13 +15,12 @@ public class Quest {
     private String description;
     private int xp;
     private int coins;
-    private LocalDate dateCreated; // Breyta í data format eða e-h þannig
-    private LocalDate deadline;
+    private SimpleDateFormat dateCreated; // Breyta í data format eða e-h þannig
+    private SimpleDateFormat deadline;
     @ManyToOne
     private Child assignee;
     private Boolean isDone;
     private Boolean isConfirmed;
-    @NotNull
     @ManyToOne
     private Parent maker;
 
@@ -36,7 +34,7 @@ public class Quest {
      * @param dateCreated
      * @param deadline
      */
-    public Quest(String name, String description, int xp, int coins, LocalDate dateCreated, LocalDate deadline, Parent maker) {
+    public Quest(String name, String description, int xp, int coins, SimpleDateFormat dateCreated, SimpleDateFormat deadline, Parent maker) {
         this.name = name;
         this.description = description;
         this.xp = xp;
@@ -93,19 +91,19 @@ public class Quest {
         this.coins = coins;
     }
 
-    public LocalDate getDateCreated() {
+    public SimpleDateFormat getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(SimpleDateFormat dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public LocalDate getDeadline() {
+    public SimpleDateFormat getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(SimpleDateFormat deadline) {
         this.deadline = deadline;
     }
 

@@ -12,8 +12,5 @@ public interface RewardService {
     Reward findById(long id);
     void purchaseReward(long rewardId, long byuerId);
 
-    void createReward(Reward reward, long parentId) throws Exception;
-
-
 
 }

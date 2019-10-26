@@ -1,8 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class Reward {
@@ -16,15 +15,14 @@ public class Reward {
     private int price;
     private int levelRequired;
     private boolean autorenew;
-    private LocalDate endDate;
+    private SimpleDateFormat endDate;
     private Boolean visible;
     @ManyToOne
     private Child buyer;
-    @NotNull
     @ManyToOne
     private Parent maker;
 
-    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, LocalDate endDate, Boolean visible, Parent maker) {
+    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, SimpleDateFormat endDate, Boolean visible, Parent maker) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -87,11 +85,11 @@ public class Reward {
         this.autorenew = autorenew;
     }
 
-    public LocalDate getEndDate() {
+    public SimpleDateFormat getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(SimpleDateFormat endDate) {
         this.endDate = endDate;
     }
 

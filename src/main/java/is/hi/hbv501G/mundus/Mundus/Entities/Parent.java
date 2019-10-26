@@ -1,7 +1,6 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,8 +19,7 @@ public class Parent extends Person {
             fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>();
 
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AccountId")
     private Account account;
 
@@ -74,15 +72,4 @@ public class Parent extends Person {
     public void setAccount(Account account) {
         this.account = account;
     }
-
-    public void addQuest(Quest quest){
-        this.quests.add(quest);
-    }
-
-    public void addReward(Reward reward){
-        this.rewards.add(reward);
-    }
-
-
-
 }
