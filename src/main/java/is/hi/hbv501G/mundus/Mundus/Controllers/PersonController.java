@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Controller
+@SessionAttributes("accountId")
 public class PersonController {
 
     private PersonService personService;
@@ -28,7 +30,7 @@ public class PersonController {
     //create child
     @RequestMapping("/person-test1")
     public String test1(Model model) {
-        Child krakki = new Child("Jón", "123", null);
+        Child krakki = new Child("Jón", "123");
         personService.save(krakki);
         return "Welcome";
     }
@@ -44,9 +46,12 @@ public class PersonController {
     //Get all child of parent
     @RequestMapping("/person-test5")
     public String test5(Model model) {
-        Child child = personService.findChildById(2);
-        System.out.println(child.getName());
-        System.out.println(child.getParent().getName());
+        Child child = new Child("Jon", "123");
+        try {
+            personService.assignChildToParent(child,2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "Welcome";
     }
 
@@ -62,7 +67,8 @@ public class PersonController {
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     public String loadpersons(Model model) {
-        Parent parent = personService.findParentById(1);
+        long parentId = Long.parseLong(String.valueOf(model.asMap().get("accountId")));
+        Parent parent = personService.findParentById(parentId);
         Set<Child> children = parent.getChildren();
         Set<Person> persons = new HashSet<>();
 

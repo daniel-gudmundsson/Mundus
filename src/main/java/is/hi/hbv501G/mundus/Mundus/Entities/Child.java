@@ -22,11 +22,10 @@ public class Child extends Person {
     @ManyToOne
     private Parent parent;
 
-    public Child(String name, String pin, Parent parent) {
+    public Child(String name, String pin) {
         super(name, pin);
         this.totalCoins = 0;
         this.xp = 0;
-        this.parent = parent;
     }
 
     public Child(){

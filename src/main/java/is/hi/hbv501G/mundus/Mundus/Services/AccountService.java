@@ -11,6 +11,7 @@ public interface AccountService {
     void delete(Account account);
     List<Account> findAll();
     Account findAccountById(long id);
+    Account findAccountByEmail(String email);
 
     void createAccount(Account account, Parent parent) throws Exception;
 

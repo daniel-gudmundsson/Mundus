@@ -45,6 +45,11 @@ public class AccountServiceImplementation implements AccountService {
     }
 
     @Override
+    public Account findAccountByEmail(String email) {
+        return accountRepository.findAccountByEmail(email);
+    }
+
+    @Override
     public void createAccount(Account account, Parent parent) throws Exception {
         account.setParent(parent);
         parent.setAccount(account);
