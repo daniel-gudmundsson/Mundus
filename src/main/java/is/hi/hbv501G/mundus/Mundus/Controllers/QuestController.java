@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 @Controller
@@ -31,7 +32,7 @@ public class QuestController {
     @RequestMapping("/quest-test1")
     public String Home(Model model) {
         Parent parent = personService.findParentById(1);
-        Quest quest = new Quest("Borda godan mat", "Cool stuff", 10, 10, "123", "1234", parent);
+        Quest quest = new Quest("Borda godan mat", "Cool stuff", 10, 10, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"), parent);
         Quest rquest = questService.save(quest);
         System.out.println(rquest.getId());
         return "Welcome";
