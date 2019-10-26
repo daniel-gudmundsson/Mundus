@@ -12,6 +12,6 @@ public interface AccountService {
     List<Account> findAll();
     Account findAccountById(long id);
 
-    void createAccount(Account account, Parent parent);
+    void createAccount(Account account, Parent parent) throws Exception;
 
 }

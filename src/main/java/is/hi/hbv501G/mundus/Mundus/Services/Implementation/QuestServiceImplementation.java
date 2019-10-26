@@ -73,5 +73,7 @@ public class QuestServiceImplementation implements QuestService {
     @Override
     public void assignQuest(long questID, long assigneId) {
 
+
+
     }
 }

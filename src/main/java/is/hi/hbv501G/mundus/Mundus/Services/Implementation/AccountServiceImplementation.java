@@ -45,7 +45,7 @@ public class AccountServiceImplementation implements AccountService {
     }
 
     @Override
-    public void createAccount(Account account, Parent parent) {
+    public void createAccount(Account account, Parent parent) throws Exception {
         account.setParent(parent);
         parent.setAccount(account);
 
