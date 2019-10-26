@@ -1,9 +1,6 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +18,10 @@ public class Parent extends Person {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AccountId")
+    private Account account;
 
 
     public Parent(String name, String pin) {
@@ -62,5 +63,13 @@ public class Parent extends Person {
 
     public void setQuests(Set<Quest> quests) {
         this.quests = quests;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

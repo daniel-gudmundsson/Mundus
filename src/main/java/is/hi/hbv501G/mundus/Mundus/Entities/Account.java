@@ -1,22 +1,34 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class Account {
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
+    @Column(name = "AccountId")
     private long id;
 
     private String name;
     private String email;
     private String password;
-    private String dateOfBirth;
+    private SimpleDateFormat dateOfBirth;
 
-    //private User parent;
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "account")
+    private Parent parent;
+
+    public Account(String name, String email, String password, SimpleDateFormat dateOfBirth, Parent parent) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.parent = parent;
+    }
+
+    public Account(){
+
+    }
 
     public long getId() {
         return id;
@@ -50,21 +62,21 @@ public class Account {
         this.password = password;
     }
 
-    public String getDateOfBirth() {
+    public SimpleDateFormat getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(SimpleDateFormat dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-/*
-    public User getParent() {
+
+    public Parent getParent() {
         return parent;
     }
 
-    public void setParent(User parent) {
+    public void setParent(Parent parent) {
         this.parent = parent;
     }
-    */
+
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 @Controller
@@ -24,13 +25,7 @@ public class QuestController {
         this.personService = personService;
     }
 
-
-    @RequestMapping("/quest-test1")
-    public String Home(Model model) {
-        model.addAttribute(questService.findAll());
-        return "quests";
-    }
-
+    
     @RequestMapping(value = "/quest-view", method = RequestMethod.POST)
     public String loadPerson(@RequestParam("id") long id, Model model) {
         Child child = personService.findChildById(id);
