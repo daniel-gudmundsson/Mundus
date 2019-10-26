@@ -1,6 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,8 @@ public class Parent extends Person {
             fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "AccountId")
     private Account account;
 

@@ -1,6 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 
 @Entity
@@ -19,6 +20,7 @@ public class Reward {
     private Boolean visible;
     @ManyToOne
     private Child buyer;
+    @NotNull
     @ManyToOne
     private Parent maker;
 

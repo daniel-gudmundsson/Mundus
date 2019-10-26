@@ -1,6 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class Child extends Person {
             fetch = FetchType.LAZY, mappedBy = "buyer", orphanRemoval = true)
     private Set<Reward> reward = new HashSet<>();
 
+    @NotNull
     @ManyToOne
     private Parent parent;
 
@@ -90,5 +92,7 @@ public class Child extends Person {
     public void addXp(int xp){
         this.xp=this.xp+xp;
     }
+
+    public void addCoins(int coins){this.totalCoins = this.totalCoins + coins;}
 
 }

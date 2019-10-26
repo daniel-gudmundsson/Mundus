@@ -64,9 +64,9 @@ public class QuestServiceImplementation implements QuestService {
         } else {
             quest.setIsConfirmed(true);
             child.addXp(quest.getXp());
+            child.addCoins(quest.getCoins());
             questRepository.save(quest);
             personRepository.save(child);
         }
-
     }
 }

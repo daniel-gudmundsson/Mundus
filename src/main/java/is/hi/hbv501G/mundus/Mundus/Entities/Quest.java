@@ -2,6 +2,7 @@ package is.hi.hbv501G.mundus.Mundus.Entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 
 @Entity
@@ -21,6 +22,7 @@ public class Quest {
     private Child assignee;
     private Boolean isDone;
     private Boolean isConfirmed;
+    @NotNull
     @ManyToOne
     private Parent maker;
 
