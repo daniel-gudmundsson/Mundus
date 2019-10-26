@@ -33,33 +33,11 @@ public class PersonController {
         return "Welcome";
     }
 
-    //Add quest to child
-    @RequestMapping("/person-test2")
-    public String test2(Model model) {
-        try {
-            personService.assignQuestToChild(1,2);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Welcome";
-    }
-
     //Create Parent
     @RequestMapping("/person-test3")
     public String test3(Model model) {
         Parent parent = new Parent("Agnar","123");
         personService.save(parent);
-        return "Welcome";
-    }
-
-    //Add children to parent
-    @RequestMapping("/person-test4")
-    public String test4(Model model) {
-        try {
-            personService.assignChildToParent(2,1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return "Welcome";
     }
 
@@ -100,6 +78,20 @@ public class PersonController {
 
         return "pinPage";
     }
+
+
+
+    @RequestMapping(value = "/assignChildToParent", method = RequestMethod.POST)
+    public String addChild(@RequestParam("id") long id, Model model, Child child) {
+        try {
+            personService.assignChildToParent(child, id);
+        }
+        catch (Exception e) {
+            System.out.println("Not able to assign child to parent");
+        }
+        return "redirect:/profile";
+    }
+
 
 
 

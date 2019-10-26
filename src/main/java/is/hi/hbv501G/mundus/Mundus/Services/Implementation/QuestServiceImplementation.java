@@ -71,7 +71,16 @@ public class QuestServiceImplementation implements QuestService {
     }
 
     @Override
-    public void assignQuest(long questID, long assigneId) {
-
+    public void assignQuest(long idOfQuest, long idOfChild) throws Exception {
+        Quest quest = questRepository.findById(idOfQuest);
+        Child child = personRepository.findChildById(idOfChild);
+        if (quest == null || child == null) {
+            throw new Exception();
+        } else {
+            child.addQuest(quest);
+            quest.setAssignee(child);
+            personRepository.save(child);
+            questRepository.save(quest);
+        }
     }
 }

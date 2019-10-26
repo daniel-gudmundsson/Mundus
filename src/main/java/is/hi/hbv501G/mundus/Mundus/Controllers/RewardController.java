@@ -38,6 +38,14 @@ public class RewardController {
         return "redirect:/rewards";
     }
 
+    @RequestMapping(value = "/purchaseReward", method = RequestMethod.POST)
+    public String purchaseReward(@RequestParam("id") long rewardId, Model model, long buyerId) {
+        // Reward reward = rewardService.findById(id);//.orElseThrow(() -> new IllegalArgumentException("Invalid reward ID"));
+        rewardService.purchaseReward(rewardId, buyerId);
+        return "redirect:/rewards";
+    }
+
+
 
 
 

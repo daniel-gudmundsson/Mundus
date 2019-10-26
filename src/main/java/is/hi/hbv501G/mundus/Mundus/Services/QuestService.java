@@ -28,7 +28,7 @@ public interface QuestService {
      */
     void confirmDone(long idOfQuest) throws Exception;
 
-    void assignQuest(long questID, long assigneId);
+    void assignQuest(long questID, long assigneId) throws Exception;
 
 
 }

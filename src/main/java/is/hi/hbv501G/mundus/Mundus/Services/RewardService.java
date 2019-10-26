@@ -10,6 +10,7 @@ public interface RewardService {
     void delete(Reward quest);
     List<Reward> findAll();
     Reward findById(long id);
+    void purchaseReward(long rewardId, long byuerId);
 
 
 }
