@@ -64,13 +64,14 @@ public class QuestServiceImplementation implements QuestService {
         } else {
             quest.setIsConfirmed(true);
             child.addXp(quest.getXp());
+            child.addCoins(quest.getCoins());
             questRepository.save(quest);
             personRepository.save(child);
         }
-
     }
 
     @Override
+<<<<<<< HEAD
     public void assignQuest(long idOfQuest, long idOfChild) throws Exception {
         Quest quest = questRepository.findById(idOfQuest);
         Child child = personRepository.findChildById(idOfChild);
@@ -82,5 +83,11 @@ public class QuestServiceImplementation implements QuestService {
             personRepository.save(child);
             questRepository.save(quest);
         }
+=======
+    public void assignQuest(long questID, long assigneId) {
+
+
+
+>>>>>>> 938b195be5e9b12d9477af07864a0274a5796840
     }
 }
