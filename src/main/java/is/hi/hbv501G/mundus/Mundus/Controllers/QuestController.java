@@ -1,9 +1,6 @@
 package is.hi.hbv501G.mundus.Mundus.Controllers;
 
-import is.hi.hbv501G.mundus.Mundus.Entities.Child;
-import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
-import is.hi.hbv501G.mundus.Mundus.Entities.Person;
-import is.hi.hbv501G.mundus.Mundus.Entities.Quest;
+import is.hi.hbv501G.mundus.Mundus.Entities.*;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import is.hi.hbv501G.mundus.Mundus.Services.QuestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +26,6 @@ public class QuestController {
     }
 
 
-    @RequestMapping("/quest-test1")
-    public String Home(Model model) {
-        Parent parent = personService.findParentById(1);
-        Quest quest = new Quest("Borda godan mat", "Cool stuff", 10, 10, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"), parent);
-        Quest rquest = questService.save(quest);
-        System.out.println(rquest.getId());
-        return "Welcome";
-    }
-
     @RequestMapping(value = "/quest-view", method = RequestMethod.POST)
     public String loadPerson(@RequestParam("id") long id, Model model) {
         Child child = personService.findChildById(id);
@@ -46,6 +34,51 @@ public class QuestController {
         model.addAttribute("child", child);
         model.addAttribute("quests", quests);
         return "questViewChild";
+    }
+
+    @RequestMapping(value = "/markQuestAsDone", method = RequestMethod.POST)
+    public String markQuestAsDone(@RequestParam("id") long id, Model model, long userID) {
+        try {
+            questService.markQuest(id, true);
+        }
+        catch (Exception e) {
+            System.out.println("Not able to mark quest as done");
+        }
+        return "redirect:/quests";
+    }
+
+    @RequestMapping(value = "/markQuestAsConfirmed", method = RequestMethod.POST)
+    public String markQuestAsConfirmed(@RequestParam("id") long id, Model model, long userID) {
+        try {
+            questService.confirmDone(id);
+        }
+        catch (Exception e) {
+            System.out.println("Not able to mark quest as confirmed");
+        }
+
+        return "redirect:/quests";
+    }
+
+    @RequestMapping(value = "/assignQuest", method = RequestMethod.POST)
+    public String assignQuest(@RequestParam("id") long id, Model model, long userID) {
+        try {
+            questService.assignQuest(id, userID);
+        }
+        catch (Exception e) {
+            System.out.println("Not able to assign quest");
+        }
+        return "redirect:/quests";
+    }
+
+    @RequestMapping(value = "/deleteQuest", method = RequestMethod.POST)
+    public String delete(@RequestParam("id") long id, Model model, long userID) {
+        try {
+            questService.delete(questService.findById(id));
+        }
+        catch (Exception e) {
+            System.out.println("Not able to delete quest");
+        }
+        return "redirect:/quests";
     }
 
 

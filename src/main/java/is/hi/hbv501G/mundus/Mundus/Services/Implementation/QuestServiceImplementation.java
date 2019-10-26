@@ -69,4 +69,9 @@ public class QuestServiceImplementation implements QuestService {
             personRepository.save(child);
         }
     }
+
+    @Override
+    public void assignQuest(long questID, long assigneId) {
+
+    }
 }
