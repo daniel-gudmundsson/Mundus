@@ -25,7 +25,7 @@ public class QuestController {
         this.personService = personService;
     }
 
-    
+
     @RequestMapping(value = "/quest-view", method = RequestMethod.POST)
     public String loadPerson(@RequestParam("id") long id, Model model) {
         Child child = personService.findChildById(id);
