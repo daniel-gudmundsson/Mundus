@@ -74,4 +74,15 @@ public class Parent extends Person {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    public void addQuest(Quest quest){
+        this.quests.add(quest);
+    }
+
+    public void addReward(Reward reward){
+        this.rewards.add(reward);
+    }
+
+
+
 }

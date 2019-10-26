@@ -1,6 +1,8 @@
 package is.hi.hbv501G.mundus.Mundus.Services.Implementation;
 
+import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
 import is.hi.hbv501G.mundus.Mundus.Entities.Reward;
+import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
 import is.hi.hbv501G.mundus.Mundus.Repositories.RewardRepository;
 import is.hi.hbv501G.mundus.Mundus.Services.RewardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ public class RewardServiceImplementation implements RewardService {
 
 
     RewardRepository rewardRepository;
+    PersonRepository personRepository;
 
     @Autowired
-    public RewardServiceImplementation(RewardRepository rewardRepository) {
+    public RewardServiceImplementation(RewardRepository rewardRepository, PersonRepository personRepository) {
         this.rewardRepository = rewardRepository;
+        this.personRepository = personRepository;
     }
 
     @Override
@@ -37,8 +41,19 @@ public class RewardServiceImplementation implements RewardService {
         return rewardRepository.findById(id);
     }
 
+    @Override
+    public void createReward(Reward reward, long parentId) throws Exception {
+        Parent parent = personRepository.findParentById(parentId);
+        if (parent == null){
+            throw new Exception();
+        }else{
+            reward.setMaker(parent);
+            parent.addReward(reward);
 
-
+            personRepository.save(parent);
+            rewardRepository.save(reward);
+        }
+    }
 
 
 }

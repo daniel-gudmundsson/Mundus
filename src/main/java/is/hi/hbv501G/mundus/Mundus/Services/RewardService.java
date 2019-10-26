@@ -11,6 +11,8 @@ public interface RewardService {
     List<Reward> findAll();
     Reward findById(long id);
 
+    void createReward(Reward reward, long parentId) throws Exception;
+
 
 
 }
