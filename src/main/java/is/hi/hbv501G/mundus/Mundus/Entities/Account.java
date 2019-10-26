@@ -1,7 +1,8 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 public class Account {
@@ -13,17 +14,17 @@ public class Account {
     private String name;
     private String email;
     private String password;
-    private SimpleDateFormat dateOfBirth;
+    private LocalDate dateOfBirth;
 
+    @NotNull
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "account")
     private Parent parent;
 
-    public Account(String name, String email, String password, SimpleDateFormat dateOfBirth, Parent parent) {
+    public Account(String name, String email, String password, LocalDate dateOfBirth) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.parent = parent;
     }
 
     public Account(){
@@ -62,11 +63,11 @@ public class Account {
         this.password = password;
     }
 
-    public SimpleDateFormat getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(SimpleDateFormat dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
