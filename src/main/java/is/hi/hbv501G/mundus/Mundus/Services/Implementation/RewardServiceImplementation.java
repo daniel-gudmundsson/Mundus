@@ -1,6 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Services.Implementation;
 
 import is.hi.hbv501G.mundus.Mundus.Entities.Child;
+import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
 import is.hi.hbv501G.mundus.Mundus.Entities.Reward;
 import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
 import is.hi.hbv501G.mundus.Mundus.Repositories.RewardRepository;
@@ -16,8 +17,9 @@ public class RewardServiceImplementation implements RewardService {
     PersonRepository personRepository;
 
     @Autowired
-    public RewardServiceImplementation(RewardRepository rewardRepository) {
+    public RewardServiceImplementation(RewardRepository rewardRepository, PersonRepository personRepository) {
         this.rewardRepository = rewardRepository;
+        this.personRepository = personRepository;
     }
 
     @Override
@@ -45,7 +47,24 @@ public class RewardServiceImplementation implements RewardService {
         Child child = personRepository.findChildById(buyerId);
         Reward reward = rewardRepository.findById(rewardId);
         child.addReward(rewardId);
+        if (!reward.isAutorenew()) {
+            reward.setAutorenew(false);
+        }
         personRepository.save(child);
+    }
+
+
+    public void createReward(Reward reward, long parentId) throws Exception {
+        Parent parent = personRepository.findParentById(parentId);
+        if (parent == null){
+            throw new Exception();
+        }else{
+            reward.setMaker(parent);
+            parent.addReward(reward);
+
+            personRepository.save(parent);
+            rewardRepository.save(reward);
+        }
     }
 
 

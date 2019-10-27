@@ -2,6 +2,7 @@ package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,14 +18,14 @@ public class Child extends Person {
 
     private List<Long> rewards = new ArrayList<>();
 
+    @NotNull
     @ManyToOne
     private Parent parent;
 
-    public Child(String name, String pin, Parent parent) {
+    public Child(String name, String pin) {
         super(name, pin);
         this.totalCoins = 0;
         this.xp = 0;
-        this.parent = parent;
     }
 
     public Child(){
@@ -93,5 +94,7 @@ public class Child extends Person {
     public void addXp(int xp){
         this.xp=this.xp+xp;
     }
+
+    public void addCoins(int coins){this.totalCoins = this.totalCoins + coins;}
 
 }
