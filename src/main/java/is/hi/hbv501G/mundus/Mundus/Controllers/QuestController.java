@@ -26,15 +26,7 @@ public class QuestController {
     }
 
 
-    @RequestMapping(value = "/quest-view", method = RequestMethod.POST)
-    public String loadPerson(@RequestParam("id") long id, Model model) {
-        Child child = personService.findChildById(id);
-        Set<Quest> quests = child.getParent().getQuests();
 
-        model.addAttribute("child", child);
-        model.addAttribute("quests", quests);
-        return "questViewChild";
-    }
 
     @RequestMapping(value = "/markQuestAsDone", method = RequestMethod.POST)
     public String markQuestAsDone(@RequestParam("id") long id, Model model, long userID) {

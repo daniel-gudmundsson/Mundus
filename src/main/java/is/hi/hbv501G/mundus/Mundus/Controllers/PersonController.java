@@ -79,11 +79,13 @@ public class PersonController {
         return "persons";
     }
 
-    @RequestMapping(value = "/pin-page", method = RequestMethod.GET)
-    public String loadPin(Model model) {
+    @RequestMapping(value = "/pin-page", method = RequestMethod.POST)
+    public String loadPin(@RequestParam("id") long id, Model model) {
 
         return "pinPage";
     }
+
+
 
 
 

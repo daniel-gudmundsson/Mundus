@@ -85,4 +85,9 @@ public class QuestServiceImplementation implements QuestService {
 
 
     }
+
+    @Override
+    public void createQuest(Quest quest, long idOfParent) {
+
+    }
 }
