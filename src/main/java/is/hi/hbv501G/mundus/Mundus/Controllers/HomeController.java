@@ -6,15 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("accountId")
+@SessionAttributes({"accountId", "personId"})
 public class HomeController {
     @RequestMapping("/")
-    public String home(Model model){
-        if(model.containsAttribute("accountId")){
-            return "redirect:/persons";
-        }else{
+    public String home(Model model) {
+        if (model.containsAttribute("accountId")) {
+            if (model.containsAttribute("personId")) {
+                return "redirect:/quests";
+            } else {
+                return "redirect:/persons";
+            }
+        } else {
             return "redirect:/login";
         }
     }
-    }
+}
 

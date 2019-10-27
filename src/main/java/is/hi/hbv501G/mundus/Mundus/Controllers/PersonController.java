@@ -1,9 +1,6 @@
 package is.hi.hbv501G.mundus.Mundus.Controllers;
 
-import is.hi.hbv501G.mundus.Mundus.Entities.Child;
-import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
-import is.hi.hbv501G.mundus.Mundus.Entities.Person;
-import is.hi.hbv501G.mundus.Mundus.Entities.Quest;
+import is.hi.hbv501G.mundus.Mundus.Entities.*;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-@SessionAttributes("accountId")
+@SessionAttributes({"accountId", "personId"})
 public class PersonController {
 
     private PersonService personService;
@@ -38,7 +35,7 @@ public class PersonController {
     //Create Parent
     @RequestMapping("/person-test3")
     public String test3(Model model) {
-        Parent parent = new Parent("Agnar","123");
+        Parent parent = new Parent("Agnar", "123");
         personService.save(parent);
         return "Welcome";
     }
@@ -48,7 +45,7 @@ public class PersonController {
     public String test5(Model model) {
         Child child = new Child("Jon", "123");
         try {
-            personService.assignChildToParent(child,2);
+            personService.assignChildToParent(child, 2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +63,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public String loadpersons(Model model) {
+    public String loadPersons(Model model) {
         long parentId = Long.parseLong(String.valueOf(model.asMap().get("accountId")));
         Parent parent = personService.findParentById(parentId);
         Set<Child> children = parent.getChildren();
@@ -80,32 +77,62 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/pin-page", method = RequestMethod.POST)
-    public String loadPin(@RequestParam("id") long id, Model model) {
-
+    public String loadPinPage(@RequestParam("id") long id, Model model) {
+        if (model.containsAttribute("personId")) {
+            if (id == Long.parseLong(String.valueOf(model.asMap().get("personId")))) ;
+            {
+                return "redirect:/quests";
+            }
+        }
+        model.addAttribute("id", id);
         return "pinPage";
     }
 
+    @RequestMapping(value = "/pin-page-auth", method = RequestMethod.POST)
+    public String authenticatePin(@RequestParam("id") long id, @RequestParam("pin") String pin, Model model) {
 
+        Person person = personService.findPersonById(id);
 
+        if (person == null) {
+            return "redirect:/";
+        }
+
+        if (person.getPin().equals(pin)) {
+            model.addAttribute("personId", person.getId());
+            return "redirect:/quests";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @RequestMapping(value = "/quests", method = RequestMethod.GET)
+    public String loadPerson(Model model) {
+        long personId = Long.parseLong(String.valueOf(model.asMap().get("personId")));
+        Person person = personService.findPersonById(personId);
+        if (person instanceof Child) {
+            Child child = personService.findChildById(personId);
+            Set<Quest> quests = child.getQuests();
+            model.addAttribute("child", child);
+            model.addAttribute("quests", quests);
+            return "questViewChild";
+        } else if (person instanceof Parent) {
+            return "redirect:/";
+        } else {
+            return "redirect:/";
+        }
+
+    }
 
 
     @RequestMapping(value = "/assignChildToParent", method = RequestMethod.POST)
     public String addChild(@RequestParam("id") long id, Model model, Child child) {
         try {
             personService.assignChildToParent(child, id);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Not able to assign child to parent");
         }
         return "redirect:/profile";
     }
-
-
-
-
-
-
-
 
 
 }

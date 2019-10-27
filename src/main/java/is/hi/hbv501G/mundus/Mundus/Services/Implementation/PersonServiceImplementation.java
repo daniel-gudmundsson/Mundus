@@ -51,6 +51,10 @@ public class PersonServiceImplementation implements PersonService {
         return personRepository.findParentById(id);
     }
 
+    @Override
+    public Person findPersonById(long id) {
+        return personRepository.findPersonById(id);
+    }
 
 
     @Override

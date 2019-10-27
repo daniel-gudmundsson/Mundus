@@ -6,9 +6,17 @@
 </head>
 <body>
 <div>
-    <form method="POST" th:action="@{/pin-page}">
-        <input type="text" name="pin" />
-        <button type="submit" name="submit" value="value" class="link-button">This is a link that sends a POST request</button>
+    <form method="POST" th:action="@{/pin-page-auth}">
+        <table>
+            <tr>
+                <td>Pin</td>
+                <input type="hidden" name="id"  th:value="${id}" />
+                <td><input type="password" id="pin" name="pin"/></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Login</button></td>
+            </tr>
+        </table>
     </form>
 </div>
 

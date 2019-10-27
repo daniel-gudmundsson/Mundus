@@ -15,6 +15,7 @@ public interface PersonService {
     List<Person> findAll();
     Child findChildById(long id);
     Parent findParentById(long id);
+    Person findPersonById(long id);
     void assignChildToParent(Child child, long idOfParent) throws Exception;
 
 }
