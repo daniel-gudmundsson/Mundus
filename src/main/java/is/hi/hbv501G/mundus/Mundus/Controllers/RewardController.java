@@ -1,6 +1,8 @@
 package is.hi.hbv501G.mundus.Mundus.Controllers;
 
+import is.hi.hbv501G.mundus.Mundus.Entities.Child;
 import is.hi.hbv501G.mundus.Mundus.Entities.Reward;
+import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,15 +12,25 @@ import is.hi.hbv501G.mundus.Mundus.Services.RewardService;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class RewardController {
 
     private RewardService rewardService;
+    private PersonService personService;
 
     @RequestMapping("/rewards")
     public String rewardHome(Model model, long userID){
-        model.addAttribute("movies", rewardService.findAll());
+        Child child = personService.findChildById(userID);
+        Set<Reward> allRewards= child.getParent().getRewards();
+        List<Long> childRewardIds = child.getReward();
+        for (long id: childRewardIds) {
+            allRewards.remove(rewardService.findById(id));
+        }
+        model.addAttribute("rewards",allRewards);
         return "rewards";
     }
 

@@ -1,7 +1,9 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,9 +15,7 @@ public class Child extends Person {
             fetch = FetchType.LAZY, mappedBy = "assignee",orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, mappedBy = "buyer", orphanRemoval = true)
-    private Set<Reward> rewards = new HashSet<>();
+    private List<Long> rewards = new ArrayList<>();
 
     @ManyToOne
     private Parent parent;
@@ -40,17 +40,16 @@ public class Child extends Person {
         this.quests = quests;
     }
 
-    @OneToMany
-    public Set<Reward> getReward() {
+    public List<Long> getReward() {
         return rewards;
     }
 
-    public void setRewards(Set<Reward> rewards) {
-        this.rewards = rewards;
+    public void setRewards(List<Long> rewardIds) {
+        this.rewards = rewardIds;
     }
 
-    public void addReward(Reward reward){
-        this.rewards.add(reward);
+    public void addReward(long rewardId){
+        this.rewards.add(rewardId);
     }
 
     public int getTotalCoins() {

@@ -44,11 +44,7 @@ public class RewardServiceImplementation implements RewardService {
     public void purchaseReward(long rewardId, long buyerId) {
         Child child = personRepository.findChildById(buyerId);
         Reward reward = rewardRepository.findById(rewardId);
-        child.addReward(reward);
-        if(!reward.isAutorenew()){
-            reward.setAutorenew(false);
-        }
-        rewardRepository.save(reward);
+        child.addReward(rewardId);
         personRepository.save(child);
     }
 
