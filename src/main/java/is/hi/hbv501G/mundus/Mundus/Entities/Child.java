@@ -15,7 +15,7 @@ public class Child extends Person {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, mappedBy = "assignee",orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>();
-
+    @ElementCollection
     private List<Long> rewards = new ArrayList<>();
 
     @NotNull
