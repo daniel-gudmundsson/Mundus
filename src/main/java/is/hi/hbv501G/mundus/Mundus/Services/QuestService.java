@@ -16,7 +16,7 @@ public interface QuestService {
 
     /**
      *Marks the quest with a mark, if it is done or not;
-     * @param id of quest
+     * @param idOfQuest of quest
      * @param mark to set isDone on quest, true or false;
      * @return
      */

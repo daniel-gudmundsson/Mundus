@@ -41,11 +41,25 @@ public class AccountController {
         return "redirect:/";
     }
 
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
+
+    @RequestMapping(value = "/logoutAccount", method = RequestMethod.GET)
+    public String logOutAccount(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/logoutPerson", method = RequestMethod.GET)
+    public String logOutPerson(HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            session.removeAttribute("PersonIdLoggedIn");
+        }
+        return "redirect:/";
+    }
+
 
 
     @RequestMapping("/test1")
