@@ -8,6 +8,8 @@ import is.hi.hbv501G.mundus.Mundus.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.FailedLoginException;
+import javax.security.auth.login.LoginException;
 import java.util.List;
 
 @Service
@@ -56,6 +58,24 @@ public class AccountServiceImplementation implements AccountService {
 
         personRepository.save(parent);
         accountRepository.save(account);
+    }
+
+    @Override
+    public long login(String email, String password) throws Exception {
+
+        Account account = accountRepository.findAccountByEmail(email);
+
+        if (account == null) {
+            throw new LoginException("Account not found");
+        }
+
+        if (account.getPassword().equals(password)) {
+            return account.getId();
+        } else {
+            throw new FailedLoginException("Wrong password");
+        }
+
+
     }
 
 

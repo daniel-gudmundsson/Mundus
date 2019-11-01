@@ -17,5 +17,6 @@ public interface PersonService {
     Parent findParentById(long id);
     Person findPersonById(long id);
     void assignChildToParent(Child child, long idOfParent) throws Exception;
+    long authenticatePin(long childId, String pin) throws Exception;
 
 }

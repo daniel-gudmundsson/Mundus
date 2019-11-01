@@ -5,13 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
-@SessionAttributes({"accountId", "personId"})
 public class HomeController {
     @RequestMapping("/")
-    public String home(Model model) {
-        if (model.containsAttribute("accountId")) {
-            if (model.containsAttribute("personId")) {
+    public String home(Model model, HttpSession session) {
+
+        if (session.getAttribute("AccountIdLoggedIn") != null) {
+            if (session.getAttribute("PersonIdLoggedIn") != null) {
                 return "redirect:/quests";
             } else {
                 return "redirect:/persons";

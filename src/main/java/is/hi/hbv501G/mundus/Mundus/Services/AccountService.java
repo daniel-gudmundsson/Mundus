@@ -14,5 +14,6 @@ public interface AccountService {
     Account findAccountByEmail(String email);
 
     void createAccount(Account account, Parent parent) throws Exception;
+    long login(String email, String password) throws Exception;
 
 }

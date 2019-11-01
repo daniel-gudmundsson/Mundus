@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-@SessionAttributes({"accountId", "personId"})
 public class PersonController {
 
     private PersonService personService;
@@ -63,8 +63,12 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public String loadPersons(Model model) {
-        long parentId = Long.parseLong(String.valueOf(model.asMap().get("accountId")));
+    public String loadPersons(Model model, HttpSession session) {
+        if (session.getAttribute("AccountIdLoggedIn") == null) {
+            return "redirect:/";
+        }
+
+        long parentId = (long) session.getAttribute("AccountIdLoggedIn");
         Parent parent = personService.findParentById(parentId);
         Set<Child> children = parent.getChildren();
         Set<Person> persons = new HashSet<>();
@@ -74,12 +78,13 @@ public class PersonController {
 
         model.addAttribute("persons", persons);
         return "persons";
+
     }
 
     @RequestMapping(value = "/pin-page", method = RequestMethod.POST)
-    public String loadPinPage(@RequestParam("id") long id, Model model) {
-        if (model.containsAttribute("personId")) {
-            if (id == Long.parseLong(String.valueOf(model.asMap().get("personId")))) ;
+    public String loadPinPage(@RequestParam("id") long id, Model model, HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            if (id == (long) session.getAttribute("PersonIdLoggedIn")) ;
             {
                 return "redirect:/quests";
             }
@@ -89,26 +94,28 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/pin-page-auth", method = RequestMethod.POST)
-    public String authenticatePin(@RequestParam("id") long id, @RequestParam("pin") String pin, Model model) {
+    public String authenticatePinPost(@RequestParam("id") long id, @RequestParam("pin") String pin, HttpSession session) {
 
-        Person person = personService.findPersonById(id);
+        long personId;
 
-        if (person == null) {
-            return "redirect:/";
+        try {
+            personId = personService.authenticatePin(id, pin);
+            session.setAttribute("PersonIdLoggedIn", personId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        if (person.getPin().equals(pin)) {
-            model.addAttribute("personId", person.getId());
-            return "redirect:/quests";
-        } else {
-            return "redirect:/";
-        }
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/quests", method = RequestMethod.GET)
-    public String loadPerson(Model model) {
-        long personId = Long.parseLong(String.valueOf(model.asMap().get("personId")));
+    public String loadPerson(Model model, HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") == null) {
+            return "redirect:/";
+        }
+        long personId = (long) session.getAttribute("PersonIdLoggedIn");
         Person person = personService.findPersonById(personId);
+
         if (person instanceof Child) {
             Child child = personService.findChildById(personId);
             Set<Quest> quests = child.getQuests();

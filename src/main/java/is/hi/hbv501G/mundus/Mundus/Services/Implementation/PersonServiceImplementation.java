@@ -1,16 +1,15 @@
 package is.hi.hbv501G.mundus.Mundus.Services.Implementation;
 
 
-import is.hi.hbv501G.mundus.Mundus.Entities.Child;
-import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
-import is.hi.hbv501G.mundus.Mundus.Entities.Person;
-import is.hi.hbv501G.mundus.Mundus.Entities.Quest;
+import is.hi.hbv501G.mundus.Mundus.Entities.*;
 import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
 import is.hi.hbv501G.mundus.Mundus.Repositories.QuestRepository;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.FailedLoginException;
+import javax.security.auth.login.LoginException;
 import java.util.List;
 
 @Service
@@ -71,7 +70,21 @@ public class PersonServiceImplementation implements PersonService {
         }
     }
 
+    @Override
+    public long authenticatePin(long childId, String pin) throws Exception {
+        Person person = personRepository.findPersonById(childId);
+
+        if (person == null) {
+            throw new LoginException("Person not found");
+        }
+
+        if (person.getPin().equals(pin)) {
+            return person.getId();
+        } else {
+            throw new FailedLoginException("Wrong pin");
+        }
 
 
+    }
 
 }
