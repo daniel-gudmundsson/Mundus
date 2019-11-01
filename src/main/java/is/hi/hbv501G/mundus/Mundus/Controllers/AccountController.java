@@ -8,9 +8,11 @@ import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 
@@ -69,6 +71,27 @@ public class AccountController {
         }
         return "login";
     }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signUpPOST(@Valid Account account, BindingResult result, Model model){
+        if(result.hasErrors()){
+            System.out.println("fail");
+            return "signup";
+        }
+        Account exists = accountService.findAccountByEmail(account.getEmail());
+        if(exists == null){
+            System.out.println(account.getName());
+            System.out.println(account.getEmail());
+        }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String signUpGET(Account account){
+        return "signup";
+    }
+
 
 
 }

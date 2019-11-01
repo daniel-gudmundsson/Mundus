@@ -66,17 +66,22 @@ public class AccountServiceImplementation implements AccountService {
         Account account = accountRepository.findAccountByEmail(email);
 
         if (account == null) {
-            throw new LoginException("Account not found");
-        }
+        throw new LoginException("Account not found");
+    }
 
         if (account.getPassword().equals(password)) {
-            return account.getId();
-        } else {
-            throw new FailedLoginException("Wrong password");
-        }
-
-
+        return account.getId();
+    } else {
+        throw new FailedLoginException("Wrong password");
     }
+
+
+}
+
+
+
+
+
 
 
 }
