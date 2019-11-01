@@ -7,9 +7,10 @@ import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
 import is.hi.hbv501G.mundus.Mundus.Repositories.RewardRepository;
 import is.hi.hbv501G.mundus.Mundus.Services.RewardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class RewardServiceImplementation implements RewardService {
 
 
