@@ -1,6 +1,9 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
+import org.springframework.validation.annotation.Validated;
+
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 

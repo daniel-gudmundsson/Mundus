@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h2>Signup for an account</h2>
+<form th:action="@{/signup}" th:object="${account}" method="post">
+    <p>Email <input type="text" name="email" id="email" th:field="*{email}"/></p>
+    <input type="text" name="name" id="name" th:field="*{name}"/>
+    <input type="date" name="dateOfBirth" id="dateOfBirth" th:field="*{dateOfBirth}"/>
+    <input type="password" name="password" id="password" th:value="*{password}"/>
+    <input type="submit" value="Sign up"/>
+</form>
+</body>
+</html>
