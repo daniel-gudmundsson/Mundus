@@ -1,10 +1,15 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
+import com.sun.istack.internal.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.OverridesAttribute;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -14,13 +19,19 @@ public class Account {
     @Column(name = "AccountId")
     private long id;
 
+    @NotBlank
     private String name;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
     private String password;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "account")
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account", optional = false)
     private Parent parent;
 
     public Account(String name, String email, String password, LocalDate dateOfBirth) {
@@ -30,8 +41,8 @@ public class Account {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Account(){
-
+    public Account() {
+        parent = new Parent();
     }
 
     public long getId() {

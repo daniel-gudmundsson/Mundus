@@ -1,6 +1,10 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public abstract class Person {
@@ -9,8 +13,10 @@ public abstract class Person {
     @Column(name = "PersonId")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
-
+    @NotBlank
     private String name;
+    //@Pattern(regexp="^[0-9]*$")
+    @NotBlank
     private String pin;
 
     public Person(String name, String pin) {

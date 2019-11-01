@@ -1,6 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Controllers;
 
 import is.hi.hbv501G.mundus.Mundus.Entities.*;
+import is.hi.hbv501G.mundus.Mundus.Services.AccountService;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,12 @@ import java.util.Set;
 public class PersonController {
 
     private PersonService personService;
+    private AccountService accountService;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, AccountService accountService) {
         this.personService = personService;
+        this.accountService = accountService;
     }
 
     //create child
@@ -68,8 +71,9 @@ public class PersonController {
             return "redirect:/";
         }
 
-        long parentId = (long) session.getAttribute("AccountIdLoggedIn");
-        Parent parent = personService.findParentById(parentId);
+        long accountId = (long) session.getAttribute("AccountIdLoggedIn");
+        Account account = accountService.findAccountById(accountId);
+        Parent parent = account.getParent();
         Set<Child> children = parent.getChildren();
         Set<Person> persons = new HashSet<>();
 

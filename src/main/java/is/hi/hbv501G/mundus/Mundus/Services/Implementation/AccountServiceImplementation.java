@@ -8,6 +8,7 @@ import is.hi.hbv501G.mundus.Mundus.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.AccountException;
 import javax.security.auth.login.FailedLoginException;
 import javax.security.auth.login.LoginException;
 import java.util.List;
@@ -53,6 +54,10 @@ public class AccountServiceImplementation implements AccountService {
 
     @Override
     public void createAccount(Account account, Parent parent) throws Exception {
+        Account exists = accountRepository.findAccountByEmail(account.getEmail());
+        if(exists != null){
+            throw new AccountException("This email is in use");
+        }
         account.setParent(parent);
         parent.setAccount(account);
 

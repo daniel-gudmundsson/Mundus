@@ -63,7 +63,6 @@ public class AccountController {
     }
 
 
-
     @RequestMapping("/test1")
     public String home(Model model) {
         if (model.containsAttribute("accountId")) {
@@ -87,25 +86,30 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUpPOST(@Valid Account account, BindingResult result, Model model){
-        if(result.hasErrors()){
-            System.out.println("fail");
+    public String signUpPOST(@Valid Account account, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "signup";
         }
-        Account exists = accountService.findAccountByEmail(account.getEmail());
-        if(exists == null){
-            System.out.println(account.getName());
-            System.out.println(account.getEmail());
+
+        try {
+            accountService.createAccount(account, account.getParent());
+        } catch (Exception e) {
+            return "signup";
         }
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signUpGET(Account account){
+    public String signUpGET(Model model) {
+        model.addAttribute("account", new Account());
         return "signup";
     }
 
-
+    @RequestMapping("/test5")
+    public String test5(Model model, HttpSession session) {
+        System.out.println((long)session.getAttribute("AccountIdLoggedIn"));
+        return "Welcome";
+    }
 
 }

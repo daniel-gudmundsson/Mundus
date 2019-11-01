@@ -20,9 +20,8 @@ public class Parent extends Person {
             fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>();
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "AccountId")
+    @JoinColumn(name = "AccountId", nullable = false)
     private Account account;
 
 
