@@ -1,6 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Services.Implementation;
 
 import is.hi.hbv501G.mundus.Mundus.Entities.Child;
+import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
 import is.hi.hbv501G.mundus.Mundus.Entities.Quest;
 import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
 import is.hi.hbv501G.mundus.Mundus.Repositories.QuestRepository;
@@ -87,7 +88,14 @@ public class QuestServiceImplementation implements QuestService {
     }
 
     @Override
-    public void createQuest(Quest quest, long idOfParent) {
+    public void createQuest(Quest quest, long idOfParent) throws Exception {
+            Parent parent = personRepository.findParentById(idOfParent);
+            if(parent == null){
+                throw new Exception("idOfParent not in database.");
+            }
+            quest.setMaker(parent);
+            parent.addQuest(quest);
 
+            personRepository.save(parent);
     }
 }

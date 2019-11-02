@@ -30,7 +30,7 @@ public interface QuestService {
 
     void assignQuest(long questID, long assigneId) throws Exception;
 
-    void createQuest(Quest quest, long idOfParent);
+    void createQuest(Quest quest, long idOfParent) throws Exception;
 
 
 }

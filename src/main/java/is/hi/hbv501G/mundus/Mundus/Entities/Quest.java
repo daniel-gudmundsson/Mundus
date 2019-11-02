@@ -1,7 +1,10 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -12,17 +15,23 @@ public class Quest {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
+    @NotNull
     private int xp;
+    @NotNull
     private int coins;
     private LocalDate dateCreated; // Breyta í data format eða e-h þannig
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
     @ManyToOne
     private Child assignee;
     private Boolean isDone;
     private Boolean isConfirmed;
-    @NotNull
+
     @ManyToOne
     private Parent maker;
 
@@ -33,15 +42,14 @@ public class Quest {
      * @param description
      * @param xp
      * @param coins
-     * @param dateCreated
      * @param deadline
      */
-    public Quest(String name, String description, int xp, int coins, LocalDate dateCreated, LocalDate deadline, Parent maker) {
+    public Quest(String name, String description, int xp, int coins, LocalDate deadline, Parent maker) {
         this.name = name;
         this.description = description;
         this.xp = xp;
         this.coins = coins;
-        this.dateCreated = dateCreated;
+        this.dateCreated = LocalDate.now();
         this.deadline = deadline;
         this.assignee = null;
         this.isDone = false;
@@ -50,7 +58,7 @@ public class Quest {
     }
 
     public Quest() {
-
+        this.dateCreated = LocalDate.now();
     }
 
     public long getId() {
