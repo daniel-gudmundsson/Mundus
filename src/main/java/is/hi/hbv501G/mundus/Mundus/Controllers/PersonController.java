@@ -125,9 +125,11 @@ public class PersonController {
             Set<Quest> quests = child.getQuests();
             model.addAttribute("child", child);
             model.addAttribute("quests", quests);
+
             return "questViewChild";
         } else if (person instanceof Parent) {
-            return "redirect:/";
+            return "Welcome";
+            //return "redirect:/";
         } else {
             return "redirect:/";
         }

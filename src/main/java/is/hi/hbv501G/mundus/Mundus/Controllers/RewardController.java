@@ -1,8 +1,6 @@
 package is.hi.hbv501G.mundus.Mundus.Controllers;
 
-import is.hi.hbv501G.mundus.Mundus.Entities.Child;
-import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
-import is.hi.hbv501G.mundus.Mundus.Entities.Reward;
+import is.hi.hbv501G.mundus.Mundus.Entities.*;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import is.hi.hbv501G.mundus.Mundus.Services.RewardService;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -45,14 +44,40 @@ public class RewardController {
         return "marketplace";
     }
 
-    @RequestMapping(value ="/addreward", method = RequestMethod.POST)
-    public String addReward(@Valid Reward reward, BindingResult result, Model model, long userID){
+    @RequestMapping(value ="/createReward", method = RequestMethod.POST)
+    public String createRewardPOST(@Valid Reward reward, BindingResult result, Model model, HttpSession session){//, long userID){
         if(result.hasErrors()){
-            return "add-reward";
+            System.out.println(result.getAllErrors());
+            return "createReward";
         }
-        rewardService.save(reward);
-        return "redirect:/rewards";
+        long parentId = (long) session.getAttribute("PersonIdLoggedIn");
+        //Parent maker = personService.findParentById(parentId);
+        //reward.setMaker(maker);
+        try {
+            rewardService.createReward(reward, parentId);
+        } catch (Exception e) {
+            return "createReward";
+        }
+        return "redirect:/";
     }
+
+    @RequestMapping(value = "/createReward", method = RequestMethod.GET)
+    public String createRewardGET(Model model, HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            long personId = (long) session.getAttribute("PersonIdLoggedIn");
+            Person person = personService.findPersonById(personId);
+
+            if (person instanceof Child) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("reward", new Reward());
+                return "createReward";
+            }
+        }
+        return "redirect:/";
+    }
+
 
     @RequestMapping(value = "/deletereward", method = RequestMethod.POST)
     public String deleteReward(@RequestParam("id") long id, Model model, long userID) {
@@ -62,9 +87,10 @@ public class RewardController {
     }
 
     @RequestMapping(value = "/purchaseReward", method = RequestMethod.POST)
-    public String purchaseReward(@RequestParam("id") long rewardId, Model model, long buyerId) {
+    public String purchaseReward(@RequestParam("id") long rewardId, Model model, long buyerId, HttpSession session) {
         // Reward reward = rewardService.findById(id);//.orElseThrow(() -> new IllegalArgumentException("Invalid reward ID"));
-        rewardService.purchaseReward(rewardId, buyerId);
+        long childId = (long) session.getAttribute("PersonIdLoggedIn");
+        rewardService.purchaseReward(rewardId, childId);
         return "redirect:/rewards";
     }
 
@@ -80,7 +106,7 @@ public class RewardController {
         Parent maker = personService.findParentById(2);
         System.out.println("asgasdgklasghasdgjashkghasgahskjgashgjkashgjkshgjksahgsakjghskjdghskgsahdgsja");
         System.out.println(maker);
-        Reward reward = new Reward(name, description, price, levelRequired, autorenew, endDate, visible, maker);
+        Reward reward = new Reward(name, description, price, levelRequired, autorenew, endDate, maker);
         maker.addReward(reward);
         personService.save(maker);
         rewardService.save(reward);

@@ -1,7 +1,9 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
+import org.jetbrains.annotations.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -16,22 +18,24 @@ public class Reward {
     private int price;
     private int levelRequired;
     private boolean autorenew;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private Boolean visible;
     @ManyToOne
     private Child buyer;
-    @NotNull
+
     @ManyToOne
     private Parent maker;
 
-    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, LocalDate endDate, Boolean visible, Parent maker) {
+    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, LocalDate endDate, Parent maker) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.levelRequired = levelRequired;
         this.autorenew = autorenew;
         this.endDate = endDate;
-        this.visible = visible;
+        //this.visible = visible;
         this.maker = maker;
     }
 

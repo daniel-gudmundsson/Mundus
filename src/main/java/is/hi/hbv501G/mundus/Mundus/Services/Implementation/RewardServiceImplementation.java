@@ -62,9 +62,8 @@ public class RewardServiceImplementation implements RewardService {
         }else{
             reward.setMaker(parent);
             parent.addReward(reward);
-
+            //rewardRepository.save(reward);
             personRepository.save(parent);
-            rewardRepository.save(reward);
         }
     }
 
