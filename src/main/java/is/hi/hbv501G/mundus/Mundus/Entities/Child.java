@@ -1,37 +1,39 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Child extends Person {
+public class Child extends Person { // This class extends the abstract Person class
 
-    private int totalCoins;
-    private int xp;
+    private int totalCoins; // The total amount of coins the child has. Can be used to buy rewards
+    private int xp; // The total amount of xp the child has (Need xp to level up) TODO MAKE A LEVEL UP FUNCTION
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, mappedBy = "assignee")
-    private Set<Quest> quests = new HashSet<>();
+            fetch = FetchType.LAZY, mappedBy = "assignee",orphanRemoval = true)
+    private Set<Quest> quests = new HashSet<>(); // Contains quests that are assigned to the child
+    @ElementCollection
+    private List<Long> rewards = new ArrayList<>(); // Contains the id of the rewards the child owns
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, mappedBy = "buyer")
-    private Set<Reward> reward = new HashSet<>();
-
+    @NotNull
     @ManyToOne
-    private Parent parent;
+    private Parent parent; // The parent of the child
 
-    public Child(String name, String pin, Parent parent) {
+    public Child(String name, String pin) {
         super(name, pin);
         this.totalCoins = 0;
         this.xp = 0;
-        this.parent = parent;
     }
 
     public Child(){
 
     }
 
-    @OneToMany(orphanRemoval = true)
+    // Getters and Setters
+    @OneToMany
     public Set<Quest> getQuests() {
         return quests;
     }
@@ -40,13 +42,16 @@ public class Child extends Person {
         this.quests = quests;
     }
 
-    @OneToMany(orphanRemoval = true)
-    public Set<Reward> getReward() {
-        return reward;
+    public List<Long> getReward() {
+        return rewards;
     }
 
-    public void setReward(Set<Reward> reward) {
-        this.reward = reward;
+    public void setRewards(List<Long> rewardIds) {
+        this.rewards = rewardIds;
+    }
+
+    public void addReward(long rewardId){
+        this.rewards.add(rewardId);
     }
 
     public int getTotalCoins() {
@@ -90,5 +95,7 @@ public class Child extends Person {
     public void addXp(int xp){
         this.xp=this.xp+xp;
     }
+
+    public void addCoins(int coins){this.totalCoins = this.totalCoins + coins;}
 
 }

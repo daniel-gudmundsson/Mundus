@@ -1,26 +1,28 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Parent extends Person {
+public class Parent extends Person { // This class extends the abstarct Person class
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, mappedBy = "parent")
-    private Set<Child> children = new HashSet<>();
+            fetch = FetchType.LAZY, mappedBy = "parent",orphanRemoval = true)
+    private Set<Child> children = new HashSet<>(); // Contains the children of this parent
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,mappedBy = "maker")
-    private Set<Reward> rewards = new HashSet<>();
+            fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
+    private Set<Reward> rewards = new HashSet<>(); // Contains the reward the parent has created
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,mappedBy = "maker")
-    private Set<Quest> quests = new HashSet<>();
+            fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
+    private Set<Quest> quests = new HashSet<>(); // Contains the quests the parent has created
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "AccountId")
+    private Account account; // The account which the parent belongs to
 
 
     public Parent(String name, String pin) {
@@ -36,8 +38,8 @@ public class Parent extends Person {
     }
 
 
-
-    @OneToMany(orphanRemoval = true)
+    // Getters and Setters
+    @OneToMany
     public Set<Child> getChildren() {
         return children;
     }
@@ -46,7 +48,7 @@ public class Parent extends Person {
         this.children = children;
     }
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany
     public Set<Reward> getRewards() {
         return rewards;
     }
@@ -55,7 +57,7 @@ public class Parent extends Person {
         this.rewards = rewards;
     }
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany
     public Set<Quest> getQuests() {
         return quests;
     }
@@ -63,4 +65,23 @@ public class Parent extends Person {
     public void setQuests(Set<Quest> quests) {
         this.quests = quests;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void addQuest(Quest quest){
+        this.quests.add(quest);
+    }
+
+    public void addReward(Reward reward){
+        this.rewards.add(reward);
+    }
+
+
+
 }

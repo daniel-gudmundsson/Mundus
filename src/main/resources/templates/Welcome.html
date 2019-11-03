@@ -1,23 +1,12 @@
-<!doctype html>
-<html lang="is">
+<html xmlns:th="https://thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>MUNDUS - SignIn Template</title>
+    <meta charset="UTF-8">
+    <title>Front page</title>
 </head>
 <body>
-<img src="img/mundus.png" width = "100" height = "100">
-<p>Please sign in </p>
-<input id="loginID" name="username" type="text" placeholder="Username" /><br>
-<input id="password" name="password" type="password" placeholder="Password" /><br>
-<form>
-    <button id="username" type="submit">LogIn</button>
-</form>
-<form>
-    <button id="help" type="button">?</button>
-    <button id="createuser" type="button">+</button>
+<h1>Hæ ég er forsíða hér muntu þurfa að logga inn.</h1>
+<form th:action="@{/persons}">
+    <button type="submit" name="submit"  class="link-button">This is a link that sends a POST request</button>
 </form>
 </body>
 </html>

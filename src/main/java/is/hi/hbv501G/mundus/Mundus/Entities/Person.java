@@ -1,17 +1,23 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
-public abstract class Person {
+public abstract class Person { // An abstract class which Child and Parent are based on
 
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
     @Column(name = "PersonId")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
-
-    private String name;
-    private String pin;
+    @NotBlank
+    private String name; // Name of the person
+    //@Pattern(regexp="^[0-9]*$")
+    @NotBlank
+    private String pin; // Pin to log in to the person's account
 
     public Person(String name, String pin) {
         this.name = name;
@@ -25,7 +31,7 @@ public abstract class Person {
 
 
 
-
+    // Getters and Setters
     public long getId() {
         return id;
     }
