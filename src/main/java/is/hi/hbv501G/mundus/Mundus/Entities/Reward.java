@@ -1,6 +1,11 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 public class Reward {
@@ -9,26 +14,29 @@ public class Reward {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
-    private String name;
-    private String description;
-    private int price;
-    private int levelRequired;
-    private boolean autorenew;
-    private String endDate;
-    private Boolean visible;
+    private String name; // Name of the reward
+    private String description; // Description of the reward
+    private int price; // The price of the reward
+    private int levelRequired; // Minimum level required to buy the reward
+    private boolean autorenew; // Probably not going to use this
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate; // Reward expires after this date
+    private Boolean visible; // Probably not going to use this
     @ManyToOne
-    private Child buyer;
-    @ManyToOne
-    private Parent maker;
+    private Child buyer; // Don't think we are going to use this anymore
 
-    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, String endDate, Boolean visible, Parent maker) {
+    @ManyToOne
+    private Parent maker; // Creator of the reward
+
+    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, LocalDate endDate, Parent maker) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.levelRequired = levelRequired;
         this.autorenew = autorenew;
         this.endDate = endDate;
-        this.visible = visible;
+        //this.visible = visible;
         this.maker = maker;
     }
 
@@ -36,6 +44,7 @@ public class Reward {
 
     }
 
+    // Getters and Setters
     public long getId() {
         return id;
     }
@@ -84,11 +93,11 @@ public class Reward {
         this.autorenew = autorenew;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

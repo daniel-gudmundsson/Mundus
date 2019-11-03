@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quest</title>
+</head>
+<body>
+<h2>Create Quest</h2>
+<form th:action="@{/createQuest}" th:object="${quest}" method="post">
+    <p>Name of quest <input type="text" name="name" id="name" th:field="*{name}"/></p>
+    <p>Description <input type="text" name="description" id="description" th:field="*{description}"/></p>
+    <p>Xp <input type="text" name="xp" id="xp" th:field="*{xp}"/></p>
+    <p>Coins <input type="text" name="coins" id="coins" th:field="*{coins}"/></p>
+    <p>Deadline<input type="date" name="deadline" id="deadline" th:field="*{deadline}"/></p>
+
+    <select name = "childId">
+        <option value="-1"> -- </option>
+        <option th:each="child : ${children}" th:value="${child.id}" th:text="${child.name}">
+        </option>
+    </select>
+
+    <input type="submit" value="Create reward"/>
+</form>
+</body>
+</html>

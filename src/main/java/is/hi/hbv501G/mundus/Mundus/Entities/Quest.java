@@ -1,7 +1,12 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 public class Quest {
@@ -10,18 +15,24 @@ public class Quest {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
-    private String name;
-    private String description;
-    private int xp;
-    private int coins;
-    private String dateCreated; // Breyta í data format eða e-h þannig
-    private String deadline;
+    @NotBlank
+    private String name; // Name of the quest
+    @NotBlank
+    private String description; // Description of the quest
+    @NotNull
+    private int xp; // xp gained for completing the quest
+    @NotNull
+    private int coins; // Coins gained for completing the quest
+    private LocalDate dateCreated; // Breyta í data format eða e-h þannig
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate deadline; // Due date of the quest
     @ManyToOne
-    private Child assignee;
-    private Boolean isDone;
-    private Boolean isConfirmed;
+    private Child assignee; // The child that the quest has been assigned to
+    private Boolean isDone; // true if the quest is done, false otherwise
+    private Boolean isConfirmed; // true if the parent has confirmed that the quest is indeed done, false otherwise.
     @ManyToOne
-    private Parent maker;
+    private Parent maker; // Creator of the quest
 
     /**
      * Assignee is null by defult. isDone is false by defult.
@@ -30,15 +41,14 @@ public class Quest {
      * @param description
      * @param xp
      * @param coins
-     * @param dateCreated
      * @param deadline
      */
-    public Quest(String name, String description, int xp, int coins, String dateCreated, String deadline, Parent maker) {
+    public Quest(String name, String description, int xp, int coins, LocalDate deadline, Parent maker) {
         this.name = name;
         this.description = description;
         this.xp = xp;
         this.coins = coins;
-        this.dateCreated = dateCreated;
+        this.dateCreated = LocalDate.now();
         this.deadline = deadline;
         this.assignee = null;
         this.isDone = false;
@@ -47,8 +57,10 @@ public class Quest {
     }
 
     public Quest() {
-
+        this.dateCreated = LocalDate.now();
     }
+
+    // Getters and Setters
 
     public long getId() {
         return id;
@@ -90,19 +102,19 @@ public class Quest {
         this.coins = coins;
     }
 
-    public String getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public String getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

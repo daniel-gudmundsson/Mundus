@@ -1,22 +1,51 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
+import javax.persistence.*;
+import javax.validation.OverridesAttribute;
+import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 public class Account {
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
+    @Column(name = "AccountId")
     private long id;
 
-    private String name;
-    private String email;
-    private String password;
-    private String dateOfBirth;
-    //private User parent;
+    @NotBlank
+    private String name; // Name of the account
+    @NotBlank
+    @Email
+    private String email; // Email used to register and log in
+    @NotBlank
+    private String password; // Password to access the account
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth; // Birthdate of the account owner (actually kind of pointless
 
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account", optional = false)
+    private Parent parent; // Each account contains one and only one parent.
+
+    public Account(String name, String email, String password, LocalDate dateOfBirth) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Account() {
+        parent = new Parent();
+    }
+
+    // Getters and Setters
     public long getId() {
         return id;
     }
@@ -49,19 +78,21 @@ public class Account {
         this.password = password;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-/*    public User getParent() {
+    public Parent getParent() {
         return parent;
     }
 
-    public void setParent(User parent) {
+    public void setParent(Parent parent) {
         this.parent = parent;
-    }*/
+    }
+
+
 }
