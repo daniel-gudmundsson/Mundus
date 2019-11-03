@@ -13,20 +13,20 @@ public class Reward {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
-    private String name;
-    private String description;
-    private int price;
-    private int levelRequired;
-    private boolean autorenew;
+    private String name; // Name of the reward
+    private String description; // Description of the reward
+    private int price; // The price of the reward
+    private int levelRequired; // Minimum level required to buy the reward
+    private boolean autorenew; // Probably not going to use this
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate;
-    private Boolean visible;
+    private LocalDate endDate; // Reward expires after this date
+    private Boolean visible; // Probably not going to use this
     @ManyToOne
-    private Child buyer;
+    private Child buyer; // Don't think we are going to use this anymore
 
     @ManyToOne
-    private Parent maker;
+    private Parent maker; // Creator of the reward
 
     public Reward(String name, String description, int price, int levelRequired, boolean autorenew, LocalDate endDate, Parent maker) {
         this.name = name;
@@ -43,6 +43,7 @@ public class Reward {
 
     }
 
+    // Getters and Setters
     public long getId() {
         return id;
     }

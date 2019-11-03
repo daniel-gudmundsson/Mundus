@@ -56,32 +56,46 @@ public class PersonServiceImplementation implements PersonService {
     }
 
 
+    /**
+     * A method for assigning a child to a parent. When a parent creates a new child account the child should
+     * be assigned to the parent
+     * @param child
+     * @param idOfParent
+     * @throws Exception
+     */
     @Override
     public void assignChildToParent(Child child, long idOfParent) throws Exception {
-        Parent parent = personRepository.findParentById(idOfParent);
+        Parent parent = personRepository.findParentById(idOfParent); // Find the parent by id
 
-        if (child == null || parent == null) {
+        if (child == null || parent == null) { // If either of them are null then something is wrong
             throw new Exception();
         } else {
-            parent.addChild(child);
-            child.setParent(parent);
-            personRepository.save(child);
+            parent.addChild(child); // Add the child to the parent
+            child.setParent(parent); // Add the parent to the child (Only one parent per child)
+            personRepository.save(child); // And finally save the updates
             personRepository.save(parent);
         }
     }
 
+    /**
+     * A method for authenticating the pin when trying to log into a person.
+     * @param childId
+     * @param pin
+     * @return
+     * @throws Exception
+     */
     @Override
     public long authenticatePin(long childId, String pin) throws Exception {
-        Person person = personRepository.findPersonById(childId);
+        Person person = personRepository.findPersonById(childId); // Get the person trying to log in
 
         if (person == null) {
             throw new LoginException("Person not found");
         }
 
-        if (person.getPin().equals(pin)) {
+        if (person.getPin().equals(pin)) { // The pin is correct
             return person.getId();
         } else {
-            throw new FailedLoginException("Wrong pin");
+            throw new FailedLoginException("Wrong pin"); // The pin was incorrect
         }
 
 

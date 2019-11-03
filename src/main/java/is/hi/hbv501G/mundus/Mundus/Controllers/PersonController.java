@@ -27,6 +27,7 @@ public class PersonController {
         this.accountService = accountService;
     }
 
+    // Several test function
     //create child
     @RequestMapping("/person-test1")
     public String test1(Model model) {
@@ -65,26 +66,39 @@ public class PersonController {
         return "Welcome";
     }
 
+    /**
+     * When an account has been logged into you will be redirected to the person page where you can select a person to log into
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     public String loadPersons(Model model, HttpSession session) {
         if (session.getAttribute("AccountIdLoggedIn") == null) {
-            return "redirect:/";
+            return "redirect:/"; // This page is not accessible unless logged into an account
         }
 
-        long accountId = (long) session.getAttribute("AccountIdLoggedIn");
-        Account account = accountService.findAccountById(accountId);
-        Parent parent = account.getParent();
-        Set<Child> children = parent.getChildren();
+        long accountId = (long) session.getAttribute("AccountIdLoggedIn"); // Get the id of the person logged in
+        Account account = accountService.findAccountById(accountId); // The account which is logged in
+        Parent parent = account.getParent(); // Get the parent of the account
+        Set<Child> children = parent.getChildren(); // Get the children of this acount
         Set<Person> persons = new HashSet<>();
 
         persons.addAll(children);
         persons.add(parent);
 
-        model.addAttribute("persons", persons);
-        return "persons";
+        model.addAttribute("persons", persons); // Add all the children and parent to the model
+        return "persons"; // Load the person page
 
     }
 
+    /**
+     * When a person has been selected you must enter a pin
+     * @param id
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/pin-page", method = RequestMethod.POST)
     public String loadPinPage(@RequestParam("id") long id, Model model, HttpSession session) {
         if (session.getAttribute("PersonIdLoggedIn") != null) {
@@ -97,14 +111,21 @@ public class PersonController {
         return "pinPage";
     }
 
+    /**
+     * A method that authenticates a pin for a particular person
+     * @param id
+     * @param pin
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/pin-page-auth", method = RequestMethod.POST)
     public String authenticatePinPost(@RequestParam("id") long id, @RequestParam("pin") String pin, HttpSession session) {
 
         long personId;
 
         try {
-            personId = personService.authenticatePin(id, pin);
-            session.setAttribute("PersonIdLoggedIn", personId);
+            personId = personService.authenticatePin(id, pin); // Try to authenticate the pin
+            session.setAttribute("PersonIdLoggedIn", personId); // Then add the id to the session
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,19 +133,25 @@ public class PersonController {
         return "redirect:/";
     }
 
+    /**
+     * Loads all the information of a person
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/quests", method = RequestMethod.GET)
     public String loadPerson(Model model, HttpSession session) {
         if (session.getAttribute("PersonIdLoggedIn") == null) {
             return "redirect:/";
         }
-        long personId = (long) session.getAttribute("PersonIdLoggedIn");
-        Person person = personService.findPersonById(personId);
+        long personId = (long) session.getAttribute("PersonIdLoggedIn"); // Get the id of the person
+        Person person = personService.findPersonById(personId); // Find the person
 
-        if (person instanceof Child) {
+        if (person instanceof Child) { // If the person is a child it will se the quest page from the viewpoint of a child
             Child child = personService.findChildById(personId);
             Set<Quest> quests = child.getQuests();
             model.addAttribute("child", child);
-            model.addAttribute("quests", quests);
+            model.addAttribute("quests", quests); // Add the quests of the child to the model
 
             return "questViewChild";
         } else if (person instanceof Parent) {
@@ -136,7 +163,13 @@ public class PersonController {
 
     }
 
-
+    /**
+     * Assign a child to a parent
+     * @param id of the parent
+     * @param model
+     * @param child
+     * @return
+     */
     @RequestMapping(value = "/assignChildToParent", method = RequestMethod.POST)
     public String addChild(@RequestParam("id") long id, Model model, Child child) {
         try {

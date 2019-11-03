@@ -6,23 +6,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Parent extends Person {
+public class Parent extends Person { // This class extends the abstarct Person class
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, mappedBy = "parent",orphanRemoval = true)
-    private Set<Child> children = new HashSet<>();
+    private Set<Child> children = new HashSet<>(); // Contains the children of this parent
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
-    private Set<Reward> rewards = new HashSet<>();
+    private Set<Reward> rewards = new HashSet<>(); // Contains the reward the parent has created
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,mappedBy = "maker",orphanRemoval = true)
-    private Set<Quest> quests = new HashSet<>();
+    private Set<Quest> quests = new HashSet<>(); // Contains the quests the parent has created
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "AccountId", nullable = false)
-    private Account account;
+    private Account account; // The account which the parent belongs to
 
 
     public Parent(String name, String pin) {
@@ -38,7 +38,7 @@ public class Parent extends Person {
     }
 
 
-
+    // Getters and Setters
     @OneToMany
     public Set<Child> getChildren() {
         return children;

@@ -43,18 +43,35 @@ public class RewardServiceImplementation implements RewardService {
         return rewardRepository.findById(id);
     }
 
+    /**
+     * An implementation of buying a reward
+     * @param rewardId
+     * @param buyerId
+     */
     @Override
-    public void purchaseReward(long rewardId, long buyerId) {
+    public void purchaseReward(long rewardId, long buyerId) throws Exception{
         Child child = personRepository.findChildById(buyerId);
-        Reward reward = rewardRepository.findById(rewardId);
-        child.addReward(rewardId);
-        if (!reward.isAutorenew()) {
-            reward.setAutorenew(false);
+        if(child == null) {
+            throw new Exception();
         }
-        personRepository.save(child);
+        else
+        {
+            //Reward reward = rewardRepository.findById(rewardId);
+            child.addReward(rewardId); // Adds the rewardId to the child.
+            /*if (!reward.isAutorenew()) {
+                reward.setAutorenew(false);
+            }*/
+            personRepository.save(child); // Saves the child after it has been updated
+        }
     }
 
 
+    /**
+     * An implmentation of creating a new reward
+     * @param reward
+     * @param parentId
+     * @throws Exception
+     */
     public void createReward(Reward reward, long parentId) throws Exception {
         Parent parent = personRepository.findParentById(parentId);
         if (parent == null){

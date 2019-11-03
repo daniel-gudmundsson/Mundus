@@ -12,19 +12,19 @@ public class Quest {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
-    private String name;
-    private String description;
-    private int xp;
-    private int coins;
+    private String name; // Name of the quest
+    private String description; // Description of the quest
+    private int xp; // xp gained for completing the quest
+    private int coins; // Coins gained for completing the quest
     private LocalDate dateCreated; // Breyta í data format eða e-h þannig
-    private LocalDate deadline;
+    private LocalDate deadline; // Due date of the quest
     @ManyToOne
-    private Child assignee;
-    private Boolean isDone;
-    private Boolean isConfirmed;
+    private Child assignee; // The child that the quest has been assigned to
+    private Boolean isDone; // true if the quest is done, false otherwise
+    private Boolean isConfirmed; // true if the parent has confirmed that the quest is indeed done, false otherwise.
     @NotNull
     @ManyToOne
-    private Parent maker;
+    private Parent maker; // Creator of the quest
 
     /**
      * Assignee is null by defult. isDone is false by defult.
@@ -52,6 +52,8 @@ public class Quest {
     public Quest() {
 
     }
+
+    // Getters and Setters
 
     public long getId() {
         return id;

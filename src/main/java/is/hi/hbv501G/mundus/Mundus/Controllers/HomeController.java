@@ -9,6 +9,14 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
+    /**
+     *
+     * @param model
+     * @param session
+     * @return the "home" page. If a person is logged in the homepage is the quest page
+     * if an account is not logged into then the homepage is the login page
+     * If an person is not logged in to a person account the the homepage is the person log in page
+     */
     @RequestMapping("/")
     public String home(Model model, HttpSession session) {
 

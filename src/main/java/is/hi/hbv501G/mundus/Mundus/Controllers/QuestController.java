@@ -26,12 +26,16 @@ public class QuestController {
     }
 
 
-
-
+    /**
+     * A function for marking a quest as done
+     * @param questId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/markQuestAsDone", method = RequestMethod.POST)
-    public String markQuestAsDone(@RequestParam("id") long id, Model model, long userID) {
+    public String markQuestAsDone(@RequestParam("id") long questId, Model model) {
         try {
-            questService.markQuest(id, true);
+            questService.markQuest(questId, true);
         }
         catch (Exception e) {
             System.out.println("Not able to mark quest as done");
@@ -39,10 +43,16 @@ public class QuestController {
         return "redirect:/quests";
     }
 
+    /**
+     * Marks quest as confirmed. (After the child has marked a quest as finished the parent must confirm it)
+     * @param questId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/markQuestAsConfirmed", method = RequestMethod.POST)
-    public String markQuestAsConfirmed(@RequestParam("id") long id, Model model, long userID) {
+    public String markQuestAsConfirmed(@RequestParam("id") long questId, Model model) {
         try {
-            questService.confirmDone(id);
+            questService.confirmDone(questId);
         }
         catch (Exception e) {
             System.out.println("Not able to mark quest as confirmed");
@@ -51,10 +61,17 @@ public class QuestController {
         return "redirect:/quests";
     }
 
+    /**
+     * A method for assigning a quest to a child
+     * @param questId
+     * @param model
+     * @param childId
+     * @return
+     */
     @RequestMapping(value = "/assignQuest", method = RequestMethod.POST)
-    public String assignQuest(@RequestParam("id") long id, Model model, long userID) {
+    public String assignQuest(@RequestParam("id") long questId, Model model, long childId) {
         try {
-            questService.assignQuest(id, userID);
+            questService.assignQuest(questId, childId);
         }
         catch (Exception e) {
             System.out.println("Not able to assign quest");
@@ -62,10 +79,16 @@ public class QuestController {
         return "redirect:/quests";
     }
 
+    /**
+     * A method for deleting a quest
+     * @param questId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/deleteQuest", method = RequestMethod.POST)
-    public String delete(@RequestParam("id") long id, Model model, long userID) {
+    public String delete(@RequestParam("id") long questId, Model model) {
         try {
-            questService.delete(questService.findById(id));
+            questService.delete(questService.findById(questId));
         }
         catch (Exception e) {
             System.out.println("Not able to delete quest");

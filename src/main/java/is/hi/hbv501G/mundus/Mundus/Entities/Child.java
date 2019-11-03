@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Child extends Person {
+public class Child extends Person { // This class extends the abstract Person class
 
-    private int totalCoins;
-    private int xp;
+    private int totalCoins; // The total amount of coins the child has. Can be used to buy rewards
+    private int xp; // The total amount of xp the child has (Need xp to level up) TODO MAKE A LEVEL UP FUNCTION
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, mappedBy = "assignee",orphanRemoval = true)
-    private Set<Quest> quests = new HashSet<>();
+    private Set<Quest> quests = new HashSet<>(); // Contains quests that are assigned to the child
     @ElementCollection
-    private List<Long> rewards = new ArrayList<>();
+    private List<Long> rewards = new ArrayList<>(); // Contains the id of the rewards the child owns
 
     @NotNull
     @ManyToOne
-    private Parent parent;
+    private Parent parent; // The parent of the child
 
     public Child(String name, String pin) {
         super(name, pin);
@@ -32,6 +32,7 @@ public class Child extends Person {
 
     }
 
+    // Getters and Setters
     @OneToMany
     public Set<Quest> getQuests() {
         return quests;

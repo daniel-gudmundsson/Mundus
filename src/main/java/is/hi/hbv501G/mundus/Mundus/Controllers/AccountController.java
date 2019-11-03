@@ -28,7 +28,13 @@ public class AccountController {
         this.personService = personService;
     }
 
-
+    /**
+     * A POST method for logging in.
+     * @param email
+     * @param password
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPost(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
         long accountId;
@@ -43,17 +49,31 @@ public class AccountController {
         return "redirect:/";
     }
 
+    /**
+     * A GET method for logging in
+     * @return the login page
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
+    /**
+     * A method for logging out of the account
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/logoutAccount", method = RequestMethod.GET)
     public String logOutAccount(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
 
+    /**
+     * A method for logging out of a person
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/logoutPerson", method = RequestMethod.GET)
     public String logOutPerson(HttpSession session) {
         if (session.getAttribute("PersonIdLoggedIn") != null) {

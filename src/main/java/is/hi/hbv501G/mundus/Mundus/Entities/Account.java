@@ -20,19 +20,19 @@ public class Account {
     private long id;
 
     @NotBlank
-    private String name;
+    private String name; // Name of the account
     @NotBlank
     @Email
-    private String email;
+    private String email; // Email used to register and log in
     @NotBlank
-    private String password;
+    private String password; // Password to access the account
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+    private LocalDate dateOfBirth; // Birthdate of the account owner (actually kind of pointless
 
     @Valid
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account", optional = false)
-    private Parent parent;
+    private Parent parent; // Each account contains one and only one parent.
 
     public Account(String name, String email, String password, LocalDate dateOfBirth) {
         this.name = name;
@@ -45,6 +45,7 @@ public class Account {
         parent = new Parent();
     }
 
+    // Getters and Setters
     public long getId() {
         return id;
     }
