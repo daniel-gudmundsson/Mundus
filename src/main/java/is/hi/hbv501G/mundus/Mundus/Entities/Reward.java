@@ -1,9 +1,10 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-import org.jetbrains.annotations.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity

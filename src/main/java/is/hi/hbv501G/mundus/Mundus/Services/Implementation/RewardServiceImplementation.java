@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class RewardServiceImplementation implements RewardService {
 
@@ -45,17 +46,16 @@ public class RewardServiceImplementation implements RewardService {
 
     /**
      * An implementation of buying a reward
+     *
      * @param rewardId
      * @param buyerId
      */
     @Override
-    public void purchaseReward(long rewardId, long buyerId) throws Exception{
+    public void purchaseReward(long rewardId, long buyerId) throws Exception {
         Child child = personRepository.findChildById(buyerId);
-        if(child == null) {
+        if (child == null) {
             throw new Exception();
-        }
-        else
-        {
+        } else {
             //Reward reward = rewardRepository.findById(rewardId);
             child.addReward(rewardId); // Adds the rewardId to the child.
             /*if (!reward.isAutorenew()) {
@@ -68,15 +68,16 @@ public class RewardServiceImplementation implements RewardService {
 
     /**
      * An implmentation of creating a new reward
+     *
      * @param reward
      * @param parentId
      * @throws Exception
      */
     public void createReward(Reward reward, long parentId) throws Exception {
         Parent parent = personRepository.findParentById(parentId);
-        if (parent == null){
+        if (parent == null) {
             throw new Exception();
-        }else{
+        } else {
             reward.setMaker(parent);
             parent.addReward(reward);
             //rewardRepository.save(reward);

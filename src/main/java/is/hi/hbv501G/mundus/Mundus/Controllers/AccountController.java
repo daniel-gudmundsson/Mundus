@@ -30,6 +30,7 @@ public class AccountController {
 
     /**
      * A POST method for logging in.
+     *
      * @param email
      * @param password
      * @param session
@@ -51,6 +52,7 @@ public class AccountController {
 
     /**
      * A GET method for logging in
+     *
      * @return the login page
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -60,6 +62,7 @@ public class AccountController {
 
     /**
      * A method for logging out of the account
+     *
      * @param session
      * @return
      */
@@ -71,6 +74,7 @@ public class AccountController {
 
     /**
      * A method for logging out of a person
+     *
      * @param session
      * @return
      */
@@ -83,27 +87,27 @@ public class AccountController {
     }
 
 
-    @RequestMapping("/test1")
-    public String home(Model model) {
-        if (model.containsAttribute("accountId")) {
-            System.out.println(Long.parseLong(String.valueOf(model.asMap().get("accountId"))));
-        } else {
-            return "redirect:/login";
-        }
-        return "Welcome";
-    }
+//    @RequestMapping("/test1")
+//    public String home(Model model) {
+//        if (model.containsAttribute("accountId")) {
+//            System.out.println(Long.parseLong(String.valueOf(model.asMap().get("accountId"))));
+//        } else {
+//            return "redirect:/login";
+//        }
+//        return "Welcome";
+//    }
 
-    @RequestMapping("/test3")
-    public String test3() {
-        Account account = new Account("Agnar", "agnar-97@hotmail.com", "mamma", LocalDate.now());
-        Parent parent = new Parent("Agnar", "1234");
-        try {
-            accountService.createAccount(account, parent);
-        } catch (Exception e) {
-
-        }
-        return "login";
-    }
+//    @RequestMapping("/test3")
+//    public String test3() {
+//        Account account = new Account("Agnar", "agnar-97@hotmail.com", "mamma", LocalDate.now());
+//        Parent parent = new Parent("Agnar", "1234");
+//        try {
+//            accountService.createAccount(account, parent);
+//        } catch (Exception e) {
+//
+//        }
+//        return "login";
+//    }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUpPOST(@Valid Account account, BindingResult result, Model model) {
@@ -126,10 +130,10 @@ public class AccountController {
         return "signup";
     }
 
-    @RequestMapping("/test5")
-    public String test5(Model model, HttpSession session) {
-        System.out.println((long)session.getAttribute("AccountIdLoggedIn"));
-        return "Welcome";
-    }
+//    @RequestMapping("/test5")
+//    public String test5(Model model, HttpSession session) {
+//        System.out.println((long)session.getAttribute("AccountIdLoggedIn"));
+//        return "Welcome";
+//    }
 
 }
