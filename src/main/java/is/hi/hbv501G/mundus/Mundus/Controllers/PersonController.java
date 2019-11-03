@@ -32,7 +32,11 @@ public class PersonController {
     @RequestMapping("/person-test1")
     public String test1(Model model) {
         Child krakki = new Child("Jón", "123");
-        personService.save(krakki);
+        try {
+            personService.assignChildToParent(krakki, 5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "Welcome";
     }
 
@@ -155,8 +159,7 @@ public class PersonController {
 
             return "questViewChild";
         } else if (person instanceof Parent) {
-            return "Welcome";
-            //return "redirect:/";
+            return "questViewParent";
         } else {
             return "redirect:/";
         }

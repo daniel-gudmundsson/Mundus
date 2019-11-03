@@ -67,7 +67,6 @@ public class AccountServiceImplementation implements AccountService {
         account.setParent(parent);
         parent.setAccount(account);
 
-        personRepository.save(parent);
         accountRepository.save(account);
     }
 
