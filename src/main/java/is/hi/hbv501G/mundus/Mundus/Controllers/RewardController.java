@@ -35,16 +35,38 @@ public class RewardController {
      * @return Returns the reward page (marketplace)
      */
     @RequestMapping("/marketplace")
-    public String rewardHome(Model model) {//, long userID){
-        //Child child = personService.findChildById(userID);
-        Child child = personService.findChildById(4);
-        Set<Reward> allRewards = child.getParent().getRewards();
-        List<Long> childRewardIds = child.getReward();
-        for (long id : childRewardIds) {
-            allRewards.remove(rewardService.findById(id));
+    public String rewardHome(Model model, HttpSession session) {//, long userID){
+        if (session.getAttribute("PersonIdLoggedIn") == null) {
+            return "redirect:/";
         }
-        model.addAttribute("rewards", allRewards);
-        return "marketplace";
+        long personId = (long) session.getAttribute("PersonIdLoggedIn"); // Get the id of the person
+        Person person = personService.findPersonById(personId); // Find the person
+
+        if (person instanceof Child) { // If the person is a child it will se the quest page from the viewpoint of a child
+            Child child = personService.findChildById(personId);
+
+            Set<Reward> allRewards = child.getParent().getRewards();
+            List<Long> childRewardIds = child.getReward();
+            for (long id : childRewardIds) {
+                allRewards.remove(rewardService.findById(id));
+            }
+
+            model.addAttribute("child", child);
+            model.addAttribute("rewards",allRewards); // Add the quests of the child to the model
+            return "marketplaceChild";
+        } else if (person instanceof Parent) {
+            return "marketplaceParent";
+        } else {
+            return "redirect:/";
+        }
+        //Child child = personService.findChildById(userID);
+//        Child child = personService.findChildById(4);
+//        Set<Reward> allRewards = child.getParent().getRewards();
+//        List<Long> childRewardIds = child.getReward();
+//        for (long id : childRewardIds) {
+//            allRewards.remove(rewardService.findById(id));
+//        }
+//        model.addAttribute("rewards", allRewards);
     }
 
     /**
@@ -125,10 +147,10 @@ public class RewardController {
         try {
             rewardService.purchaseReward(rewardId, childId); // Purchase the reward for the child
         } catch (Exception e) {
-            return "redirect:/rewards";
+            return "redirect:/marketplace";
         }
 
-        return "redirect:/rewards";
+        return "redirect:/marketplace";
     }
 
 //    /**
