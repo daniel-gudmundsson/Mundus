@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,16 +41,18 @@ public class RewardController {
         Person person = personService.findPersonById(personId); // Find the person
 
         if (person instanceof Child) { // If the person is a child it will se the quest page from the viewpoint of a child
-            Child child = personService.findChildById(personId);
-
-            Set<Reward> allRewards = child.getParent().getRewards();
-            List<Long> childRewardIds = child.getReward();
-            for (long id : childRewardIds) {
-                allRewards.remove(rewardService.findById(id));
+            Set<Reward> rewardsAvailable = null;
+            Set<Reward> ownRewards = null;
+            try {
+                Child child = personService.findChildById(personId);
+                rewardsAvailable = rewardService.getChildRewardAvailable(personId);
+                ownRewards = rewardService.getChildRewards(personId);
+                model.addAttribute("child", child);
+                model.addAttribute("rewards",rewardsAvailable); // Add the quests of the child to the model
+                model.addAttribute("ownrewards",ownRewards);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            model.addAttribute("child", child);
-            model.addAttribute("rewards",allRewards); // Add the quests of the child to the model
             return "marketplaceChild";
         } else if (person instanceof Parent) {
             return "marketplaceParent";
@@ -67,6 +67,12 @@ public class RewardController {
 //            allRewards.remove(rewardService.findById(id));
 //        }
 //        model.addAttribute("rewards", allRewards);
+    }
+
+    public void getChildQuestNoOwned(Set<Reward> allRewards, List<Long> childRewardIds) {
+        for (long id : childRewardIds) {
+            allRewards.remove(rewardService.findById(id));
+        }
     }
 
     /**

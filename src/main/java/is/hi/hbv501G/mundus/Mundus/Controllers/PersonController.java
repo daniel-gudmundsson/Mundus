@@ -163,6 +163,7 @@ public class PersonController {
             model.addAttribute("quests", quests); // Add the quests of the child to the model
 
             return "questViewChild";
+
         } else if (person instanceof Parent) {
             return "questViewParent";
         } else {

@@ -9,7 +9,9 @@ import is.hi.hbv501G.mundus.Mundus.Services.RewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RewardServiceImplementation implements RewardService {
@@ -73,6 +75,7 @@ public class RewardServiceImplementation implements RewardService {
      * @param parentId
      * @throws Exception
      */
+    @Override
     public void createReward(Reward reward, long parentId) throws Exception {
         Parent parent = personRepository.findParentById(parentId);
         if (parent == null) {
@@ -83,6 +86,32 @@ public class RewardServiceImplementation implements RewardService {
             //rewardRepository.save(reward);
             personRepository.save(parent);
         }
+    }
+    @Override
+    public Set<Reward> getChildRewardAvailable(long childId) throws Exception {
+        Child child = personRepository.findChildById(childId);
+        if(child == null){
+            throw new Exception();
+        }
+        Set<Reward> allRewards = new HashSet<>(child.getParent().getRewards());
+        List<Long> childRewardIds = child.getReward();
+        for (long id : childRewardIds) {
+            allRewards.remove(findById(id));
+        }
+        return allRewards;
+    }
+    @Override
+    public Set<Reward> getChildRewards(long childId) throws Exception {
+        Child child = personRepository.findChildById(childId);
+        if(child == null){
+            throw new Exception();
+        }
+        Set<Reward> allRewards = new HashSet<>(child.getParent().getRewards());
+        System.out.println(allRewards);
+        Set<Reward> rewardsNotOwned = getChildRewardAvailable(childId);
+        System.out.println(rewardsNotOwned);
+        allRewards.removeAll(rewardsNotOwned);
+        return allRewards;
     }
 
 
