@@ -49,19 +49,27 @@ public class RewardServiceImplementation implements RewardService {
      * @param buyerId
      */
     @Override
-    public void purchaseReward(long rewardId, long buyerId) throws Exception{
+    public boolean purchaseReward(long rewardId, long buyerId) throws Exception{
         Child child = personRepository.findChildById(buyerId);
         if(child == null) {
             throw new Exception();
         }
         else
         {
-            //Reward reward = rewardRepository.findById(rewardId);
-            child.addReward(rewardId); // Adds the rewardId to the child.
-            /*if (!reward.isAutorenew()) {
-                reward.setAutorenew(false);
-            }*/
-            personRepository.save(child); // Saves the child after it has been updated
+            int childLVL = child.getLevel();
+            int childCoins = child.getTotalCoins();
+            Reward reward = findById(rewardId);
+            int requiredLVL = reward.getLevelRequired();
+            int price = reward.getPrice();
+            if(childLVL >= requiredLVL && childCoins >= price) {
+                //Reward reward = rewardRepository.findById(rewardId);
+                child.addReward(rewardId); // Adds the rewardId to the child.
+
+                child.setTotalCoins(childCoins-price);
+                personRepository.save(child); // Saves the child after it has been updated
+                return true;
+            }
+            return false;
         }
     }
 

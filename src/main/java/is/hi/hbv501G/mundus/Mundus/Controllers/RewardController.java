@@ -122,12 +122,16 @@ public class RewardController {
     public String purchaseReward(@RequestParam("id") long rewardId, Model model, HttpSession session) {
         // Reward reward = rewardService.findById(id);//.orElseThrow(() -> new IllegalArgumentException("Invalid reward ID"));
         long childId = (long) session.getAttribute("PersonIdLoggedIn"); // Get the id of the buyer
-        try {
-            rewardService.purchaseReward(rewardId, childId); // Purchase the reward for the child
-        }
-        catch (Exception e) {
-            return "redirect:/rewards";
-        }
+
+            try {
+                boolean success = rewardService.purchaseReward(rewardId, childId); // Purchase the reward for the child
+            }
+            catch (Exception e) {
+                return "redirect:/rewards";
+            }
+
+            //TODO Bregðast við success
+
 
         return "redirect:/rewards";
     }
