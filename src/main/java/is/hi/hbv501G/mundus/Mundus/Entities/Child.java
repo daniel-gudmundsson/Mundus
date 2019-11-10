@@ -64,12 +64,16 @@ public class Child extends Person { // This class extends the abstract Person cl
     }
 
     public int getLevel() {
-        return 99;
+
+        return xp/1000;
     }
 
     public void addQuest(Quest quest) {
-        quest.setAssignee(this);
         quests.add(quest);
+    }
+
+    public void removeQuest(Quest quest) {
+        quests.remove(quest);
     }
 
     public int getXp() {

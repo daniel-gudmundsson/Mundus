@@ -47,6 +47,16 @@ public class QuestController {
         return "redirect:/quests";
     }
 
+    @RequestMapping(value = "/markQuestAsNotDone", method = RequestMethod.POST)
+    public String markQuestAsNotDone(@RequestParam("id") long questId, Model model) {
+        try {
+            questService.markQuest(questId, false);
+        } catch (Exception e) {
+            System.out.println("Not able to mark quest as not done");
+        }
+        return "redirect:/quests";
+    }
+
     /**
      * Marks quest as confirmed. (After the child has marked a quest as finished the parent must confirm it)
      *
@@ -70,15 +80,31 @@ public class QuestController {
      *
      * @param questId
      * @param model
-     * @param childId
+     * @param session
      * @return
      */
     @RequestMapping(value = "/assignQuest", method = RequestMethod.POST)
-    public String assignQuest(@RequestParam("id") long questId, Model model, long childId) {
-        try {
-            questService.assignQuest(questId, childId);
-        } catch (Exception e) {
-            System.out.println("Not able to assign quest");
+    public String assignQuest(@RequestParam("id") long questId, Model model, HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            long childId = (long) session.getAttribute("PersonIdLoggedIn");
+            try {
+                questService.assignQuest(questId, childId);
+            } catch (Exception e) {
+                System.out.println("Not able to assign quest");
+            }
+        }
+        return "redirect:/quests";
+    }
+
+    @RequestMapping(value = "/unAssignQuest", method = RequestMethod.POST)
+    public String unAssignQuest(@RequestParam("id") long questId, Model model, HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            long childId = (long) session.getAttribute("PersonIdLoggedIn");
+            try {
+                questService.assignQuest(questId, childId);
+            } catch (Exception e) {
+                System.out.println("Not able to assign quest");
+            }
         }
         return "redirect:/quests";
     }

@@ -41,6 +41,8 @@
                         <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
+                        <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                        <a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" type="hidden">Assign to me</button></a>
                     </div>
                 </div>
             </div>
@@ -55,6 +57,9 @@
                         <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
+                        <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                        <a th:href="@{markQuestAsDone}" type="hidden" class ="done"><button class="view__done" >Done</button></a>
+                        <a th:href="@{unAssignQuest}" type="hidden" class ="assign"><button class="view__assign" type="hidden">Unassign</button></a>
                     </div>
                 </div>
 
@@ -71,6 +76,8 @@
                             <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                             <p class="quest__description" th:text="${quest.description}" hidden></p>
                             <h3 class="quest__status" hidden>Status: Available</h3>
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <a th:href="@{markQuestAsNotDone}" type="hidden" class ="done"><button class="view__done" type="hidden">Not Done</button></a>
                         </div>
                     </div>
                 </div>
@@ -87,10 +94,9 @@
 
 <footer class="footer">
     <ul class="header__points">
-        <!-- <li class="header__point header__point--active">MUNDUS</li> -->
-        <li class="header__point"></a>Olaf lvl 5</li>
-        <li class="header__point">Coins: 1337</li>
-        <li class="header__point">xp: 9999</li>
+        <li class="header__point" th:text="${child.name} + ' Level ' + ${child.getLevel()}"></a></li>
+        <li class="header__point" th:text="'Coins: ' + ${child.totalCoins}"></li>
+        <li class="header__point" th:text="'XP: ' + ${child.xp}"></li>
     </ul>
 </footer>
 
