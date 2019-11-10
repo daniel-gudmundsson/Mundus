@@ -54,6 +54,10 @@ public class Child extends Person { // This class extends the abstract Person cl
         this.rewards.add(rewardId);
     }
 
+    public void removeReward(long rewardId){
+        this.rewards.remove(rewardId);
+    }
+
     public int getTotalCoins() {
 
         return totalCoins;

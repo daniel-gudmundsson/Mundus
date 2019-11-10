@@ -1,0 +1,227 @@
+.sidenav {
+    height: 100%;
+    /* Full-height: remove this if you want "auto" height */
+    width: 140px;
+    /* Set the width of the sidebar */
+    position: fixed;
+    /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    left: 0;
+    background-color: #633e10;
+    /* Black */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 1;
+    border: solid #e1b01e;
+    border-width: 8px;
+    /* margin-right: 0px; */
+}
+
+li {
+    list-style: none;
+}
+
+main {
+    display: flex;
+    /* margin-left: 150px; Same as the width of the sidebar */
+    padding: 0px 10px;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #154074;
+    position: fixed;
+    /* background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
+    /* background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(21,64,116,1) 0%, rgba(15,108,158,1) 100%, rgba(0,212,255,1) 100%); */
+    background-image: url("../img/scroll.png");
+    background-repeat: no-repeat;
+    /* background-size: 1400px 900px; */
+    background-size: 100% 120%;
+    background-position: bottom;
+}
+
+body {
+    margin: 0px;
+}
+
+.header {
+    /* margin-left: 160px; Same as the width of the sidebar */
+    background: #633e10;
+    border: solid #e1b01e;
+    border-width: 7px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 2;
+    margin-top: 0px;
+    padding-top: 0px;
+    /* padding: 10px; */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    background: #633e10;
+    border: solid #e1b01e;
+    border-width: 7px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 2;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.header__points {
+    width: 100%;
+    /* border: solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+/*===========Body==========*/
+.reward-body {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 80%;
+}
+
+/*==========Create reward===========*/
+.create-reward{
+    width: 30%;
+}
+
+.create-reward__title{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+/*=========All rewards=========*/
+.reward-content {
+    border-left: solid black;
+    border-right: solid black;
+    width: 50%;
+}
+
+.reward-content__title{
+    display: flex;
+    justify-content: center;
+}
+
+.reward__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.reward-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 75%;
+    overflow: auto;
+
+}
+
+.reward-container::-webkit-scrollbar { 
+    display: none; 
+} 
+
+.reward {
+    height: 250px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-color: #85521f;
+    border-width: 5px;
+    border-radius: 15px;
+    margin: 0px 15px 15px 15px;
+}
+
+.reward__title {
+    width: 100%;
+    height: 20%;
+}
+
+.reward__text {
+    margin: 0 auto auto auto;
+    width: 100%;
+}
+
+.reward__date {
+    margin: 1px auto;
+    height: 10%;
+}
+
+.reward__level{
+    margin: 1px auto;
+}
+
+.reward__footer {
+    width: 100%;
+    height: 30%;
+    display: flex;
+}
+
+.reward__remove-button {
+    margin: auto;
+}
+
+.reward__price{
+    margin: auto;
+}
+
+/*========Purchased rewards=======*/
+.purchased-rewards{
+    width: 20%;
+}
+
+.purchased-rewards__title{
+    display: flex;
+    justify-content: center;
+}
+
+.purchased-rewards{
+    overflow: auto;
+}
+
+/*Removes Scroll*/
+.purchased-rewards::-webkit-scrollbar{ 
+    display: none; 
+} 
+
+.reward__purchased{
+    height: 250px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-color: #85521f;
+    border-width: 5px;
+    border-radius: 15px;
+    margin: 0 auto 15px auto;
+}
+
+
+
+
+
+

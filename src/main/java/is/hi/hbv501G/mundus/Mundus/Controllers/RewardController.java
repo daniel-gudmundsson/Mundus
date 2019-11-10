@@ -55,6 +55,11 @@ public class RewardController {
             }
             return "marketplaceChild2";
         } else if (person instanceof Parent) {
+            Parent parent = personService.findParentById(personId);
+
+            model.addAttribute("allRewards", parent.getRewards());
+
+
             return "marketplaceParent";
         } else {
             return "redirect:/";
@@ -132,10 +137,18 @@ public class RewardController {
      * @return
      */
     @RequestMapping(value = "/deletereward", method = RequestMethod.POST)
-    public String deleteReward(@RequestParam("id") long rewardId, Model model, long userID) {
-        Reward reward = rewardService.findById(rewardId);//.orElseThrow(() -> new IllegalArgumentException("Invalid reward ID"));
-        rewardService.delete(reward);
-        return "redirect:/rewards";
+    public String deleteReward(@RequestParam("id") long rewardId, HttpSession session) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            long parentId = (long) session.getAttribute("PersonIdLoggedIn");
+            try {
+                rewardService.deleteReward(parentId,rewardId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "redirect:/marketplace";
+        }
+        return "redirect:/";
+
     }
 
     /**

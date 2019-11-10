@@ -124,5 +124,21 @@ public class RewardServiceImplementation implements RewardService {
         return allRewards;
     }
 
+    @Override
+    public void deleteReward(long parentId, long rewardId) throws Exception {
+        Parent parent = personRepository.findParentById(parentId);
+        for(Child child : parent.getChildren()){
+                if(child.getReward().contains(rewardId)){
+                    child.removeReward(rewardId);
+            }
+        }
+        Reward reward = rewardRepository.findById(rewardId);
+        parent.removeReward(reward);
+        Parent parentReturn = personRepository.save(parent);
+        if(parentReturn == null){
+            throw new Exception("Save failed");
+        }
+    }
+
 
 }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rewards Parent</title>
+    <link rel="stylesheet" th:href="@{/css/stylesMarketplaceParent.css}">
+</head>
+
+<body>
+
+<header class="header">
+    <ul class="header__points">
+        <li class="header__point header__point--active">MUNDUS</li>
+        <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
+        <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
+        <li class="header__point"><a>Options</a></li>
+    </ul>
+</header>
+
+
+<main class="main">
+    <div class="reward-body">
+        <div class="create-reward">
+            <div class="create-reward__title">
+                <h2>Create Reward</h2>
+            </div>
+        </div>
+
+        <div class="reward-content">
+            <div class="reward-content__title">
+                <h2 class="reward-view__title">All Rewards</h2>
+            </div>
+            <div class="reward-container">
+
+                <div th:each="reward : ${allRewards}" class="reward">
+                    <h3 th:text="${reward.name}" class="reward__title"></h3>
+                    <div class="reward__content">
+                        <p th:text="${reward.description}" class="reward__text"></p>
+                        <p th:text="${reward.endDate}" class="reward__date"></p>
+                        <p th:text="${reward.levelRequired}" class="reward__level"></p>
+                    </div>
+                    <div class="reward__footer">
+                        <form method="POST" th:action="@{/deletereward}">
+                            <input type="hidden" name="id" th:value="${reward.id}"/>
+                            <button class="reward__remove-button">Remove</button>
+                        </form>
+                        <p th:text="${reward.price}" class="reward__price"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="purchased-rewards">
+            <div class="purchased-rewards__title">
+                <h2>Purchased Rewards</h2>
+            </div>
+            <div class="reward__purchased">
+                <h3 class="reward__title">The most epic food ever sfd asdf sdf</h3>
+                <div class="reward__content">
+                    <p class="reward__text">You will get some awesome foodasdasdasddsf gfsd gsdf gsd fgsdas dasd
+                        as </p>
+                    <p class="reward__date">07.11.2019</p>
+                    <p class="reward__level">Level required: 5</p>
+                </div>
+                <div class="reward__footer">
+                    <button class="reward__remove-button">Granted</button>
+                    <p class="reward__price">Price: 9999</p>
+                </div>
+            </div>
+            <div class="reward__purchased">
+                <h3 class="reward__title">The most epic food ever sfd asdf sdf</h3>
+                <div class="reward__content">
+                    <p class="reward__text">You will get some awesome foodasdasdasddsf gfsd gsdf gsd fgsdas dasd
+                        as </p>
+                    <p class="reward__date">07.11.2019</p>
+                    <p class="reward__level">Level required: 5</p>
+                </div>
+                <div class="reward__footer">
+                    <button class="reward__remove-button">Granted</button>
+                    <p class="reward__price">Price: 9999</p>
+                </div>
+            </div>
+            <div class="reward__purchased">
+                <h3 class="reward__title">The most epic food ever sfd asdf sdf</h3>
+                <div class="reward__content">
+                    <p class="reward__text">You will get some awesome foodasdasdasddsf gfsd gsdf gsd fgsdas dasd
+                        as </p>
+                    <p class="reward__date">07.11.2019</p>
+                    <p class="reward__level">Level required: 5</p>
+                </div>
+                <div class="reward__footer">
+                    <button class="reward__remove-button">Granted</button>
+                    <p class="reward__price">Price: 9999</p>
+                </div>
+            </div>
+            <div class="reward__purchased">
+                <h3 class="reward__title">The most epic food ever sfd asdf sdf</h3>
+                <div class="reward__content">
+                    <p class="reward__text">You will get some awesome foodasdasdasddsf gfsd gsdf gsd fgsdas dasd
+                        as </p>
+                    <p class="reward__date">07.11.2019</p>
+                    <p class="reward__level">Level required: 5</p>
+                </div>
+                <div class="reward__footer">
+                    <button class="reward__remove-button">Granted</button>
+                    <p class="reward__price">Price: 9999</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <ul class="header__points">
+        <!-- <li class="header__point header__point--active">MUNDUS</li> -->
+
+    </ul>
+</footer>
+
+</body>
+
+</html>

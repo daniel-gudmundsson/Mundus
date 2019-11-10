@@ -82,6 +82,10 @@ public class Parent extends Person { // This class extends the abstarct Person c
         this.rewards.add(reward);
     }
 
+    public void removeReward(Reward reward){
+        this.rewards.remove(reward);
+    }
+
 
 
 }

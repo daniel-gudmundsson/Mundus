@@ -16,6 +16,7 @@ public interface RewardService {
     void createReward(Reward reward, long parentId) throws Exception;
     Set<Reward> getChildRewardAvailable(long childId) throws Exception;
     Set<Reward> getChildRewards(long childId) throws Exception;
+    public void deleteReward(long parentId, long rewardId) throws Exception;
 
 
 
