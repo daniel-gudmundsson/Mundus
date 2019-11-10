@@ -21,7 +21,7 @@ public class Parent extends Person { // This class extends the abstarct Person c
     private Set<Quest> quests = new HashSet<>(); // Contains the quests the parent has created
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "AccountId", nullable = false)
+    @JoinColumn(name = "AccountId")
     private Account account; // The account which the parent belongs to
 
 

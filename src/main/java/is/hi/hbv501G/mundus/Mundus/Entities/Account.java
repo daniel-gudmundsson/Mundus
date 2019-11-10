@@ -1,7 +1,6 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
-//import com.sun.istack.internal.NotNull;
-import org.jetbrains.annotations.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import javax.persistence.*;

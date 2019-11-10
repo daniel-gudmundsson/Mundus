@@ -31,7 +31,6 @@ public class Quest {
     private Child assignee; // The child that the quest has been assigned to
     private Boolean isDone; // true if the quest is done, false otherwise
     private Boolean isConfirmed; // true if the parent has confirmed that the quest is indeed done, false otherwise.
-    @NotNull
     @ManyToOne
     private Parent maker; // Creator of the quest
 

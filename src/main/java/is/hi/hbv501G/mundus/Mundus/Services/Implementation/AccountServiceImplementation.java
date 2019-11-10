@@ -54,14 +54,15 @@ public class AccountServiceImplementation implements AccountService {
 
     /**
      * A method for creating an account (Sign up)
+     *
      * @param account A new account
-     * @param parent The prent that the account must contain
+     * @param parent  The prent that the account must contain
      * @throws Exception
      */
     @Override
     public void createAccount(Account account, Parent parent) throws Exception {
         Account exists = accountRepository.findAccountByEmail(account.getEmail());
-        if(exists != null){
+        if (exists != null) {
             throw new AccountException("This email is in use");
         }
         account.setParent(parent);
@@ -72,6 +73,7 @@ public class AccountServiceImplementation implements AccountService {
 
     /**
      * A method for logging into an account
+     *
      * @param email
      * @param password
      * @return
@@ -83,22 +85,17 @@ public class AccountServiceImplementation implements AccountService {
         Account account = accountRepository.findAccountByEmail(email);
 
         if (account == null) {
-        throw new LoginException("Account not found"); // The acccount doesn't exist
-    }
+            throw new LoginException("Account not found"); // The acccount doesn't exist
+        }
 
         if (account.getPassword().equals(password)) { // The account exists and the passoword is correct
-        return account.getId();
-    } else {
-        throw new FailedLoginException("Wrong password"); // Incorrect password
+            return account.getId();
+        } else {
+            throw new FailedLoginException("Wrong password"); // Incorrect password
+        }
+
+
     }
-
-
-}
-
-
-
-
-
 
 
 }

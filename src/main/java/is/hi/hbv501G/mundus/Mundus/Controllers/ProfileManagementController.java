@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProfileManagementController {
     // We are not sure what we are going to do with this one ¯\_(ツ)_/¯
     @RequestMapping("/profile")
-    public String home(){
+    public String home() {
         return "profile";
     }
 }

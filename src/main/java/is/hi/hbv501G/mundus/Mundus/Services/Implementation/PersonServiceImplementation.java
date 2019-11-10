@@ -59,6 +59,7 @@ public class PersonServiceImplementation implements PersonService {
     /**
      * A method for assigning a child to a parent. When a parent creates a new child account the child should
      * be assigned to the parent
+     *
      * @param child
      * @param idOfParent
      * @throws Exception
@@ -72,13 +73,13 @@ public class PersonServiceImplementation implements PersonService {
         } else {
             parent.addChild(child); // Add the child to the parent
             child.setParent(parent); // Add the parent to the child (Only one parent per child)
-            personRepository.save(child); // And finally save the updates
             personRepository.save(parent);
         }
     }
 
     /**
      * A method for authenticating the pin when trying to log into a person.
+     *
      * @param childId
      * @param pin
      * @return

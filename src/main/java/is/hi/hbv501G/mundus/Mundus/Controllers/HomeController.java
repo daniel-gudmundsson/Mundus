@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
     /**
-     *
      * @param model
      * @param session
      * @return the "home" page. If a person is logged in the homepage is the quest page

@@ -33,7 +33,7 @@ public class PersonController {
     public String test1(Model model) {
         Child krakki = new Child("Jón", "123");
         try {
-            personService.assignChildToParent(krakki, 5);
+            personService.assignChildToParent(krakki, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,35 +43,36 @@ public class PersonController {
     //Create Parent
     @RequestMapping("/person-test3")
     public String test3(Model model) {
-        Parent parent = new Parent("Agnar", "123");
-        personService.save(parent);
+        Child child = personService.findChildById(2);
+        System.out.println(child.getParent());
         return "Welcome";
     }
 
     //Get all child of parent
-    @RequestMapping("/person-test5")
-    public String test5(Model model) {
-        Child child = new Child("Jon", "123");
-        try {
-            personService.assignChildToParent(child, 2);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Welcome";
-    }
+//    @RequestMapping("/person-test5")
+//    public String test5(Model model) {
+//        Child child = new Child("Jon", "123");
+//        try {
+//            personService.assignChildToParent(child, 2);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return "Welcome";
+//    }
 
     //Get all child of parent
-    @RequestMapping("/person-test6")
-    public String test6(Model model) {
-        Parent parent = personService.findParentById(1);
-        for (Child c : parent.getChildren()) {
-            System.out.println(c.getName());
-        }
-        return "Welcome";
-    }
+//    @RequestMapping("/person-test6")
+//    public String test6(Model model) {
+//        Parent parent = personService.findParentById(1);
+//        for (Child c : parent.getChildren()) {
+//            System.out.println(c.getName());
+//        }
+//        return "Welcome";
+//    }
 
     /**
      * When an account has been logged into you will be redirected to the person page where you can select a person to log into
+     *
      * @param model
      * @param session
      * @return
@@ -88,6 +89,7 @@ public class PersonController {
         Set<Child> children = parent.getChildren(); // Get the children of this acount
         Set<Person> persons = new HashSet<>();
 
+
         persons.addAll(children);
         persons.add(parent);
 
@@ -98,6 +100,7 @@ public class PersonController {
 
     /**
      * When a person has been selected you must enter a pin
+     *
      * @param id
      * @param model
      * @param session
@@ -117,6 +120,7 @@ public class PersonController {
 
     /**
      * A method that authenticates a pin for a particular person
+     *
      * @param id
      * @param pin
      * @param session
@@ -139,6 +143,7 @@ public class PersonController {
 
     /**
      * Loads all the information of a person
+     *
      * @param model
      * @param session
      * @return
@@ -168,7 +173,8 @@ public class PersonController {
 
     /**
      * Assign a child to a parent
-     * @param id of the parent
+     *
+     * @param id    of the parent
      * @param model
      * @param child
      * @return
