@@ -1,157 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quests</title>
-    <link rel="stylesheet" href="stylesQuestViewChild.css">
+    <link rel="stylesheet" th:href="@{/css/stylesQuestViewChild.css}">
 </head>
 
 <body>
 
-    <header class="header">
-        <ul class="header__points">
-            <li class="header__point header__point--active">MUNDUS</li>
-            <li class="header__point"><a>Quest Log</a></li>
-            <li class="header__point"><a>Rewards</a></li>
-            <li class="header__point"><a>Options</a></li>
-        </ul>
-    </header>
-    <!-- <div class="sidenav">
+<header class="header">
+    <ul class="header__points">
+        <li class="header__point header__point--active">MUNDUS</li>
+        <li class="header__point"><a>Quest Log</a></li>
+        <li class="header__point"><a th:href="@{}">Marketplace</a></li>
+        <li class="header__point"><a>Options</a></li>
+    </ul>
+</header>
+<!-- <div class="sidenav">
 
-        <ul>
-            <li><button>Quest Log</button></li>
-            <li><button>Rewards</button></li>
-            <li><button>Options</button></li>
-        </ul>
-    </div> -->
+    <ul>
+        <li><button>Quest Log</button></li>
+        <li><button>Rewards</button></li>
+        <li><button>Options</button></li>
+    </ul>
+</div> -->
 
-    <main>
-        <div class="logs">
-            <div class="log">
-                <div class="quests">
-                    <h2 class="log__name">Quests</h2>
-                    <div class="quests__content">
-                        <div class="quests__content">
-                            <div class="quest">
-                                <h2 class="quest__name">Clean your room</h2>
-                                <h3 class="quest__xp">xp 300</h3>
-                                <h3 class="quest__coins">Coins 400</h3>
-                                <h3 class="quest__deadline">Deadline 03/01/2019</h3>
-                                <p class="quest__description" hidden>Your room is a mess and you have to clean it.</p>
-                                <h3 class="quest__status" hidden>Status: Available</h3>
-                                <h3 class="quest__startDate" hidden>Quest Started:</h3>
-                                <h3 class="quest__finishDate" hidden>Quest Finished:</h3>
-                            </div>
-                        </div>
-                        <!-- <div class="quest">
-                        <h2>Vaccum clean</h2>
-                        <h3>xp 100</h3>
-                        <h3>Coins 300</h3>
-                        <h3>Deadline 03/01/2019</h3>
-                        <p hidden>Your objective is to vaccum clean the living room. Watch out for goblins.</p>
-                        <h3 hidden>Status: Available</h3>
-                        <h3 hidden>Quest Started:</h3>
-                        <h3 hidden>Quest Finished:</h3>
-                    </div> -->
-
-                        <!-- <div class="quest">
-                        <h2>Fead the cat</h2>
-                        <h3>xp 50</h3>
-                        <h3>Coins 200</h3>
-                        <h3>Deadline 03/01/2019</h3>
-                        <p hidden>Mr Fluffball is hungry and you need to feed him. Whatever you do, do not feed him after
-                            midnight!
-                        </p>
-                        <h3 hidden>Status: Available</h3>
-                        <h3 hidden>Quest Started:</h3>
-                        <h3 hidden>Quest Finished:</h3>
-                    </div> -->
-                        <div class="quests__content">
-                            <div class="quest">
-                                <h2 class="quest__name">Clean your room</h2>
-                                <h3 class="quest__xp">xp 300</h3>
-                                <h3 class="quest__coins">Coins 400</h3>
-                                <h3 class="quest__deadline">Deadline 03/01/2019</h3>
-                                <p class="quest__description" hidden>Your room is a mess and you have to clean it.</p>
-                                <h3 class="quest__status" hidden>Status: Available</h3>
-                                <h3 class="quest__startDate" hidden>Quest Started:</h3>
-                                <h3 class="quest__finishDate" hidden>Quest Finished:</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="myQuests">
-                    <h2 class="log__name">My Quests</h2>
-                    <div class="quests__content">
-                        <div class="quest">
-                            <h2 class="quest__name">Clean your room</h2>
-                            <h3 class="quest__xp">xp 300</h3>
-                            <h3 class="quest__coins">Coins 400</h3>
-                            <h3 class="quest__deadline">Deadline 03/01/2019</h3>
-                            <p class="quest__description" hidden>Your room is a mess and you have to clean it.</p>
-                            <h3 class="quest__status" hidden>Status: Available</h3>
-                            <h3 class="quest__startDate" hidden>Quest Started:</h3>
-                            <h3 class="quest__finishDate" hidden>Quest Finished:</h3>
-                        </div>
-                    </div>
-                    <!-- <div class="quests__content">
+<main>
+    <div class="logs">
+        <div class="log">
+            <div class="quests">
+                <h2 class="log__name">Quests</h2>
+                <div class="quests__content" th:each="quest : ${allQuests}">
                     <div class="quest">
-                        <h2>Mow the lawn</h2>
-                        <h3>xp 400</h3>
-                        <h3>Coins 400</h3>
-                        <h3>Deadline 03/01/2019</h3>
-                        <p hidden>The grass has grown to much. You need to mow the lawn.</p>
-                        <button>Done</button>
-                        <h3 hidden>Status: Available</h3>
-                        <h3 hidden>Quest Started:</h3>
-                        <h3 hidden>Quest Finished:</h3>
+                        <h2 class="quest__name" th:text="${quest.name}"></h2>
+                        <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
+                        <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
+                        <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
+                        <p class="quest__description" th:text="${quest.description}" hidden></p>
+                        <h3 class="quest__status" hidden>Status: Available</h3>
                     </div>
-                </div> -->
+                </div>
+            </div>
 
+            <div class="myQuests">
+                <h2 class="log__name">My Quests</h2>
+                <div class="quests__content" th:each="quest : ${quests}" th:if="${!quest.isDone}">
+                    <div class="quest">
+                        <h2 class="quest__name" th:text="${quest.name}"></h2>
+                        <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
+                        <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
+                        <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
+                        <p class="quest__description" th:text="${quest.description}" hidden></p>
+                        <h3 class="quest__status" hidden>Status: Available</h3>
+                    </div>
                 </div>
 
-                <div class="pending">
-                    <h2 class="log__name">Pending</h2>
-                    <div class="quests__content">
+            </div>
+
+            <div class="pending">
+                <h2 class="log__name">Pending</h2>
+                <div class="quests__content">
+                    <div class="quests__content" th:each="quest : ${quests}" th:if="${quest.isDone}">
                         <div class="quest">
-                            <h2 class="quest__name">Clean your room</h2>
-                            <h3 class="quest__xp">xp 300</h3>
-                            <h3 class="quest__coins">Coins 400</h3>
-                            <h3 class="quest__deadline">Deadline 03/01/2019</h3>
-                            <p class="quest__description" hidden>Your room is a mess and you have to clean it.</p>
+                            <h2 class="quest__name" th:text="${quest.name}"></h2>
+                            <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
+                            <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
+                            <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
+                            <p class="quest__description" th:text="${quest.description}" hidden></p>
                             <h3 class="quest__status" hidden>Status: Available</h3>
-                            <h3 class="quest__startDate" hidden>Quest Started:</h3>
-                            <h3 class="quest__finishDate" hidden>Quest Finished:</h3>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <div class="view">
-                <h2 class="log__name">Details</h2>
-            </div>
-
         </div>
-    </main>
-
-    <footer class="footer">
-            <ul class="header__points">
-                    <!-- <li class="header__point header__point--active">MUNDUS</li> -->
-                    <li class="header__point"></a>Olaf lvl 5</li>
-                    <li class="header__point">Coins: 1337</li>
-                    <li class="header__point">xp: 9999</li>
-            </ul>
-    </footer>
 
 
+        <div class="view">
+            <h2 class="log__name">Details</h2>
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <ul class="header__points">
+        <!-- <li class="header__point header__point--active">MUNDUS</li> -->
+        <li class="header__point"></a>Olaf lvl 5</li>
+        <li class="header__point">Coins: 1337</li>
+        <li class="header__point">xp: 9999</li>
+    </ul>
+</footer>
 
 
-    <script src="script.js"></script>
+<script th:src="@{/js/script.js}"></script>
 </body>
 
 </html>

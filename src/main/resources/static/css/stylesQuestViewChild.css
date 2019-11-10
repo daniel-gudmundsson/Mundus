@@ -1,0 +1,169 @@
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 140px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #633e10; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 1;
+    border: solid #e1b01e;
+    border-width: 8px;
+    /* margin-right: 0px; */
+}   
+
+li {
+    list-style: none;
+}
+main {
+    display: flex;
+    /* margin-left: 150px; Same as the width of the sidebar */
+    padding: 0px 10px;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #154074;
+    position: fixed;
+    /* background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
+    /* background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(21,64,116,1) 0%, rgba(15,108,158,1) 100%, rgba(0,212,255,1) 100%); */
+    background-image: url("../img/scroll.png");
+    background-repeat: no-repeat;
+    /* background-size: 1400px 900px; */
+    background-size: 100% 120%;
+    background-position: bottom;
+
+}
+
+body {
+    margin: 0px;
+    
+}
+
+.header {
+    /* margin-left: 160px; Same as the width of the sidebar */
+    background: #633e10;
+    border: solid #e1b01e;
+    border-width: 7px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 2;
+    margin-top: 0px;
+    padding-top: 0px;
+    /* padding: 10px; */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    background: #633e10;
+    border: solid #e1b01e;
+    border-width: 7px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 2;
+    margin-top: 0px;
+    padding-top: 0px;
+
+}
+
+.header__points {
+    width: 100%;
+    /* border: solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.quest {
+    border: solid black;
+    border-radius: 25px;
+    width: 200px;
+    height: 200px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.logs {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.log {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    border: solid black;
+}
+
+.log__name {
+    margin-top: 50px;
+    justify-content: center;
+}
+.quests {
+    flex: 1;
+    /* border: solid black; */
+    /* border-radius: 25px; */
+    margin-left: 60px;
+    width: 220px;
+    
+    
+}
+
+.quests__content {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.quests__content::-webkit-scrollbar { 
+    display: none; 
+} 
+
+.myQuests {
+    flex: 1;
+    /* border: solid black; */
+    /* border-radius: 25px; */
+    max-height: 700px;
+    overflow: auto;
+    margin-right: 5px;
+    width: 220px;
+}
+
+.pending {
+    flex: 1;
+    /* border: solid black; */
+    max-height: 700px;
+    overflow: auto;
+    margin-right: 10px;
+    width: 220px;
+}
+
+.finished {
+    /* border: solid black; */
+}
+
+.view {
+  /* width: 500px; */
+    border: solid black;
+    flex: 1;
+    max-height: 700px;
+    width   : 100%;
+    overflow: auto;
+
+}
+
+
+button {
+    /* z-index: 2; */
+}

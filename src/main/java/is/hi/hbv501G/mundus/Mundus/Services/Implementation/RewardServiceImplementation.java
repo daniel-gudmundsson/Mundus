@@ -59,21 +59,21 @@ public class RewardServiceImplementation implements RewardService {
         if (child == null) {
             throw new Exception();
         }
-        else
-        {
+        else {
             int childLVL = child.getLevel();
             int childCoins = child.getTotalCoins();
             Reward reward = findById(rewardId);
             int requiredLVL = reward.getLevelRequired();
             int price = reward.getPrice();
-            if(childLVL >= requiredLVL && childCoins >= price) {
+            if (childLVL >= requiredLVL && childCoins >= price) {
                 //Reward reward = rewardRepository.findById(rewardId);
                 child.addReward(rewardId); // Adds the rewardId to the child.
 
-                child.setTotalCoins(childCoins-price);
+                child.setTotalCoins(childCoins - price);
                 personRepository.save(child); // Saves the child after it has been updated
                 return true;
             }
+        }
             return false;
     }
 

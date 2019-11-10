@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Controller
@@ -156,6 +157,28 @@ public class QuestController {
             }
         }
         return "redirect:/";
+    }
+
+
+    @RequestMapping(value = "/testQuest", method = RequestMethod.GET)
+    public String testQuest(Model model, HttpSession session) {
+        long personId = (long) session.getAttribute("PersonIdLoggedIn");
+        Child child = personService.findChildById(personId);
+        String name = "Clean your room 3.0";
+        int xp = 300;
+        int coins = 400;
+        LocalDate date = LocalDate.now();
+        String desc = "Your room is a mess and you have to clean it";
+        String status = "Available";
+        Parent maker = child.getParent();
+
+        Quest quest = new Quest(name,desc, xp, coins, date, maker);
+        quest.setIsDone(true);
+        child.addQuest(quest);
+        maker.addQuest(quest);
+        personService.save(child);
+
+        return "redirect:/quests";
     }
 
 

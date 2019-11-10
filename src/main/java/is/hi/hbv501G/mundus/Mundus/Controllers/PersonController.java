@@ -158,10 +158,13 @@ public class PersonController {
 
         if (person instanceof Child) { // If the person is a child it will se the quest page from the viewpoint of a child
             Child child = personService.findChildById(personId);
+            Parent parent = child.getParent();
+            Set<Quest> allQuests = parent.getQuests();
             Set<Quest> quests = child.getQuests();
+            allQuests.removeAll(quests);
             model.addAttribute("child", child);
             model.addAttribute("quests", quests); // Add the quests of the child to the model
-
+            model.addAttribute("allQuests", allQuests);
             return "questViewChild2";
         } else if (person instanceof Parent) {
             return "questViewParent";
