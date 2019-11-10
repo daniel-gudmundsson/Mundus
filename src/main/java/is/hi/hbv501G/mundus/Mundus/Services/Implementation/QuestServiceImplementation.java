@@ -101,8 +101,21 @@ public class QuestServiceImplementation implements QuestService {
             personRepository.save(child);
             questRepository.save(quest);
         }
+    }
 
-
+    @Override
+    public void unassignQuest(long idOfQuest, long idOfChild) throws Exception {
+        Quest quest = questRepository.findById(idOfQuest);
+        Child child = personRepository.findChildById(idOfChild);
+        if (quest == null || child == null) {
+            throw new Exception();
+        } else {
+            child.removeQuest(quest);
+            child.addQuest(quest);
+            quest.setAssignee(null);
+            personRepository.save(child);
+            questRepository.save(quest);
+        }
     }
 
     /***

@@ -77,6 +77,15 @@ const text = (() => {
         const markAsDone = document.createElement('button');
         markAsDone.innerHTML = 'Done';
         markAsDone.className = 'view__done';
+
+        const id = document.createElement('input');
+        id.value = cln.querySelector(".quest__id").value;
+        id.style.visibility = 'hidden';
+
+        const as = cln.getElementsByTagName('a');
+        const assign = cln.querySelector('.assign');
+        const done = cln.querySelector('.done');
+        console.log(as.length);
         view.appendChild(h2);
         view.appendChild(name);
         view.appendChild(xp);
@@ -84,9 +93,30 @@ const text = (() => {
         view.appendChild(deadline);
         view.appendChild(description);
         view.appendChild(status);
-        view.appendChild(assignToMe);
-        view.appendChild(markAsDone);
-        
+        //view.appendChild(assignToMe);
+        //view.appendChild(markAsDone);
+        view.appendChild(id);
+        //debugger
+        /*for(var i=0; i<as.length; i++) {
+            as[i].type = 'visible';
+            view.appendChild(as[i]);
+        }*/
+
+        /*for(var a of as) {
+            a.type = 'visible';
+            view.appendChild(a);
+        }*/
+
+        if(assign) {
+            assign.type = 'visible';
+            assign.querySelector('.view__assign').style = "display: block;";
+            view.appendChild(assign);
+        }
+        if(done) {
+            done.type = 'visible';
+            done.querySelector('.view__done').style = "display: block;";
+            view.appendChild(done);
+        }
     }
     return {
         init: init
