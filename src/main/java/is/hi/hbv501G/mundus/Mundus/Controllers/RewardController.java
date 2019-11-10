@@ -53,7 +53,7 @@ public class RewardController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return "marketplaceChild";
+            return "marketplaceChild2";
         } else if (person instanceof Parent) {
             return "marketplaceParent";
         } else {
