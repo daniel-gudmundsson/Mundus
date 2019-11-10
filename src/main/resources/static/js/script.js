@@ -109,12 +109,12 @@ const text = (() => {
 
         if(assign) {
             assign.type = 'visible';
-            assign.querySelector('.view__assign').type = 'visible';
+            assign.querySelector('.view__assign').style = "display: block;";
             view.appendChild(assign);
         }
         if(done) {
             done.type = 'visible';
-            done.querySelector('.view__done').type = 'visible';
+            done.querySelector('.view__done').style = "display: block;";
             view.appendChild(done);
         }
     }

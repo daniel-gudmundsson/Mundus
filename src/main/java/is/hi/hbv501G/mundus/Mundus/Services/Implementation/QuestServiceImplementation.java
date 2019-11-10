@@ -104,7 +104,7 @@ public class QuestServiceImplementation implements QuestService {
     }
 
     @Override
-    public void unAssignQuest(long idOfQuest, long idOfChild) throws Exception {
+    public void unassignQuest(long idOfQuest, long idOfChild) throws Exception {
         Quest quest = questRepository.findById(idOfQuest);
         Child child = personRepository.findChildById(idOfChild);
         if (quest == null || child == null) {

@@ -96,12 +96,12 @@ public class QuestController {
         return "redirect:/quests";
     }
 
-    @RequestMapping(value = "/unAssignQuest", method = RequestMethod.POST)
-    public String unAssignQuest(@RequestParam("id") long questId, Model model, HttpSession session) {
+    @RequestMapping(value = "/unassignQuest", method = RequestMethod.POST)
+    public String unassignQuest(@RequestParam("id") long questId, Model model, HttpSession session) {
         if (session.getAttribute("PersonIdLoggedIn") != null) {
             long childId = (long) session.getAttribute("PersonIdLoggedIn");
             try {
-                questService.assignQuest(questId, childId);
+                questService.unassignQuest(questId, childId);
             } catch (Exception e) {
                 System.out.println("Not able to assign quest");
             }

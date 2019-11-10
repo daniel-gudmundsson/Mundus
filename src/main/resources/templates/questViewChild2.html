@@ -33,33 +33,44 @@
         <div class="log">
             <div class="quests">
                 <h2 class="log__name">Quests</h2>
-                <div class="quests__content" th:each="quest : ${allQuests}">
-                    <div class="quest">
+                <div class="quests__content" >
+                    <div class="quest" th:each="quest : ${allQuests}">
                         <h2 class="quest__name" th:text="${quest.name}"></h2>
                         <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
                         <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
-                        <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
-                        <a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" type="hidden">Assign to me</button></a>
+                        <form method="POST" class = "assign" th:action="@{/assignQuest}">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <button type="submit" name="submit" value="value" class="view__assign" style="display: none;">Assign to me</button>
+                        </form>
+                        <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
                     </div>
                 </div>
             </div>
 
             <div class="myQuests">
                 <h2 class="log__name">My Quests</h2>
-                <div class="quests__content" th:each="quest : ${quests}" th:if="${!quest.isDone}">
-                    <div class="quest">
+                <div class="quests__content" >
+                    <div class="quest" th:each="quest : ${quests}" th:if="${!quest.isDone}">
                         <h2 class="quest__name" th:text="${quest.name}"></h2>
                         <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
                         <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
-                        <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
-                        <a th:href="@{markQuestAsDone}" type="hidden" class ="done"><button class="view__done" >Done</button></a>
-                        <a th:href="@{unAssignQuest}" type="hidden" class ="assign"><button class="view__assign" type="hidden">Unassign</button></a>
+                        <form method="POST" class = "done" th:action="@{/markQuestAsDone}">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <button type="submit" name="submit" value="value" class="view__done" style="display: none;">Done</button>
+                        </form>
+
+                        <!--<a th:href="@{markQuestAsDone}" type="hidden" class ="done"><button class="view__done" style="display: none;">Done</button></a>-->
+                        <form method="POST" class = "assign" th:action="@{/unassignQuest}">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <button type="submit" name="submit" value="value" class="view__assign" style="display: none;">Unassign</button>
+                        </form>
+                       <!-- <a th:href="@{unAssignQuest}" type="hidden" class ="assign"><button class="view__assign"style="display: none;">Unassign</button></a>-->
                     </div>
                 </div>
 
@@ -67,20 +78,23 @@
 
             <div class="pending">
                 <h2 class="log__name">Pending</h2>
-                <div class="quests__content">
-                    <div class="quests__content" th:each="quest : ${quests}" th:if="${quest.isDone}">
-                        <div class="quest">
+                    <div class="quests__content" >
+                        <div class="quest" th:each="quest : ${quests}" th:if="${quest.isDone}">
                             <h2 class="quest__name" th:text="${quest.name}"></h2>
                             <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                             <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
                             <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                             <p class="quest__description" th:text="${quest.description}" hidden></p>
                             <h3 class="quest__status" hidden>Status: Available</h3>
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
-                            <a th:href="@{markQuestAsNotDone}" type="hidden" class ="done"><button class="view__done" type="hidden">Not Done</button></a>
+                            <form method="POST" class = "done" th:action="@{/markQuestAsNotDone}">
+                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                                <button type="submit" name="submit" value="value" class="view__done" style="display: none;">Not Done</button>
+                            </form>
+
+                            <!--<a th:href="@{markQuestAsNotDone}" type="hidden" class ="done"><button class="view__done" style="display: none;">Not Done</button></a>-->
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
 
