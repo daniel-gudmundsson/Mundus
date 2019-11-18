@@ -139,7 +139,7 @@ public class QuestController {
     public String createQuestPOST(@Valid Quest quest, BindingResult result, Model model, HttpSession session, @RequestParam("childId") long childId) {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
-            return "createQuest";
+            return "createQuest2";
         }
 
 
@@ -154,7 +154,7 @@ public class QuestController {
             //
 
         } catch (Exception e) {
-            return "createQuest";
+            return "createQuest2";
         }
 
         return "redirect:/";
@@ -179,7 +179,7 @@ public class QuestController {
             } else {
                 Parent parent = (Parent) person;
                 model.addAttribute("children", parent.getChildren());
-                return "createQuest";
+                return "createQuest2";
             }
         }
         return "redirect:/";

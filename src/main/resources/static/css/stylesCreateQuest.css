@@ -91,149 +91,18 @@ body {
 }
 
 /*===========Body==========*/
-.reward-body {
+.body {
     display: flex;
+    justify-content: center;
+    align-content: center;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
     height: 80%;
-}
-
-/*==========Create reward===========*/
-
-
-
-
-
-
-/*=========All rewards=========*/
-.reward-content {
-    border-left: solid black;
-    border-right: solid black;
-    width: 50%;
-}
-
-.reward-content__title{
-    display: flex;
-    justify-content: center;
-}
-
-.reward__content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.reward-container {
-    display: flex;
-    flex-wrap: wrap;
-    height: 75%;
-    overflow: auto;
 
 }
 
-.reward-container::-webkit-scrollbar { 
-    display: none; 
-} 
-
-.reward {
-    height: 250px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    border-style: solid;
-    border-color: #85521f;
-    border-width: 5px;
-    border-radius: 15px;
-    margin: 0px 15px 15px 15px;
-}
-
-.reward__title {
-    width: 100%;
-    height: 20%;
-}
-
-.reward__text {
-    margin: 0 auto auto auto;
-    width: 100%;
-}
-
-.reward__date {
-    margin: 1px auto;
-    height: 10%;
-}
-
-.reward__level{
-    margin: 1px auto;
-}
-
-.reward__footer {
-    width: 100%;
-    height: 30%;
-    display: flex;
-}
-
-.reward__remove-button {
-    margin: auto;
-}
-
-.reward__price{
-    margin: auto;
-}
-
-.reward__purchaser{
-    margin: auto;
-}
-
-/*========Purchased rewards=======*/
-.purchased-rewards{
-    width: 20%;
-}
-
-.purchased-rewards__title{
-    display: flex;
-    justify-content: center;
-}
-
-.purchased-rewards{
-    overflow: auto;
-}
-
-/*Removes Scroll*/
-.purchased-rewards::-webkit-scrollbar{ 
-    display: none; 
-} 
-
-.reward__purchased{
-    height: 250px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    border-style: solid;
-    border-color: #85521f;
-    border-width: 5px;
-    border-radius: 15px;
-    margin: 0 auto 15px auto;
-}
-
-
-/*========Create rewards=======*/
-
-.create-reward{
-    width: 30%;
-}
-
-.create-reward__title{
-    display: flex;
-    justify-content: center;
-}
-
-.create-reward__form{
-    display: flex;
-    justify-content: center;
-}
-
+/*==========Create Quest From=========*/
 .container{
     border-style: solid;
     border-width: 5px;
@@ -241,6 +110,8 @@ body {
     width: fit-content;
     background: saddlebrown;
     padding: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .button{
     background-color: #e1b01e;

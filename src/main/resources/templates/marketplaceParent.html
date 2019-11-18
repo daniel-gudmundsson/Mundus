@@ -28,14 +28,26 @@
             <div class="create-reward__title">
                 <h2>Create Reward</h2>
             </div>
+            <div class="create-reward__form">
+                <div class="container">
+                    <form th:action="@{/createReward}" th:object="${reward}" method="post">
+                        <p>Reward name <input type="text" name="name" id="name" th:field="*{name}"/></p>
+                        <p>Reward description <textarea rows="4" cols="50" type="" name="description" id="description" th:field="*{description}"/></p>
+                        <p>Price<input type="text" name="price" id="price" th:value="*{price}"/></p>
+                        <p>Level required:<input type="text" name="levelRequired" id="levelRequired"  th:value="*{levelRequired}"/></p>
+                        <p>Due date<input type="date" name="endDate" id="endDate"  th:value="*{endDate}"/></p>
+                        <input class="button" type="submit" value="Create loot!"/>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div class="reward-content">
             <div class="reward-content__title">
                 <h2 class="reward-view__title">All Rewards</h2>
             </div>
-            <div class="reward-container">
 
+            <div class="reward-container">
                 <div th:each="reward : ${allRewards}" class="reward">
                     <h3 th:text="${reward.name}" class="reward__title"></h3>
                     <div class="reward__content">
@@ -51,6 +63,7 @@
                     </form>
 
                 </div>
+
             </div>
         </div>
         <div class="purchased-rewards">

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Quest</title>
+    <link rel="stylesheet" th:href="@{/css/stylesCreateQuest.css}">
+</head>
+
+<body>
+
+<header class="header">
+    <ul class="header__points">
+        <li class="header__point header__point--active">MUNDUS</li>
+        <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
+        <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
+        <li class="header__point"><a>Options</a></li>
+    </ul>
+</header>
+
+
+<main class="main">
+    <div class="body">
+        <div class="container">
+            <h1>Create Quest</h1>
+            <form th:action="@{/createQuest}" th:object="${quest}" method="post">
+                <p>Quest name<input type="text" name="name" id="name" th:field="*{name}"/></p>
+                <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description"
+                                               th:field="*{description}"/></p>
+                <p>XP <input type="text" name="xp" id="xp" th:field="*{xp}"/></p>
+                <p>Coins <input type="text" name="coins" id="coins" th:field="*{coins}"/></p>
+                <p>Deadline<input type="date" name="deadline" id="deadline" th:field="*{deadline}"/></p>
+
+
+                <p>Assign to: <select name="childId">
+                    <option value="-1"> --</option>
+                    <option th:each="child : ${children}" th:value="${child.id}" th:text="${child.name}">
+                    </option>
+                </select></p>
+                <br>
+                <input class="button" type="submit" value="Create reward"/>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <ul class="header__points">
+        <!-- <li class="header__point header__point--active">MUNDUS</li> -->
+
+    </ul>
+</footer>
+
+</body>
+
+</html>
