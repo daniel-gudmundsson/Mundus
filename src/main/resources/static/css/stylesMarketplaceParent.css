@@ -189,6 +189,10 @@ body {
     margin: auto;
 }
 
+.reward__purchaser{
+    margin: auto;
+}
+
 /*========Purchased rewards=======*/
 .purchased-rewards{
     width: 20%;

@@ -2,10 +2,12 @@ package is.hi.hbv501G.mundus.Mundus.Services.Implementation;
 
 import is.hi.hbv501G.mundus.Mundus.Entities.Child;
 import is.hi.hbv501G.mundus.Mundus.Entities.Parent;
+import is.hi.hbv501G.mundus.Mundus.Entities.Quest;
 import is.hi.hbv501G.mundus.Mundus.Entities.Reward;
 import is.hi.hbv501G.mundus.Mundus.Repositories.PersonRepository;
 import is.hi.hbv501G.mundus.Mundus.Repositories.RewardRepository;
 import is.hi.hbv501G.mundus.Mundus.Services.RewardService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -127,6 +129,10 @@ public class RewardServiceImplementation implements RewardService {
     @Override
     public void deleteReward(long parentId, long rewardId) throws Exception {
         Parent parent = personRepository.findParentById(parentId);
+        if(parent == null){
+            throw new Exception("Person not found");
+        }
+
         for(Child child : parent.getChildren()){
                 if(child.getReward().contains(rewardId)){
                     child.removeReward(rewardId);
@@ -140,5 +146,32 @@ public class RewardServiceImplementation implements RewardService {
         }
     }
 
+    @Override
+    public Set<Pair<Child, Reward>> getPurchasedRewards(long parentId) throws Exception {
+        Parent parent = personRepository.findParentById(parentId);
+        if(parent == null){
+            throw new Exception("Person not found");
+        }
 
+        Set<Pair<Child, Reward>> rewardPairs = new HashSet<>();
+        for(Child child : parent.getChildren()){
+            System.out.println(child.getName());
+            System.out.println(child.getReward());
+            for(long id : child.getReward()){
+                System.out.println(id);
+                Reward reward = rewardRepository.findById(id);
+                rewardPairs.add(new Pair<Child, Reward>(child, reward));
+            }
+        }
+        return rewardPairs;
+    }
+    @Override
+    public void grantReward(long rewardId, long childId) throws Exception {
+        Child child = personRepository.findChildById(childId);
+        if(child == null){
+            throw new Exception("Person not found");
+        }
+        child.removeReward(rewardId);
+        personRepository.save(child);
+    }
 }
