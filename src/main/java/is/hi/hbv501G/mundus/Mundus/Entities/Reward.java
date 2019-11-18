@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class Reward {
+public class Reward implements Comparable<Reward> {
+
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
     @Column(name = "RewardId")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
@@ -40,7 +41,7 @@ public class Reward {
         this.maker = maker;
     }
 
-    public Reward(){
+    public Reward() {
 
     }
 
@@ -129,5 +130,11 @@ public class Reward {
 
     public void setBuyer(Child buyer) {
         this.buyer = buyer;
+    }
+
+
+    @Override
+    public int compareTo(@org.jetbrains.annotations.NotNull Reward o) {
+        return this.price - o.getPrice();
     }
 }

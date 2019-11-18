@@ -17,7 +17,8 @@
         <li class="header__point header__point--active">MUNDUS</li>
         <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
         <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
-        <li class="header__point"><a>Options</a></li>
+        <li class="header__point"><a th:href="@{logoutPerson}">Switch Adventurer</a> </li>
+        <li class="header__point"><a th:href="@{logoutAccount}">Log Out</a> </li>
     </ul>
 </header>
 
@@ -46,7 +47,7 @@
                 <h2 class="reward-view__title">What do you need?</h2>
             </div>
             <div class="reward-container">
-                <div th:each="reward : ${rewards}" class="reward">
+                <div th:each="reward : ${#lists.sort(rewards)}" class="reward">
                     <h3 th:text="${reward.name}" class="reward__title"></h3>
                     <div class="reward__content">
                         <p th:text="${reward.description}" class="reward__text"></p>
@@ -56,7 +57,7 @@
                     <form class="reward__footer" method="POST" th:action="@{/purchaseReward}">
                         <input type="hidden" name="id" th:value="${reward.id}"/>
                         <button type="submit" name="submit" value="value" class="reward__buy-button"
-                                th:text="${reward.price} + 'coins'">
+                                th:text="${reward.price} + ' Coins'">
                         </button>
                     </form>
                 </div>
@@ -68,9 +69,9 @@
 <footer class="footer">
     <ul class="header__points">
         <!-- <li class="header__point header__point--active">MUNDUS</li> -->
-        <li class="header__point" th:text="${child.name}"></a>Olaf lvl 5</li>
-        <li class="header__point" th:text="'Coins: ' + ${child.totalCoins}">Coins: 1337</li>
-        <li class="header__point" th:text="'xp: ' + ${child.xp}">xp: 9999</li>
+        <li class="header__point" th:text="${child.name} + ' Level ' + ${child.getLevel()}"></a></li>
+        <li class="header__point" th:text="'Coins: ' + ${child.totalCoins}"></li>
+        <li class="header__point" th:text="'xp: ' + ${child.xp}"></li>
     </ul>
 </footer>
 
