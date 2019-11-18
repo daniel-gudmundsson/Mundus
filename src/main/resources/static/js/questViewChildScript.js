@@ -97,15 +97,6 @@ const text = (() => {
         //view.appendChild(markAsDone);
         view.appendChild(id);
         //debugger
-        /*for(var i=0; i<as.length; i++) {
-            as[i].type = 'visible';
-            view.appendChild(as[i]);
-        }*/
-
-        /*for(var a of as) {
-            a.type = 'visible';
-            view.appendChild(a);
-        }*/
 
         if(assign) {
             assign.type = 'visible';

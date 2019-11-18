@@ -159,15 +159,58 @@ public class PersonController {
         if (person instanceof Child) { // If the person is a child it will se the quest page from the viewpoint of a child
             Child child = personService.findChildById(personId);
             Parent parent = child.getParent();
-            Set<Quest> allQuests = parent.getQuests();
-            Set<Quest> quests = child.getQuests();
-            allQuests.removeAll(quests);
+            Set<Quest> availableQuests = parent.getQuests();
+            Set<Quest> assignedQuests = child.getQuests();
+            availableQuests.removeAll(assignedQuests);
+            Set<Quest> doneQuests = new HashSet<Quest>();
+            Set<Quest> finishedQuests = new HashSet<Quest>(); // Don't show quests that are finished
+            for(Quest q : assignedQuests)
+            {
+                if(q.getIsDone() && !q.getIsConfirmed())
+                {
+                    doneQuests.add(q);
+                }
+                if(q.getIsConfirmed())
+                {
+                    finishedQuests.add(q);
+                }
+            }
+            assignedQuests.removeAll(doneQuests);
+            assignedQuests.removeAll(finishedQuests);
             model.addAttribute("child", child);
-            model.addAttribute("quests", quests); // Add the quests of the child to the model
-            model.addAttribute("allQuests", allQuests);
+            model.addAttribute("assignedQuests", assignedQuests); // Add the quests of the child to the model
+            model.addAttribute("availableQuests", availableQuests);
+            model.addAttribute("doneQuests", doneQuests);
             return "questViewChild2";
         } else if (person instanceof Parent) {
-            return "questViewParent";
+            Parent parent = personService.findParentById(personId);
+            Set<Quest> availableQuests = parent.getQuests();
+            Set<Quest> onGoingQuests = new HashSet<Quest>();
+            Set<Child> children = parent.getChildren();
+            for(Child child : children) {
+                onGoingQuests.addAll(child.getQuests());
+            }
+            Set<Quest> doneQuests = new HashSet<Quest>();
+            Set<Quest> finishedQuests = new HashSet<Quest>();
+            for(Quest q : onGoingQuests)
+            {
+                if(q.getIsDone() && !q.getIsConfirmed())
+                {
+                    doneQuests.add(q);
+                }
+                if(q.getIsConfirmed())
+                {
+                    finishedQuests.add(q);
+                }
+            }
+            availableQuests.removeAll(onGoingQuests);
+            onGoingQuests.removeAll(doneQuests);
+            onGoingQuests.removeAll(finishedQuests);
+            model.addAttribute("parent", parent);
+            model.addAttribute("availableQuests", availableQuests);
+            model.addAttribute("onGoingQuests", onGoingQuests);
+            model.addAttribute("doneQuests", doneQuests);
+            return "questViewParent2";
         } else {
             return "redirect:/";
         }
