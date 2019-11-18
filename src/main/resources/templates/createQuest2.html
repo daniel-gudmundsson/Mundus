@@ -28,8 +28,7 @@
             <h1>Create Quest</h1>
             <form th:action="@{/createQuest}" th:object="${quest}" method="post">
                 <p>Quest name<input type="text" name="name" id="name" th:field="*{name}"/></p>
-                <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description"
-                                               th:field="*{description}"/></p>
+                <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description" th:field="*{description}"/></p>
                 <p>XP <input type="text" name="xp" id="xp" th:field="*{xp}"/></p>
                 <p>Coins <input type="text" name="coins" id="coins" th:field="*{coins}"/></p>
                 <p>Deadline<input type="date" name="deadline" id="deadline" th:field="*{deadline}"/></p>

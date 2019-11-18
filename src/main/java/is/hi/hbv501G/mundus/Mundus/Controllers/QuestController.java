@@ -145,13 +145,13 @@ public class QuestController {
 
         try {
             long idOfParent = (long) session.getAttribute("PersonIdLoggedIn");
+            Child child = personService.findChildById(childId);
+            if(childId != -1){
+                quest.setAssignee(child);
+            }
             questService.createQuest(quest, idOfParent);
 
-            //Not finished
-//            if(childId != -1){
-//                questService.assignQuest(quest.getId(), childId);
-//            }
-            //
+
 
         } catch (Exception e) {
             return "createQuest2";
