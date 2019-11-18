@@ -34,7 +34,7 @@
             <div class="quests">
                 <h2 class="log__name">Quests</h2>
                 <div class="quests__content" >
-                    <div class="quest" th:each="quest : ${allQuests}">
+                    <div class="quest" th:each="quest : ${availableQuests}">
                         <h2 class="quest__name" th:text="${quest.name}"></h2>
                         <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
@@ -53,7 +53,7 @@
             <div class="myQuests">
                 <h2 class="log__name">My Quests</h2>
                 <div class="quests__content" >
-                    <div class="quest" th:each="quest : ${quests}" th:if="${!quest.isDone}">
+                    <div class="quest" th:each="quest : ${assignedQuests}">
                         <h2 class="quest__name" th:text="${quest.name}"></h2>
                         <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
@@ -79,7 +79,7 @@
             <div class="pending">
                 <h2 class="log__name">Pending</h2>
                     <div class="quests__content" >
-                        <div class="quest" th:each="quest : ${quests}" th:if="${quest.isDone}">
+                        <div class="quest" th:each="quest : ${doneQuests}" th:if="${quest.isDone}">
                             <h2 class="quest__name" th:text="${quest.name}"></h2>
                             <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                             <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
@@ -115,7 +115,7 @@
 </footer>
 
 
-<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/questViewChildScript.js}"></script>
 </body>
 
 </html>

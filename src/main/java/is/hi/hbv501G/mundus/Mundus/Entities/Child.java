@@ -69,7 +69,7 @@ public class Child extends Person { // This class extends the abstract Person cl
 
     public int getLevel() {
 
-        return xp/1000;
+        return xp/1000+1;
     }
 
     public void addQuest(Quest quest) {

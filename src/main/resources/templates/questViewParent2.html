@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quests</title>
+    <link rel="stylesheet" th:href="@{/css/stylesQuestViewChild.css}">
+</head>
+
+<body>
+
+<header class="header">
+    <ul class="header__points">
+        <li class="header__point header__point--active">MUNDUS</li>
+        <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
+        <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
+        <li class="header__point"><a>Options</a></li>
+    </ul>
+</header>
+
+<main>
+    <div class="logs">
+        <div class="log">
+            <div class="quests">
+                <h2 class="log__name">All Quests</h2>
+                <div class="quests__content">
+                    <div class="quests__content">
+                        <div class="quest" th:each="quest : ${availableQuests}">
+                            <h2 class="quest__name" th:text="${quest.name}"></h2>
+                            <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
+                            <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
+                            <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
+                            <p class="quest__description" th:text="${quest.description}" hidden></p>
+                            <h3 class="quest__status" hidden>Status: Available</h3>
+                            <form method="POST" class = "delete" th:action="@{/deleteQuest}">
+                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                                <button type="submit" name="submit" value="value" class="view__delete" style="display: none">Delete</button>
+                            </form>
+                            <form method="POST" class = "assignee">
+                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                                <select name = "childId" class = "view__assignee" style="display: none">
+                                    <option value="-1"> -- </option>
+                                    <option th:each="child : ${parent.children}" th:value="${child.id}" th:text="${child.name}">
+                                    </option>
+                                </select>
+                            </form>
+                            <form method="POST" class = "setAssignee" th:action="@{/deleteQuest}">
+                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                                <button type="submit" name="submit" value="value" class="view__setAssignee" style="display: none">Set assignee</button>
+                            </form>
+                            <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myQuests">
+                <h2 class="log__name">Ongoing Quests</h2>
+                <div class="quests__content">
+                    <div class="quest" th:each="quest : ${onGoingQuests}">
+                        <h2 class="quest__name" th:text="${quest.name}"></h2>
+                        <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
+                        <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
+                        <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
+                        <p class="quest__description" th:text="${quest.description}" hidden></p>
+                        <h3 class="quest__status" hidden>Status: Available</h3>
+                        <form method="POST" class = "delete" th:action="@{/deleteQuest}">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <button type="submit" name="submit" value="value" class="view__delete" style="display: none;">Delete</button>
+                        </form>
+                        <form method="POST" class = "assignee">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <select name = "childId" class = "view__assignee" style="display: none">
+                                <option th:value="${quest.assignee.id}" th:text="${quest.assignee.name}" ></option>
+                                <option th:each="child : ${parent.children}"   th:if="${child != quest.assignee}" th:value="${child.id}" th:text="${child.name}">
+                                </option>
+                            </select>
+                            <button type="submit" name="submit" value="value" class="view__assignee" style="display: none">Set assignee</button>
+                        </form>
+                    <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="pending">
+                <h2 class="log__name">Finished</h2>
+                <div class="quests__content">
+                    <div class="quest" th:each="quest : ${doneQuests}">
+                        <h2 class="quest__name" th:text="${quest.name}"></h2>
+                        <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
+                        <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
+                        <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
+                        <p class="quest__description" th:text="${quest.description}" hidden></p>
+                        <h3 class="quest__status" hidden>Status: Available</h3>
+                        <form method="POST" class = "confirm" th:action="@{/markQuestAsConfirmed}">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <button type="submit" name="submit" value="value" class="view__confirm" style="display: none;">Confirm</button>
+                        </form>
+                        <form method="POST" class = "deny" th:action="@{/markQuestAsNotDone}">
+                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <button type="submit" name="submit" value="value" class="view__deny" style="display: none;">Deny</button>
+                        </form>
+                        <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="view">
+            <h2 class="log__name">Details</h2>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <ul class="header__points">
+        <!-- <li class="header__point header__point--active">MUNDUS</li> -->
+        <li class="header__point"></a>Olaf lvl 5</li>
+        <li class="header__point">Coins: 1337</li>
+        <li class="header__point">xp: 9999</li>
+    </ul>
+</footer>
+
+
+
+
+<script th:src="@{/js/questViewParentScript.js}"></script>
+</body>
+
+</html>
