@@ -160,6 +160,7 @@ body {
     border-style: solid;
     border-color: #85521f;
     border-width: 5px;
+    border-radius: 15px;
     margin: 0px 15px 15px 15px;
 }
 
@@ -169,26 +170,36 @@ body {
 }
 
 .reward__text {
-    margin: auto;
+    margin: 0 auto auto auto;
     width: 100%;
-    height: 30%;
 }
 
 .reward__date {
-    margin: auto;
-    width: 100%;
+    margin: 1px auto;
     height: 10%;
+}
+
+.reward__level{
+    margin: 1px auto;
 }
 
 .reward__footer {
     width: 100%;
-    height: 40%;
+    height: 30%;
     display: flex;
 }
 
+.reward__price{
+    margin: auto;
+}
+
+.reward__purchaser{
+    margin: auto;
+}
+
 .reward__buy-button {
-    width: 50%;
-    height: 50%;
+    height: 80%;
+    width: 80%;
     margin: auto;
 }
 

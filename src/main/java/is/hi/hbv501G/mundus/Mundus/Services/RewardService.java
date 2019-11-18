@@ -1,6 +1,8 @@
 package is.hi.hbv501G.mundus.Mundus.Services;
 
+import is.hi.hbv501G.mundus.Mundus.Entities.Child;
 import is.hi.hbv501G.mundus.Mundus.Entities.Reward;
+import javafx.util.Pair;
 
 import java.util.List;
 import java.util.Set;
@@ -17,7 +19,8 @@ public interface RewardService {
     Set<Reward> getChildRewardAvailable(long childId) throws Exception;
     Set<Reward> getChildRewards(long childId) throws Exception;
     public void deleteReward(long parentId, long rewardId) throws Exception;
-
+    public Set<Pair<Child, Reward>> getPurchasedRewards(long parentId) throws Exception;
+    public void grantReward(long rewardId, long childId) throws Exception;
 
 
 }

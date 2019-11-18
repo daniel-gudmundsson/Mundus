@@ -2,6 +2,7 @@ package is.hi.hbv501G.mundus.Mundus.Controllers;
 
 import is.hi.hbv501G.mundus.Mundus.Entities.*;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,10 +56,15 @@ public class RewardController {
             }
             return "marketplaceChild2";
         } else if (person instanceof Parent) {
-            Parent parent = personService.findParentById(personId);
-
-            model.addAttribute("allRewards", parent.getRewards());
-
+            try {
+                Parent parent = personService.findParentById(personId);
+                Set<Pair<Child, Reward>> rewardPairs = rewardService.getPurchasedRewards(personId);
+                System.out.println(rewardPairs);
+                model.addAttribute("purchasedRewards", rewardPairs);
+                model.addAttribute("allRewards", parent.getRewards());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             return "marketplaceParent";
         } else {
@@ -174,6 +180,22 @@ public class RewardController {
             //TODO Bregðast við success
         return "redirect:/marketplace";
     }
+
+    @RequestMapping(value = "/grantReward", method = RequestMethod.POST)
+    public String grantReward(@RequestParam("rewardId") long rewardId,@RequestParam("childId") long childId) {
+        try {
+            rewardService.grantReward(rewardId, childId);
+        }
+        catch (Exception e) {
+            return "redirect:/marketplace";
+        }
+
+        //TODO Bregðast við success
+        return "redirect:/marketplace";
+    }
+
+
+
 
 //    /**
 //     * Just a testing function
