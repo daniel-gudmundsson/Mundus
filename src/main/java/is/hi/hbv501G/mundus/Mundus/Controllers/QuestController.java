@@ -84,7 +84,7 @@ public class QuestController {
      * @return
      */
     @RequestMapping(value = "/assignQuest", method = RequestMethod.POST)
-    public String assignQuest(@RequestParam("id") long questId, Model model, HttpSession session) {
+    public String assignQuest(@RequestParam("questId") long questId, Model model, HttpSession session) {
         if (session.getAttribute("PersonIdLoggedIn") != null) {
             long childId = (long) session.getAttribute("PersonIdLoggedIn");
             try {
@@ -96,8 +96,29 @@ public class QuestController {
         return "redirect:/quests";
     }
 
+    @RequestMapping(value = "/assignQuestParent", method = RequestMethod.POST)
+    public String assignQuest(@RequestParam("childId") long childId, @RequestParam("questId") long questId, Model model) {
+        if(childId == -1)
+        {
+            childId = questService.findById(questId).getAssignee().getId();
+            try {
+                questService.unassignQuest(questId, childId);
+            } catch (Exception e) {
+                System.out.println("Not able to assign quest");
+            }
+        }
+        else {
+            try {
+                questService.assignQuest(questId, childId);
+            } catch (Exception e) {
+                System.out.println("Not able to assign quest");
+            }
+        }
+        return "redirect:/quests";
+    }
+
     @RequestMapping(value = "/unassignQuest", method = RequestMethod.POST)
-    public String unassignQuest(@RequestParam("id") long questId, Model model, HttpSession session) {
+    public String unassignQuest(@RequestParam("questId") long questId, Model model, HttpSession session) {
         if (session.getAttribute("PersonIdLoggedIn") != null) {
             long childId = (long) session.getAttribute("PersonIdLoggedIn");
             try {
