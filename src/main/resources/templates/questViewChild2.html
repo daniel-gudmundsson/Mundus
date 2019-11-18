@@ -16,7 +16,8 @@
         <li class="header__point header__point--active">MUNDUS</li>
         <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
         <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
-        <li class="header__point"><a>Options</a></li>
+        <li class="header__point"><a th:href="@{logoutPerson}">Switch Adventurer</a> </li>
+        <li class="header__point"><a th:href="@{logoutAccount}">Log Out</a> </li>
     </ul>
 </header>
 <!-- <div class="sidenav">
@@ -42,7 +43,7 @@
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
                         <form method="POST" class = "assign" th:action="@{/assignQuest}">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__assign" style="display: none;">Assign to me</button>
                         </form>
                         <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
@@ -61,13 +62,13 @@
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
                         <form method="POST" class = "done" th:action="@{/markQuestAsDone}">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__done" style="display: none;">Done</button>
                         </form>
 
                         <!--<a th:href="@{markQuestAsDone}" type="hidden" class ="done"><button class="view__done" style="display: none;">Done</button></a>-->
                         <form method="POST" class = "assign" th:action="@{/unassignQuest}">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__assign" style="display: none;">Unassign</button>
                         </form>
                        <!-- <a th:href="@{unAssignQuest}" type="hidden" class ="assign"><button class="view__assign"style="display: none;">Unassign</button></a>-->
@@ -87,7 +88,7 @@
                             <p class="quest__description" th:text="${quest.description}" hidden></p>
                             <h3 class="quest__status" hidden>Status: Available</h3>
                             <form method="POST" class = "done" th:action="@{/markQuestAsNotDone}">
-                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                                <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                                 <button type="submit" name="submit" value="value" class="view__done" style="display: none;">Not Done</button>
                             </form>
 

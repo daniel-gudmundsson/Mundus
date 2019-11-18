@@ -16,7 +16,8 @@
         <li class="header__point header__point--active">MUNDUS</li>
         <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
         <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
-        <li class="header__point"><a>Options</a></li>
+        <li class="header__point"><a th:href="@{logoutPerson}">Switch Adventurer</a> </li>
+        <li class="header__point"><a th:href="@{logoutAccount}">Log Out</a> </li>
     </ul>
 </header>
 
@@ -38,17 +39,14 @@
                                 <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
                                 <button type="submit" name="submit" value="value" class="view__delete" style="display: none">Delete</button>
                             </form>
-                            <form method="POST" class = "assignee">
-                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <form method="POST" class = "assignee" th:action="@{/assignQuestParent}">
+                                <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                                 <select name = "childId" class = "view__assignee" style="display: none">
-                                    <option value="-1"> -- </option>
+                                    <option value="-1">No One</option>
                                     <option th:each="child : ${parent.children}" th:value="${child.id}" th:text="${child.name}">
                                     </option>
                                 </select>
-                            </form>
-                            <form method="POST" class = "setAssignee" th:action="@{/deleteQuest}">
-                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
-                                <button type="submit" name="submit" value="value" class="view__setAssignee" style="display: none">Set assignee</button>
+                                <button type="submit" name="submit" value="value" class="view__assigneeButton" style="display: none">Set assignee</button>
                             </form>
                             <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
                         </div>
@@ -67,17 +65,18 @@
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
                         <form method="POST" class = "delete" th:action="@{/deleteQuest}">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__delete" style="display: none;">Delete</button>
                         </form>
-                        <form method="POST" class = "assignee">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                        <form method="POST" class = "assignee" th:action="@{/assignQuestParent}">
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <select name = "childId" class = "view__assignee" style="display: none">
-                                <option th:value="${quest.assignee.id}" th:text="${quest.assignee.name}" ></option>
+                                <option th:value="${quest.assignee.id}" th:text="${quest.assignee.name}"></option>
                                 <option th:each="child : ${parent.children}"   th:if="${child != quest.assignee}" th:value="${child.id}" th:text="${child.name}">
                                 </option>
+                                <option th:value=-1>No One</option>
                             </select>
-                            <button type="submit" name="submit" value="value" class="view__assignee" style="display: none">Set assignee</button>
+                            <button type="submit" name="submit" value="value" class="view__assigneeButton" style="display: none">Set assignee</button>
                         </form>
                     <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
                     </div>
@@ -118,10 +117,8 @@
 
 <footer class="footer">
     <ul class="header__points">
-        <!-- <li class="header__point header__point--active">MUNDUS</li> -->
-        <li class="header__point"></a>Olaf lvl 5</li>
-        <li class="header__point">Coins: 1337</li>
-        <li class="header__point">xp: 9999</li>
+        <li class="header__point" th:text="'Lord ' + ${parent.name}"></a></li>
+        <li class="header__point" th:text="'Number of Servants: ' + parent.children.length"></li>
     </ul>
 </footer>
 

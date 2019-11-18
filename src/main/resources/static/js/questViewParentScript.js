@@ -88,6 +88,7 @@ const text = (() => {
         const del = cln.querySelector('.delete');
         const assignee = cln.querySelector('.assignee');
         const setAssignee = cln.querySelector('.setAssignee');
+        const view__assigneeButton = cln.querySelector('.view__assigneeButton');
         console.log(as.length);
         view.appendChild(h2);
         view.appendChild(name);
@@ -123,15 +124,23 @@ const text = (() => {
         {
             assignee.type = 'visible';
             assignee.querySelector('.view__assignee').style = "display: block;";
+            assignee.querySelector('.view__assigneeButton').style = "display: block;";
             view.appendChild(assignee);
         }
 
-        if(setAssignee)
+        /*if(setAssignee)
         {
             setAssignee.type = 'visible';
             setAssignee.querySelector('.view__setAssignee').style = "display: block;";
             view.appendChild(setAssignee);
-        }
+        }*/
+
+        /*if(view__assigneeButton)
+        {
+            view__assigneeButton.type = 'visible';
+            view__assigneeButton.querySelector('.view__view__assigneeButton').style = "display: block;";
+            view.appendChild(view__assigneeButton);
+        }*/
     }
     return {
         init: init
