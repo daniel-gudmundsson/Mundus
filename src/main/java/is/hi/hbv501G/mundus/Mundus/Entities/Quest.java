@@ -58,6 +58,8 @@ public class Quest {
 
     public Quest() {
         this.dateCreated = LocalDate.now();
+        this.isDone = false;
+        this.isConfirmed = false;
     }
 
     // Getters and Setters

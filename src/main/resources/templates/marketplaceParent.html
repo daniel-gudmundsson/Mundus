@@ -17,7 +17,8 @@
         <li class="header__point header__point--active">MUNDUS</li>
         <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
         <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
-        <li class="header__point"><a>Options</a></li>
+        <li class="header__point"><a th:href="@{logoutPerson}">Switch Adventurer</a> </li>
+        <li class="header__point"><a th:href="@{logoutAccount}">Log Out</a> </li>
     </ul>
 </header>
 
@@ -36,7 +37,7 @@
                         <p>Price<input type="text" name="price" id="price" th:value="*{price}"/></p>
                         <p>Level required:<input type="text" name="levelRequired" id="levelRequired"  th:value="*{levelRequired}"/></p>
                         <p>Due date<input type="date" name="endDate" id="endDate"  th:value="*{endDate}"/></p>
-                        <input class="button" type="submit" value="Create loot!"/>
+                        <input class="button" type="submit" value="Create Reward!"/>
                     </form>
                 </div>
             </div>

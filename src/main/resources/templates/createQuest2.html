@@ -17,7 +17,8 @@
         <li class="header__point header__point--active">MUNDUS</li>
         <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
         <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
-        <li class="header__point"><a>Options</a></li>
+        <li class="header__point"><a th:href="@{logoutPerson}">Switch Adventurer</a> </li>
+        <li class="header__point"><a th:href="@{logoutAccount}">Log Out</a> </li>
     </ul>
 </header>
 
@@ -28,8 +29,7 @@
             <h1>Create Quest</h1>
             <form th:action="@{/createQuest}" th:object="${quest}" method="post">
                 <p>Quest name<input type="text" name="name" id="name" th:field="*{name}"/></p>
-                <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description"
-                                               th:field="*{description}"/></p>
+                <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description" th:field="*{description}"/></p>
                 <p>XP <input type="text" name="xp" id="xp" th:field="*{xp}"/></p>
                 <p>Coins <input type="text" name="coins" id="coins" th:field="*{coins}"/></p>
                 <p>Deadline<input type="date" name="deadline" id="deadline" th:field="*{deadline}"/></p>
@@ -41,7 +41,7 @@
                     </option>
                 </select></p>
                 <br>
-                <input class="button" type="submit" value="Create reward"/>
+                <input class="button" type="submit" value="Create Quest"/>
             </form>
         </div>
     </div>
