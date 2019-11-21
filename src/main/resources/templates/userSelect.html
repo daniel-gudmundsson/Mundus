@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="https://thymeleaf.org" lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MUNDUS - LogIn Template</title>
+
+    <style>
+        html{
+            background-image: url("./img/loginBackground.png");
+            background-repeat: no-repeat;
+        }
+        h1{
+            font-family: 'Nova Flat';
+            font-size: 40px;
+            color: darkred;
+            text-align: center;
+        }
+        .scrollContainer{
+            position: fixed; /* or absolute */
+            top: 25%;
+            left: 25%;
+            background-image: url("./img/scroll.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 1000px;
+            height: 500px;
+        }
+        .persons{
+            margin-top: 100px;
+            margin-left: 100px;
+            width: 80%;
+            font-family: 'Nova Flat';
+            display: flex;
+            flex-direction: row;
+        }
+
+        .person {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+
+</head>
+<body>
+<div class="scrollContainer">
+    <h1>Who has a quest?</h1>
+    <div class="persons" th:each="person : ${persons}">
+        <div class = "person">
+        <h2 th:text="${person.name}"></h2>
+        <form method="POST" th:action="@{/pin-page}">
+            <input type="hidden" name="id"  th:value="${person.id}" />
+            <button><img src="./img/smile.jpg" width="50" height="50" type="submit" name="submit" value="value" class="link-button"></button>
+            <p>Admin</p>
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

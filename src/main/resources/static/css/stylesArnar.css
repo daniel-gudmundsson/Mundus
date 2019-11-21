@@ -1,0 +1,57 @@
+body{
+    background-image: url("../img/loginBackground.png");
+    height: 100%;
+    background-size: cover;
+}
+
+input{
+    padding-left: 8px;
+    margin-bottom: 12px;
+}
+
+h5{
+    padding: 12px 0px;
+}
+
+h2{
+    margin-bottom: 12px;
+}
+
+#log{
+    padding: 12px 36px 12px 36px;
+    border-radius: 24px;
+    font-size: 16px;
+    color: #000000;
+    margin: 24px 0px 24px 0px;
+}
+
+#adduser{
+    padding: 8px 18px 8px 18px;
+    border-radius: 24px;
+    font-size: 16px;
+    color: #000000;
+    margin: -8px 8px 0px 8px;
+}
+
+#help{
+    padding: 8px 18px 8px 18px;
+    border-radius: 24px;
+    font-size: 16px;
+    color: #000000;
+    margin: -8px 8px 0px 8px;
+}
+
+.userlogin{
+    margin-top: 32px;
+}
+
+.subbackground{
+    position: fixed; /* or absolute */
+    top: 25%;
+    left: 25%;
+    background-image: url("../img/scroll.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1000px;
+    height: 500px;
+}

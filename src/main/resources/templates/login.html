@@ -1,26 +1,56 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+
+<!doctype html>
+<html xmlns:th="https://thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MUNDUS - SignIn</title>
+    <style>
+        html{
+            background-image: url("./img/loginBackground.png");
+            background-repeat: no-repeat;
+        }
+        div{
+            position: fixed; /* or absolute */
+            top: 25%;
+            left: 40%;
+            background-image: url("./img/scroll.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 500px;
+            height: 200px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        div > p{
+            font-size: 26px;
+        }
+        .button{
+            background-color: #e1b01e;
+            background-image: linear-gradient(to bottom, #fce374, #e1b01e);
+            border: 1px solid #c9ae34;
+            box-shadow: inset 0 1px 0 #fff6ce, inset 0 -1px 0 #e3c852, inset 0 0 0 1px #fce88d, 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: #633e10;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-<div >
+<div>
 
+    <p>Please sign in to realm</p>
     <form method="POST" th:action="@{/login}">
-        <table>
-            <tr>
-                <td>Email</td>
-                <td><input type="email" id="email" name="email"/></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" id="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td><button type="submit">Login</button></td>
-            </tr>
-        </table>
+        <input id="email" name="email" type="email" placeholder="Username" /><br>
+        <input id="password" name="password" type="password" placeholder="Password" /><br>
+        <button  class="button" id="submit" type="submit">LogIn</a></button>
+    </form>
+    <br>
+    <form>
+        <button id="signUpID" type="button">Signup</a></button>
     </form>
 
 </div>

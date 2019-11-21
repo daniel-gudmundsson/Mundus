@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
@@ -94,7 +93,8 @@ public class PersonController {
         persons.add(parent);
 
         model.addAttribute("persons", persons); // Add all the children and parent to the model
-        return "persons"; // Load the person page
+        return "userSelect";
+        //return "persons"; // Load the person page
 
     }
 
@@ -115,7 +115,7 @@ public class PersonController {
             }
         }
         model.addAttribute("id", id);
-        return "pinPage";
+        return "pinPage2";
     }
 
     /**
