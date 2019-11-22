@@ -88,13 +88,9 @@ public class PersonController {
         Account account = accountService.findAccountById(accountId); // The account which is logged in
         Parent parent = account.getParent(); // Get the parent of the account
         Set<Child> children = parent.getChildren(); // Get the children of this acount
-        Set<Person> persons = new HashSet<>();
 
-
-        persons.addAll(children);
-        persons.add(parent);
-
-        model.addAttribute("persons", persons); // Add all the children and parent to the model
+        model.addAttribute("parent", parent); // Add all the children and parent to the model
+        model.addAttribute("children", children);
         return "userSelect";
         //return "persons"; // Load the person page
 
@@ -110,6 +106,7 @@ public class PersonController {
      */
     @RequestMapping(value = "/pin-page", method = RequestMethod.POST)
     public String loadPinPage(@RequestParam("id") long id, Model model, HttpSession session) {
+        session.setAttribute("PersonIdLoggedIn", null);
         if (session.getAttribute("PersonIdLoggedIn") != null) {
             if (id == (long) session.getAttribute("PersonIdLoggedIn")) ;
             {
