@@ -18,7 +18,6 @@ public class Child extends Person { // This class extends the abstract Person cl
     @ElementCollection
     private List<Long> rewards = new ArrayList<>(); // Contains the id of the rewards the child owns
 
-    @NotNull
     @ManyToOne
     private Parent parent; // The parent of the child
 

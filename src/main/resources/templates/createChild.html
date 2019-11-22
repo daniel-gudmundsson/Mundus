@@ -14,23 +14,21 @@
 <body>
 <div style="text-align:center; margin:0 auto; position: fixed; top: 45%; left: 50%; -webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
     <div class="background"></div>
-    <img src="../img/mundus.png" width = "100" height = "100">
+    <img src="./img/mundusLogo.png" width = "100" height = "100">
     <div class="header">
         <div class="header__name">
-            <h2>Add child</h2>
+            <h2>Add champion</h2>
         </div>
-        <h5>Please pick a valid name and a pin for child</h5>
+        <h5>Choose a name for the champion!</h5>
     </div>
     <div class="createchild">
-        <form>
+        <form th:action="@{/createChild}" th:object="${child}" method="post">
             <div class="createchild__signup">
-                <input id="childname" name="childname" type="text" placeholder="Name" />
-                <input id="createpasswordID" name="email" type="password" placeholder="Password" /><br>
+                <p>Name of champion: <input id="childname" name="childname" type="text" th:field="*{name}" placeholder="Name" /></p>
+                <p>Code:<input id="createpasswordID" name="email" type="password" th:field="*{pin}" placeholder="Code" /></p><br>
             </div>
+            <button id="log" type="submit">Create Champion!</button>
         </form>
-        <form>
-            <button id="log" type="submit">SignUp</button>
-            <form>
     </div>
 </div>
 </body>

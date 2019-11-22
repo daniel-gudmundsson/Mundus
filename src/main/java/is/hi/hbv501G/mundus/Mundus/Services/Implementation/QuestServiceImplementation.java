@@ -136,4 +136,16 @@ public class QuestServiceImplementation implements QuestService {
 
         personRepository.save(parent);
     }
+
+    @Override
+    public void expired(Quest quest) throws Exception {
+        if(quest == null) {
+            throw new Exception("Quest can't be null when trying to mark expired");
+        }
+        else {
+            quest.setIsConfirmed(true);
+            questRepository.save(quest);
+        }
+    }
+
 }
