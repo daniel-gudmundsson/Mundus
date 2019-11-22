@@ -6,11 +6,13 @@ import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -141,7 +143,7 @@ public class PersonController {
         return "redirect:/";
     }
 
-    /**
+    /** TODO færa kóða yfir í service
      * Loads all the information of a person
      *
      * @param model
@@ -233,6 +235,40 @@ public class PersonController {
             System.out.println("Not able to assign child to parent");
         }
         return "redirect:/profile";
+    }
+
+    @RequestMapping(value = "/createChild", method = RequestMethod.POST)
+    public String createChildPOST(@Valid Child child, BindingResult result, Model model, HttpSession session) {
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+            return "createChild";
+        }
+        long parentId = (long) session.getAttribute("PersonIdLoggedIn"); // Get the id of the parent creating this reward
+        //Parent maker = personService.findParentById(parentId);
+        //reward.setMaker(maker);
+        try {
+            personService.assignChildToParent(child, parentId); // Create a new reward
+        } catch (Exception e) {
+            return "redirect:/createChild";
+        }
+        return "redirect:/quests";
+    }
+
+    @RequestMapping(value = "/createChild", method = RequestMethod.GET)
+    public String createChildGET(Child child, HttpSession session, Model model) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            long personId = (long) session.getAttribute("PersonIdLoggedIn");
+            Person person = personService.findPersonById(personId);
+
+            if (person instanceof Child) {
+                return "redirect:/";
+            } else {
+                Parent parent = (Parent) person;
+                model.addAttribute("children", parent.getChildren());
+                return "createChild";
+            }
+        }
+        return "redirect:/";
     }
 
 

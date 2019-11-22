@@ -30,12 +30,11 @@ public class Reward implements Comparable<Reward> {
     @ManyToOne
     private Parent maker; // Creator of the reward
 
-    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, LocalDate endDate, Parent maker) {
+    public Reward(String name, String description, int price, int levelRequired, LocalDate endDate, Parent maker) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.levelRequired = levelRequired;
-        this.autorenew = autorenew;
         this.endDate = endDate;
         //this.visible = visible;
         this.maker = maker;
