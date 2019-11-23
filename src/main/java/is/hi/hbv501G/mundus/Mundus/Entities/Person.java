@@ -1,5 +1,7 @@
 package is.hi.hbv501G.mundus.Mundus.Entities;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -7,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Entity
-public abstract class Person { // An abstract class which Child and Parent are based on
+public abstract class Person implements Comparable<Person> { // An abstract class which Child and Parent are based on
 
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
     @Column(name = "PersonId")
@@ -56,5 +58,8 @@ public abstract class Person { // An abstract class which Child and Parent are b
         this.pin = pin;
     }
 
-
+    @Override
+    public int compareTo(@NotNull Person o) {
+        return this.name.compareTo(o.getName());
+    }
 }

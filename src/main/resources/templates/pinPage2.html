@@ -14,6 +14,7 @@
             font-size: 40px;
             color: darkred;
             text-align: center;
+            margin-bottom: 5px;
         }
         .scrollContainer{
             position: fixed; /* or absolute */
@@ -26,7 +27,7 @@
             height: 500px;
         }
         .pinbuttons{
-            margin-top: 100px;
+            margin-top: 50px;
             margin-left: 400px;
             width: 80%;
         }
@@ -39,12 +40,28 @@
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
             font-size: 40px;
         }
+
+        .return--div{
+            display: flex;
+        }
+
+        .return__text{
+            font-family: 'Nova Flat';
+            font-size: 1.2rem;
+            margin-left: 43px;
+            color: darkred;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 <div class="scrollContainer">
     <h1>Enter your secret code</h1>
+    <div class="return--div">
+        <a class="return__text" href="/persons">Return</a>
+    </div>
     <div class="pinbuttons">
+        <h2 th:text="${person.name}"></h2>
         <form method="POST" th:action="@{/pin-page-auth}">
             <input type="hidden" name="id"  th:value="${id}" />
             <input name="pin" type="password" placeholder="CODE" id = "pin"/>
