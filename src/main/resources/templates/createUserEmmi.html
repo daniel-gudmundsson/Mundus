@@ -5,17 +5,21 @@
     <meta charset="UTF-8">
     <title>Create User</title>
     <style>
-        html{
+        html {
             background-image: url("./img/loginBackground.png");
             background-repeat: no-repeat;
+            font-family: 'Nova Flat';
         }
-        h2{
+
+        h2 {
             font-family: 'Nova Flat';
             font-size: 40px;
             color: darkred;
             text-align: center;
+            margin-bottom: 5px;
         }
-        .scrollContainer{
+
+        .scrollContainer {
             position: fixed; /* or absolute */
             top: 25%;
             left: 25%;
@@ -25,7 +29,8 @@
             width: 1000px;
             height: 500px;
         }
-        .button{
+
+        .button {
             background-color: #e1b01e;
             background-image: linear-gradient(to bottom, #fce374, #e1b01e);
             border: 1px solid #c9ae34;
@@ -34,11 +39,34 @@
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
             font-size: 20px;
         }
-        .info{
-            margin-top: 100px;
+
+        .info {
+            margin-top: 20px;
             margin-left: 400px;
             width: 80%;
             font-family: 'Nova Flat';
+        }
+
+        .return--div {
+            display: flex;
+        }
+
+        .return__text {
+            font-family: 'Nova Flat';
+            font-size: 1.2rem;
+            margin-left: 43px;
+            color: darkred;
+            text-decoration: none;
+        }
+
+        .information-text{
+            color: darkred;
+            font-size: 1.3rem;
+        }
+
+        .information-div{
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -46,21 +74,24 @@
 
 <div class="scrollContainer" a>
     <h2>Create Champion</h2>
+    <div th:if="${not #lists.isEmpty(children)}" class="return--div">
+        <a class="return__text" href="/">Return</a>
+    </div>
+    <div th:if="${#lists.isEmpty(children)}" class="return--div">
+        <a class="return__text" href="/logoutAccount">Log Out</a>
+    </div>
+
+
+    <div class="information-div" th:if="${#lists.isEmpty(children)}">
+        <p class="information-text">Now it's time to make your first champion</p>
+    </div>
     <div class="info">
-        <form>
-            <input type="text" name="Username" value="username"> <br>
-            <br>
-            <input type="text" name="Username" value="Select Pin"> <br>
-            <input type="text" name="Username" value="Confirm Pin"> <br>
-
-            <br>
-
-            <button type="submit" name="loginUser"  class="link-button">Cancel</button>
-            <button  type="submit" name="loginUser"  class="button">Confirm</button>
-
-
+        <form th:action="@{/createChild}" th:object="${child}" method="post">
+            <p>Name: <input id="childname" name="childname" type="text" th:field="*{name}" placeholder="Name"/></p> <br>
+            <p>Code: <input id="createpasswordID" name="email" type="password" th:field="*{pin}" placeholder="Code"/>
+            </p> <br>
+            <button class="button" id="log" type="submit">Confirm</button>
         </form>
-        <div/>
     </div>
 </body>
 </html>

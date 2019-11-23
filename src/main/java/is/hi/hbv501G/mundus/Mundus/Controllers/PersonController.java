@@ -263,7 +263,7 @@ public class PersonController {
             } else {
                 Parent parent = (Parent) person;
                 model.addAttribute("children", parent.getChildren());
-                return "createChild";
+                return "createUserEmmi";
             }
         }
         return "redirect:/";
