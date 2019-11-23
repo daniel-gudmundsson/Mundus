@@ -202,6 +202,7 @@ public class QuestController {
                 return "redirect:/";
             } else {
                 Parent parent = (Parent) person;
+                model.addAttribute("parent", parent);
                 model.addAttribute("children", parent.getChildren());
                 return "createQuest2";
             }
