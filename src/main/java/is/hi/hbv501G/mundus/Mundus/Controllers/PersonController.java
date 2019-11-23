@@ -153,6 +153,7 @@ public class PersonController {
             questService.deleteExpired();
         }
         catch (Exception e) {
+            System.out.println(e);
             System.out.println("Couldn't delete expired quests");
         }
         if (session.getAttribute("PersonIdLoggedIn") == null) {
