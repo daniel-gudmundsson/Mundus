@@ -1,3 +1,8 @@
+html{
+    font-family: 'Nova Flat';
+    height: 100%;
+}
+
 .sidenav {
     height: 100%;
     /* Full-height: remove this if you want "auto" height */
@@ -28,7 +33,7 @@ li {
     list-style: none;
 }
 
-main {
+.main {
     display: flex;
     /* margin-left: 150px; Same as the width of the sidebar */
     padding: 0px 10px;
@@ -36,7 +41,7 @@ main {
     width: 100%;
     overflow-x: hidden;
     background-color: #154074;
-    position: fixed;
+   /* position: fixed;*/
     /* background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
     /* background: rgb(2,0,36);
     background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(21,64,116,1) 0%, rgba(15,108,158,1) 100%, rgba(0,212,255,1) 100%); */
@@ -48,11 +53,11 @@ main {
 
 body {
     margin: 0px;
+    height: 100%;
 }
 
 .header {
     /* margin-left: 160px; Same as the width of the sidebar */
-    position: fixed;
 
     /* background: #633e10; */
     background: rgb(129,44,5);
@@ -66,7 +71,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    z-index: 2;
+  /*  z-index: 2;*/
     margin-top: 0px;
     padding-top: 0px;
     /* padding: 10px; */
@@ -85,8 +90,7 @@ body {
 }
 
 .footer {
-    position: fixed;
-    bottom: 0;
+    margin-top: -500px;
     /* background: #633e10; */
     background: rgb(129,44,5);
     background: linear-gradient(0deg, rgba(129,44,5,1) 0%, rgba(125,55,6,1) 100%);
@@ -100,7 +104,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    z-index: 2;
+   /* z-index: 2;*/
     margin-top: 0px;
     padding-top: 0px;
 
@@ -193,15 +197,13 @@ body {
     width: 200px;
     display: flex;
     flex-direction: column;
-    border-style: solid;
-    border-color: #85521f;
-    border-width: 5px;
-    border-radius: 15px;
-    margin: 0px 15px 15px 15px;
-    background-image: url("../img/scrollVertical.png");
+    margin: 0px 5px 5px 5px;
+    padding: 20px;
+    background-image: url("../img/scrollVertical2.png");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+    font-size: 0.8rem;
 }
 
 .reward__title {
