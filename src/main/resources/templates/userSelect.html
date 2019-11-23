@@ -34,7 +34,6 @@
         }
 
 
-
         .person {
             display: flex;
             flex-direction: column;
@@ -63,12 +62,12 @@
             flex-direction: column;
         }
 
-        .form{
+        .form {
             display: flex;
             justify-content: center;
         }
 
-        .person__name{
+        .person__name {
             margin-left: auto;
             margin-right: auto;
         }
@@ -84,13 +83,13 @@
         <div class="container">
             <div class="container-persons">
                 <div class="person">
-                        <h2 class="person__name" th:text="${parent.name}"></h2>
-                        <form method="POST" th:action="@{/pin-page}">
-                            <input type="hidden" name="id" th:value="${parent.id}"/>
-                            <button><img src="./img/smile.jpg" width="50" height="50" type="submit" name="submit"
-                                         value="value"
-                                         class="link-button"></button>
-                        </form>
+                    <h2 class="person__name" th:text="${parent.name}"></h2>
+                    <form method="POST" th:action="@{/pin-page}">
+                        <input type="hidden" name="id" th:value="${parent.id}"/>
+                        <button><img src="./img/smile.jpg" width="50" height="50" type="submit" name="submit"
+                                     value="value"
+                                     class="link-button"></button>
+                    </form>
 
                 </div>
             </div>
@@ -98,22 +97,23 @@
             <div class="container-persons">
                 <div class="person" th:if="${#lists.isEmpty(children)}">
                     <h2>Add user</h2>
-                    <form class="form" method="POST" th:action="@{/createChild}">
-                    <button><img src="./img/plus-sign.png" width="50" height="50" type="submit" name="submit"
-                                 value="value"
-                                 class="link-button"></button>
+                    <form class="form" method="POST" th:action="@{/pin-page}">
+                        <input type="hidden" name="id" th:value="${parent.id}"/>
+                        <button><img src="./img/plus-sign.png" width="50" height="50" type="submit" name="submit"
+                                     value="value"
+                                     class="link-button"></button>
                     </form>
                 </div>
 
                 <div class="person" th:each="child : ${children}">
-                        <h2 class="person__name" th:text="${child.name}"></h2>
-                        <form class="form" method="POST" th:action="@{/pin-page}">
-                            <input type="hidden" name="id" th:value="${child.id}"/>
-                            <button><img src="./img/smile.jpg" width="50" height="50" type="submit" name="submit"
-                                         value="value"
-                                         class="link-button"></button>
-                        </form>
-                    </div>
+                    <h2 class="person__name" th:text="${child.name}"></h2>
+                    <form class="form" method="POST" th:action="@{/pin-page}">
+                        <input type="hidden" name="id" th:value="${child.id}"/>
+                        <button><img src="./img/smile.jpg" width="50" height="50" type="submit" name="submit"
+                                     value="value"
+                                     class="link-button"></button>
+                    </form>
+                </div>
 
             </div>
         </div>

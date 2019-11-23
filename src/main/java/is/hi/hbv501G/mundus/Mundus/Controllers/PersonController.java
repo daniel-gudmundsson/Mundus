@@ -107,12 +107,9 @@ public class PersonController {
     @RequestMapping(value = "/pin-page", method = RequestMethod.POST)
     public String loadPinPage(@RequestParam("id") long id, Model model, HttpSession session) {
         session.setAttribute("PersonIdLoggedIn", null);
-        if (session.getAttribute("PersonIdLoggedIn") != null) {
-            if (id == (long) session.getAttribute("PersonIdLoggedIn")) ;
-            {
-                return "redirect:/quests";
-            }
-        }
+        Person person = personService.findPersonById(id);
+
+        model.addAttribute("person", person);
         model.addAttribute("id", id);
         return "pinPage2";
     }
@@ -186,6 +183,10 @@ public class PersonController {
             Set<Quest> availableQuests = parent.getQuests();
             Set<Quest> onGoingQuests = new HashSet<Quest>();
             Set<Child> children = parent.getChildren();
+            if(children.isEmpty()){
+               return  "redirect:/createChild";
+            }
+
             for(Child child : children) {
                 onGoingQuests.addAll(child.getQuests());
             }

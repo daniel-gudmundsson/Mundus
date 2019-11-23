@@ -45,6 +45,7 @@
 <div class="scrollContainer">
     <h1>Enter your secret code</h1>
     <div class="pinbuttons">
+        <h2 th:text="${person.name}"></h2>
         <form method="POST" th:action="@{/pin-page-auth}">
             <input type="hidden" name="id"  th:value="${id}" />
             <input name="pin" type="password" placeholder="CODE" id = "pin"/>

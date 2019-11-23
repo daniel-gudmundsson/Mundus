@@ -14,6 +14,6 @@ public interface QuestRepository extends JpaRepository<Quest, Long> {
     List<Quest> findAll();
     Quest findById(long id);
 
-    Quest findAllByIdAndDeadlineAfter(LocalDate.)
+   // Quest findAllByIdAndDeadlineAfter(LocalDate.)
 
 }
