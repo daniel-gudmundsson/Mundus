@@ -34,7 +34,5 @@ public interface QuestService {
 
     void createQuest(Quest quest, long idOfParent) throws Exception;
 
-    void expired(Quest quest) throws Exception;
-
-
+    void deleteExpired() throws Exception;
 }

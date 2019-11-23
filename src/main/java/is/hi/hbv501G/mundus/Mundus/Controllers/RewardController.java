@@ -60,6 +60,7 @@ public class RewardController {
                 Parent parent = personService.findParentById(personId);
                 Set<Pair<Child, Reward>> rewardPairs = rewardService.getPurchasedRewards(personId);
                 System.out.println(rewardPairs);
+                model.addAttribute("parent", parent);
                 model.addAttribute("purchasedRewards", rewardPairs);
                 model.addAttribute("allRewards", parent.getRewards());
             } catch (Exception e) {

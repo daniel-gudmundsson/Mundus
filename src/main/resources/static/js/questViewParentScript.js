@@ -48,6 +48,7 @@ const text = (() => {
         const cln = div.cloneNode(true);
         const h2 = document.createElement('h2');
         h2.innerHTML = 'Details'
+        h2.className = "log__name";
         emptyView();
         // cln.children().show();
         // const view = document.createElement('div');
@@ -89,35 +90,37 @@ const text = (() => {
         const assignee = cln.querySelector('.assignee');
         const setAssignee = cln.querySelector('.setAssignee');
         const view__assigneeButton = cln.querySelector('.view__assigneeButton');
-        console.log(as.length);
-        view.appendChild(h2);
-        view.appendChild(name);
-        view.appendChild(xp);
-        view.appendChild(coins);
-        view.appendChild(deadline);
-        view.appendChild(description);
-        view.appendChild(status);
+
+        const container = document.createElement('div');
+        container.className= 'view__quest';
+        container.appendChild(h2);
+        container.appendChild(name);
+        container.appendChild(xp);
+        container.appendChild(coins);
+        container.appendChild(deadline);
+        container.appendChild(description);
+        container.appendChild(status);
         //view.appendChild(assignToMe);
         //view.appendChild(markAsDone);
-        view.appendChild(id);
+        container.appendChild(id);
         //debugger
 
         if(confirm) {
             confirm.type = 'visible';
             confirm.querySelector('.view__confirm').style = "display: block;";
-            view.appendChild(confirm);
+            container.appendChild(confirm);
         }
         if(deny) {
             deny.type = 'visible';
             deny.querySelector('.view__deny').style = "display: block;";
-            view.appendChild(deny);
+            container.appendChild(deny);
         }
 
         if(del)
         {
             del.type = 'visible';
             del.querySelector('.view__delete').style = "display: block;";
-            view.appendChild(del);
+            container.appendChild(del);
         }
 
         if(assignee)
@@ -125,8 +128,9 @@ const text = (() => {
             assignee.type = 'visible';
             assignee.querySelector('.view__assignee').style = "display: block;";
             assignee.querySelector('.view__assigneeButton').style = "display: block;";
-            view.appendChild(assignee);
+            container.appendChild(assignee);
         }
+        view.appendChild(container);
 
         /*if(setAssignee)
         {

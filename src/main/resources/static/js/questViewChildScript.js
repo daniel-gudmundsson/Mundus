@@ -48,6 +48,7 @@ const text = (() => {
         const cln = div.cloneNode(true);
         const h2 = document.createElement('h2');
         h2.innerHTML = 'Details'
+        h2.className = "log__name";
         emptyView();
         // cln.children().show();
         // const view = document.createElement('div');
@@ -85,29 +86,31 @@ const text = (() => {
         const as = cln.getElementsByTagName('a');
         const assign = cln.querySelector('.assign');
         const done = cln.querySelector('.done');
-        console.log(as.length);
-        view.appendChild(h2);
-        view.appendChild(name);
-        view.appendChild(xp);
-        view.appendChild(coins);
-        view.appendChild(deadline);
-        view.appendChild(description);
-        view.appendChild(status);
+        const container = document.createElement('div');
+        container.className = 'view__quest'
+        container.appendChild(h2);
+        container.appendChild(name);
+        container.appendChild(xp);
+        container.appendChild(coins);
+        container.appendChild(deadline);
+        container.appendChild(description);
+        container.appendChild(status);
         //view.appendChild(assignToMe);
         //view.appendChild(markAsDone);
-        view.appendChild(id);
+        container.appendChild(id);
         //debugger
 
         if(assign) {
             assign.type = 'visible';
             assign.querySelector('.view__assign').style = "display: block;";
-            view.appendChild(assign);
+            container.appendChild(assign);
         }
         if(done) {
             done.type = 'visible';
             done.querySelector('.view__done').style = "display: block;";
-            view.appendChild(done);
+            container.appendChild(done);
         }
+        view.appendChild(container);
     }
     return {
         init: init

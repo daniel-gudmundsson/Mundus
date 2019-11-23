@@ -100,11 +100,14 @@ public class QuestController {
     public String assignQuest(@RequestParam("childId") long childId, @RequestParam("questId") long questId, Model model) {
         if(childId == -1)
         {
-            childId = questService.findById(questId).getAssignee().getId();
-            try {
-                questService.unassignQuest(questId, childId);
-            } catch (Exception e) {
-                System.out.println("Not able to assign quest");
+            Child assignee = questService.findById(questId).getAssignee();
+            if(assignee !=null) {
+                childId = questService.findById(questId).getAssignee().getId();
+                try {
+                    questService.unassignQuest(questId, childId);
+                } catch (Exception e) {
+                    System.out.println("Not able to assign quest");
+                }
             }
         }
         else {

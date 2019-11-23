@@ -3,6 +3,7 @@ package is.hi.hbv501G.mundus.Mundus.Controllers;
 import is.hi.hbv501G.mundus.Mundus.Entities.*;
 import is.hi.hbv501G.mundus.Mundus.Services.AccountService;
 import is.hi.hbv501G.mundus.Mundus.Services.PersonService;
+import is.hi.hbv501G.mundus.Mundus.Services.QuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,13 @@ public class PersonController {
 
     private PersonService personService;
     private AccountService accountService;
+    private QuestService questService;
 
     @Autowired
-    public PersonController(PersonService personService, AccountService accountService) {
+    public PersonController(PersonService personService, AccountService accountService, QuestService questService) {
         this.personService = personService;
         this.accountService = accountService;
+        this.questService = questService;
     }
 
     // Several test function
@@ -149,6 +152,12 @@ public class PersonController {
      */
     @RequestMapping(value = "/quests", method = RequestMethod.GET)
     public String loadPerson(Model model, HttpSession session) {
+        try {
+            questService.deleteExpired();
+        }
+        catch (Exception e) {
+            System.out.println("Couldn't delete expired quests");
+        }
         if (session.getAttribute("PersonIdLoggedIn") == null) {
             return "redirect:/";
         }

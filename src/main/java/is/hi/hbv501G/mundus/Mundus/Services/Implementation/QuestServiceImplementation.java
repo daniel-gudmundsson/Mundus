@@ -9,6 +9,7 @@ import is.hi.hbv501G.mundus.Mundus.Services.QuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -138,14 +139,8 @@ public class QuestServiceImplementation implements QuestService {
     }
 
     @Override
-    public void expired(Quest quest) throws Exception {
-        if(quest == null) {
-            throw new Exception("Quest can't be null when trying to mark expired");
-        }
-        else {
-            quest.setIsConfirmed(true);
-            questRepository.save(quest);
-        }
+    public void deleteExpired() throws Exception {
+        questRepository.deleteAllByDeadlineBefore(LocalDate.now());
     }
 
 }

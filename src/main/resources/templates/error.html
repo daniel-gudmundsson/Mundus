@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org" lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/errorPageStyles.css}">
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+
+<div class="scrollContainer">
+    <div class="scrollcontent">
+        <h1>Whoops! </h1>
+        <p>You died!</p>
+        <p>Disconnected from realm</p>
+        <p>Task failed successfully</p>
+        <p>OOPS Child died</p>
+        <form>
+            <button class="button" id="return" type="button"><a th:href="@{/}">Respawn!</a></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

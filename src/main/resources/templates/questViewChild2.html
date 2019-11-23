@@ -2,6 +2,7 @@
 <html xmlns:th="https://thymeleaf.org" lang="en">
 
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,10 +15,10 @@
 <header class="header">
     <ul class="header__points">
         <li class="header__point header__point--active">MUNDUS</li>
-        <li class="header__point"><a th:href="@{quests}">Quest Log</a></li>
-        <li class="header__point"><a th:href="@{marketplace}">Marketplace</a></li>
-        <li class="header__point"><a th:href="@{logoutPerson}">Switch Adventurer</a> </li>
-        <li class="header__point"><a th:href="@{logoutAccount}">Log Out</a> </li>
+        <li class="header__point"><a th:href="@{quests}" class = "link">Quest Log</a></li>
+        <li class="header__point"><a th:href="@{marketplace}" class = "link">Marketplace</a></li>
+        <li class="header__point"><a th:href="@{logoutPerson}" class = "link">Switch Adventurer</a> </li>
+        <li class="header__point"><a th:href="@{logoutAccount}" class = "link">Log Out</a> </li>
     </ul>
 </header>
 <!-- <div class="sidenav">
@@ -60,7 +61,7 @@
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
                         <h3 class="quest__deadline" th:text="'Deadline: ' + ${quest.deadline}"></h3>
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
-                        <h3 class="quest__status" hidden>Status: Available</h3>
+                        <h3 class="quest__status" hidden th:text = "'Status: Assigned to '  + ${quest.assignee.name}"></h3>
                         <form method="POST" class = "done" th:action="@{/markQuestAsDone}">
                             <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__done" style="display: none;">Done</button>
