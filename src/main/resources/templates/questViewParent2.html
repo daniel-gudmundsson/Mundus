@@ -28,7 +28,7 @@
             <div class="quests">
                 <h2 class="log__name">All Quests</h2>
                 <div class="quests__content">
-                        <div class="quest" th:each="quest : ${availableQuests}">
+                        <div class="quest" th:each="quest : ${#lists.sort(availableQuests)}">
                             <h2 class="quest__name" th:text="${quest.name}"></h2>
                             <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                             <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
@@ -56,7 +56,7 @@
             <div class="myQuests">
                 <h2 class="log__name">Ongoing Quests</h2>
                 <div class="quests__content">
-                    <div class="quest" th:each="quest : ${onGoingQuests}">
+                    <div class="quest" th:each="quest : ${#lists.sort(onGoingQuests)}">
                         <h2 class="quest__name" th:text="${quest.name}"></h2>
                         <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>
@@ -85,7 +85,7 @@
             <div class="pending">
                 <h2 class="log__name">Finished</h2>
                 <div class="quests__content">
-                    <div class="quest" th:each="quest : ${doneQuests}">
+                    <div class="quest" th:each="quest : ${#lists.sort(doneQuests)}">
                         <h2 class="quest__name" th:text="${quest.name}"></h2>
                         <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
                         <h3 class="quest__coins" th:text="'Coins: ' + ${quest.coins}"></h3>

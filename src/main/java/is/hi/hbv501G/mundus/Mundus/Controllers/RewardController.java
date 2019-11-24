@@ -34,7 +34,7 @@ public class RewardController {
      * @return Returns the reward page (marketplace)
      */
     @RequestMapping("/marketplace")
-    public String rewardHome(Model model, HttpSession session) {//, long userID){
+    public String rewardHome(Model model, HttpSession session, Reward reward) {//, long userID){
         if (session.getAttribute("PersonIdLoggedIn") == null) {
             return "redirect:/";
         }

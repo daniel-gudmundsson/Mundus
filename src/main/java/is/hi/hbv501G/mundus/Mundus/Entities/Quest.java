@@ -160,6 +160,6 @@ public class Quest implements Comparable<Quest> {
 
     @Override
     public int compareTo(@org.jetbrains.annotations.NotNull Quest o) {
-        return 0;
+        return this.dateCreated.compareTo(o.getDateCreated());
     }
 }
