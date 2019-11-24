@@ -100,7 +100,7 @@ public class RewardController {
     public String createRewardPOST(@Valid Reward reward, BindingResult result, Model model, HttpSession session) {//, long userID){
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
-            return "createReward";
+            return "redirect:/marketplace";
         }
         long parentId = (long) session.getAttribute("PersonIdLoggedIn"); // Get the id of the parent creating this reward
         //Parent maker = personService.findParentById(parentId);

@@ -163,6 +163,10 @@ public class QuestController {
     public String createQuestPOST(@Valid Quest quest, BindingResult result, Model model, HttpSession session, @RequestParam("childId") long childId) {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
+            long personId = (long) session.getAttribute("PersonIdLoggedIn");
+            Parent parent = personService.findParentById(personId);
+            model.addAttribute("parent", parent);
+            model.addAttribute("children", parent.getChildren());
             return "createQuest2";
         }
 
