@@ -141,7 +141,7 @@ public class QuestController {
      * @return
      */
     @RequestMapping(value = "/deleteQuest", method = RequestMethod.POST)
-    public String delete(@RequestParam("id") long questId, Model model) {
+    public String delete(@RequestParam("questId") long questId, Model model) {
         try {
             questService.delete(questService.findById(questId));
         } catch (Exception e) {

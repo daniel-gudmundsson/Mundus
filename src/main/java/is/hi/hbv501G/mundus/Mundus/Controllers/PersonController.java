@@ -166,8 +166,18 @@ public class PersonController {
             Child child = personService.findChildById(personId);
             Parent parent = child.getParent();
             Set<Quest> availableQuests = parent.getQuests();
+            Set<Quest> allAssignedQuests = new HashSet<Quest>();
+            Set<Child> allChildren = parent.getChildren();
+            for(Child c : allChildren) {
+                for(Quest q : c.getQuests())
+                {
+                    allAssignedQuests.add(q);
+                }
+            }
+
+
             Set<Quest> assignedQuests = child.getQuests();
-            availableQuests.removeAll(assignedQuests);
+            availableQuests.removeAll(allAssignedQuests);
             Set<Quest> doneQuests = new HashSet<Quest>();
             Set<Quest> finishedQuests = new HashSet<Quest>(); // Don't show quests that are finished
             for(Quest q : assignedQuests)
