@@ -110,6 +110,7 @@ const text = (() => {
             done.querySelector('.view__done').style = "display: block;";
             container.appendChild(done);
         }
+        view.style.backgroundImage = "url('../img/scrollVertical.png')";
         view.appendChild(container);
     }
     return {

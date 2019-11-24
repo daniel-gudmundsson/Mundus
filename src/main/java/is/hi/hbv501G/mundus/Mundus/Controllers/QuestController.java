@@ -38,7 +38,7 @@ public class QuestController {
      * @return
      */
     @RequestMapping(value = "/markQuestAsDone", method = RequestMethod.POST)
-    public String markQuestAsDone(@RequestParam("id") long questId, Model model) {
+    public String markQuestAsDone(@RequestParam("questId") long questId, Model model) {
         try {
             questService.markQuest(questId, true);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class QuestController {
     }
 
     @RequestMapping(value = "/markQuestAsNotDone", method = RequestMethod.POST)
-    public String markQuestAsNotDone(@RequestParam("id") long questId, Model model) {
+    public String markQuestAsNotDone(@RequestParam("questId") long questId, Model model) {
         try {
             questService.markQuest(questId, false);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class QuestController {
      * @return
      */
     @RequestMapping(value = "/markQuestAsConfirmed", method = RequestMethod.POST)
-    public String markQuestAsConfirmed(@RequestParam("id") long questId, Model model) {
+    public String markQuestAsConfirmed(@RequestParam("questId") long questId, Model model) {
         try {
             questService.confirmDone(questId);
         } catch (Exception e) {
