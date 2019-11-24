@@ -14,7 +14,7 @@
 
 <header class="header">
     <ul class="header__points">
-        <li class="header__point header__point--active">MUNDUS</li>
+        <li class="Mundus">MUNDUS</li>
         <li class="header__point"><a th:href="@{quests}" class = "link">Quest Log</a></li>
         <li class="header__point"><a th:href="@{marketplace}" class = "link">Marketplace</a></li>
         <li class="header__point"><a th:href="@{logoutPerson}" class = "link">Switch Adventurer</a> </li>
@@ -118,7 +118,7 @@
 
 <footer class="footer">
     <ul class="header__points">
-        <li class="header__point" th:text="'Lord ' + ${parent.name}"></a></li>
+        <li class="Person" th:text="'Lord ' + ${parent.name}"></a></li>
         <li class = "header__point"><a th:href="@{createQuest}" class = "link">Create New Quest</a></li>
         <li class = "header__point"><a th:href="@{createChild}" class = "link">Add New Champion</a></li>
     </ul>

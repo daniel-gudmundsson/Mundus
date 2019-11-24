@@ -30,15 +30,10 @@
             <h1>Create Quest</h1>
             <form th:action="@{/createQuest}" th:object="${quest}" method="post">
                 <p>Quest name<input type="text" name="name" id="name" th:field="*{name}"/></p>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name cannot be empty</span>
                 <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description" th:field="*{description}"/></p>
-                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
                 <p>XP <input type="number" name="xp" id="xp" th:field="*{xp}"/></p>
-                <span th:if="${#fields.hasErrors('xp')}" th:errors="*{xp}"></span>
                 <p>Coins <input type="number" name="coins" id="coins" th:field="*{coins}"/></p>
-                <span th:if="${#fields.hasErrors('coins')}" th:errors="*{coins}"></span>
                 <p>Deadline<input type="date" name="deadline" id="deadline" th:field="*{deadline}"/></p>
-                <span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}"></span>
 
                 <p>Assign to: <select name="childId">
                     <option value="-1"> --</option>
