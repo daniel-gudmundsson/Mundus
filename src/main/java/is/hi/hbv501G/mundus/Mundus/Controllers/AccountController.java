@@ -112,13 +112,13 @@ public class AccountController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUpPOST(@Valid Account account, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "signup2";
+            return "signUp";
         }
 
         try {
             accountService.createAccount(account, account.getParent());
         } catch (Exception e) {
-            return "signup2";
+            return "signUp";
         }
 
         return "redirect:/";
@@ -127,7 +127,7 @@ public class AccountController {
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signUpGET(Model model) {
         model.addAttribute("account", new Account());
-        return "signup2";
+        return "signUp";
     }
 
 //    @RequestMapping("/test5")

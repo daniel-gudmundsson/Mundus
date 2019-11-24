@@ -114,7 +114,7 @@ public class PersonController {
 
         model.addAttribute("person", person);
         model.addAttribute("id", id);
-        return "pinPage2";
+        return "pinPage";
     }
 
     /**
@@ -273,7 +273,7 @@ public class PersonController {
             } else {
                 Parent parent = (Parent) person;
                 model.addAttribute("children", parent.getChildren());
-                return "createUserEmmi";
+                return "createUser";
             }
         }
         return "redirect:/";
