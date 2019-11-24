@@ -92,11 +92,16 @@ body {
 
 }
 
-.Logo {
-    background-image: url('mundusLogo2.png');
-    background-size: 50px;
-    background-repeat: no-repeat;
-    background-position: bottom;
+.Mundus {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 2rem;
+}
+
+.Person {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 1.5rem;
 }
 
 .footer {
@@ -139,6 +144,10 @@ body {
     padding: 5px;
     background: rgb(31,3,98);
     background: radial-gradient(circle, rgba(31,3,98,1) 57%, rgba(37,36,128,1) 100%);
+}
+
+.header__point:hover {
+    border-radius: 10px;
 }
 
 .link {

@@ -79,11 +79,16 @@ body {
 
 }
 
-.Logo {
-    background-image: url('mundusLogo2.png');
-    background-size: 50px;
-    background-repeat: no-repeat;
-    background-position: bottom;
+.Mundus {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 2rem;
+}
+
+.Person {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 1.5rem;
 }
 
 .footer {
@@ -127,10 +132,14 @@ body {
     background: radial-gradient(circle, rgba(31,3,98,1) 57%, rgba(37,36,128,1) 100%);
 }
 
+.header__point:hover {
+    border-radius: 10px;
+}
 .link {
     text-decoration: none;
     color: rgb(231,162,35);
 }
+
 
 .header__point .Mundus {
     color: rgb(231,162,35);
@@ -191,13 +200,12 @@ body {
     display: flex;
     flex-direction: row;
     flex: 1;
-    border: solid black;
 }
 
 .log__name {
     margin-top: 50px;
     align-self: center;
-    color: rgb(231,162,35);;
+    color: rgb(231,162,35);
 }
 .quests {
     flex: 1;
@@ -212,8 +220,9 @@ body {
 }
 
 .quests__content {
-    max-height: 400px;
-    overflow: auto;
+    max-height: 530px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     /* border: solid black; */
@@ -222,6 +231,7 @@ body {
 .quests__content::-webkit-scrollbar {
     display: none;
 }
+
 
 .myQuests {
     flex: 1;
@@ -253,7 +263,6 @@ body {
 
 .view {
     /* width: 500px; */
-    border: solid black;
     flex: 1;
     max-height: 700px;
     width   : 100%;

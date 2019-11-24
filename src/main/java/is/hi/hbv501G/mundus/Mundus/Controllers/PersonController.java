@@ -249,7 +249,11 @@ public class PersonController {
     public String createChildPOST(@Valid Child child, BindingResult result, Model model, HttpSession session) {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
-            return "createChild";
+            long personId = (long) session.getAttribute("PersonIdLoggedIn");
+            Person person = personService.findPersonById(personId);
+            Parent parent = (Parent) person;
+            model.addAttribute("children", parent.getChildren());
+            return "createUser";
         }
         long parentId = (long) session.getAttribute("PersonIdLoggedIn"); // Get the id of the parent creating this reward
         //Parent maker = personService.findParentById(parentId);
@@ -257,7 +261,7 @@ public class PersonController {
         try {
             personService.assignChildToParent(child, parentId); // Create a new reward
         } catch (Exception e) {
-            return "redirect:/createChild";
+            return "redirect:/createUser";
         }
         return "redirect:/quests";
     }
