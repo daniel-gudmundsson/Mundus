@@ -139,6 +139,10 @@ body {
     background: radial-gradient(circle, rgba(31,3,98,1) 57%, rgba(37,36,128,1) 100%);
 }
 
+.header__point:hover {
+    border-radius: 10px;
+}
+
 .link {
     text-decoration: none;
     color: rgb(231,162,35);
