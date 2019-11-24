@@ -188,8 +188,6 @@ body {
 
 /*=========All rewards=========*/
 .reward-content {
-    border-left: solid black;
-    border-right: solid black;
     width: 50%;
 }
 
@@ -249,6 +247,7 @@ body {
 
 .reward__level{
     margin: 1px auto;
+    height: 10%;
 }
 
 .reward__footer {

@@ -27,7 +27,7 @@
 <main class="main">
     <div class="body">
         <div class="container">
-            <h1>Create Quest</h1>
+            <h1 class="createQuest-title">Create Quest</h1>
             <form th:action="@{/createQuest}" th:object="${quest}" method="post">
                 <p>Quest name<input type="text" name="name" id="name" th:field="*{name}"/></p>
                 <p>Quest description <textarea rows="4" cols="50" type="" name="description" id="description" th:field="*{description}"/></p>
@@ -51,7 +51,7 @@
     <ul class="header__points">
         <li class="header__point" th:text="'Lord ' + ${parent.name}"></a></li>
         <li class = "header__point"><a th:href="@{createQuest}" class = "link">Create New Quest</a></li>
-        <li class = "header__point"><a th:href="@{createChild}" class = "link">Add New Champion</a></li>
+        <li class = "header__point"><a th:href="@{champions}" class = "link">Champions</a></li>
     </ul>
 </footer>
 

@@ -36,7 +36,7 @@
                 <h3 th:text="${reward.name}" class="reward__title"></h3>
                 <div class="reward__content">
                     <p th:text="${reward.description}" class="reward__text"></p>
-                    <p th:text="${reward.endDate}" class="reward__date"></p>
+                    <!--<p th:text="${reward.endDate}" class="reward__date"></p>-->
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
                     <h3 th:text="${reward.name}" class="reward__title"></h3>
                     <div class="reward__content">
                         <p th:text="${reward.description}" class="reward__text"></p>
-                        <p th:text="${reward.endDate}" class="reward__date"></p>
+                        <!--<p th:text="${reward.endDate}" class="reward__date"></p>-->
                         <p th:text="'Level required: ' + ${reward.levelRequired}" class="reward__level"></p>
                     </div>
                     <form class="reward__footer" method="POST" th:action="@{/purchaseReward}">

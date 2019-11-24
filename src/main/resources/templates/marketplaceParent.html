@@ -37,7 +37,7 @@
                         <p>Reward description <textarea textarea class="text-area" type="" name="description" id="description" th:field="*{description}"/></p>
                         <p>Price<input type="number" name="price" id="price" th:value="*{price}"/></p>
                         <p>Level required:<input type="number" name="levelRequired" id="levelRequired"  th:value="*{levelRequired}"/></p>
-                        <p>Due date<input type="date" name="endDate" id="endDate"  th:value="*{endDate}"/></p>
+                        <!--<p>Due date<input type="date" name="endDate" id="endDate"  th:value="*{endDate}"/></p>-->
                         <input class="button" type="submit" value="Create Reward!"/>
                     </form>
                 </div>
@@ -54,7 +54,7 @@
                     <h3 th:text="${reward.name}" class="reward__title"></h3>
                     <div class="reward__content">
                         <p th:text="${reward.description}" class="reward__text"></p>
-                        <p th:text="${reward.endDate}" class="reward__date"></p>
+                        <!--<p th:text="${reward.endDate}" class="reward__date"></p>-->
                         <p th:text="'Level required: ' + ${reward.levelRequired}" class="reward__level"></p>
                     </div>
 
@@ -77,7 +77,7 @@
                 <h3 th:text="${rewardPair.value.name}" class="reward__title"></h3>
                 <div class="reward__content">
                     <p th:text="${rewardPair.value.description}" class="reward__text"></p>
-                    <p th:text="${rewardPair.value.endDate}" class="reward__date"></p>
+                    <!--<p th:text="${rewardPair.value.endDate}" class="reward__date"></p>-->
                     <p th:text="'Level required: ' + ${rewardPair.value.levelRequired}" class="reward__level"></p>
                 </div>
 
@@ -99,7 +99,7 @@
     <ul class="header__points">
         <li class="Person" th:text="'Lord ' + ${parent.name}"></a></li>
         <li class = "header__point"><a th:href="@{createQuest}" class = "link">Create New Quest</a></li>
-        <li class = "header__point"><a th:href="@{createChild}" class = "link">Add New Champion</a></li>
+        <li class = "header__point"><a th:href="@{champions}" class = "link">Add New Champions</a></li>
     </ul>
 </footer>
 

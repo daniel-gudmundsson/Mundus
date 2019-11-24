@@ -41,10 +41,10 @@
         }
 
         .info {
-            margin-top: 20px;
-            margin-left: 400px;
-            width: 80%;
-            font-family: 'Nova Flat';
+            display: flex;
+            align-contentt: center;
+            flex-direction: column;
+            width: 50%;
         }
 
         .return--div {
@@ -59,21 +59,47 @@
             text-decoration: none;
         }
 
-        .information-text{
+        .information-text {
             color: darkred;
             font-size: 1.3rem;
+            margin-bottom: 0;
+            margin-top: 0;
         }
 
-        .information-div{
+        .information-div {
             display: flex;
             justify-content: center;
+        }
+
+
+        .container {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .remove__content {
+            display: flex;
+            align-contentt: center;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .remove__title {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form {
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
 <body>
 
 <div class="scrollContainer" a>
-    <h2>Create Champion</h2>
+    <h2>Champions</h2>
     <div th:if="${not #lists.isEmpty(children)}" class="return--div">
         <a class="return__text" href="/">Return</a>
     </div>
@@ -85,13 +111,32 @@
     <div class="information-div" th:if="${#lists.isEmpty(children)}">
         <p class="information-text">Now it's time to make your first champion</p>
     </div>
-    <div class="info">
-        <form th:action="@{/createChild}" th:object="${child}" method="post">
-            <p>Name: <input id="childname" name="childname" type="text" th:field="*{name}" placeholder="Name"/></p> <br>
-            <p>Code: <input id="createpasswordID" name="email" type="password" th:field="*{pin}" placeholder="Code"/>
-            </p> <br>
-            <button class="button" id="log" type="submit">Confirm</button>
-        </form>
+    <div class="container">
+        <div th:if="${not #lists.isEmpty(children)}" class="remove__content">
+            <h3 class="remove__title">Remove A Champion</h3>
+            <form class="form" th:action="@{/removeChild}" th:object="${child}" method="post">
+                <p>Remove: <select name="childId">
+                    <option th:each="child : ${children}" th:value="${child.id}" th:text="${child.name}">
+                    </option>
+                </select></p>
+                <button class="button" id="log" type="submit">Remove</button>
+            </form>
+
+        </div>
+
+        <div class="info">
+            <h3 class="remove__title">Create A Champion</h3>
+
+            <form class="form" th:action="@{/createChild}" th:object="${child}" method="post">
+                <p>Name: <input id="childname" name="childname" type="text" th:field="*{name}" placeholder="Name"/></p>
+                <br>
+                <p>Code: <input id="createpasswordID" name="email" type="password" th:field="*{pin}"
+                                placeholder="Code"/>
+                </p> <br>
+                <button class="button" id="log" type="submit">Confirm</button>
+            </form>
+        </div>
     </div>
+</div>
 </body>
 </html>

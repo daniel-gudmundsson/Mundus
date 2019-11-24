@@ -179,7 +179,7 @@ body {
 }
 
 .reward-content {
-    border-left: solid black;
+/*    border-left: solid black;*/
     width: 100%;
 
 }
@@ -268,6 +268,7 @@ body {
 
 .reward__level{
     margin: 1px auto;
+    height: 10%;
 }
 
 .reward__footer {
