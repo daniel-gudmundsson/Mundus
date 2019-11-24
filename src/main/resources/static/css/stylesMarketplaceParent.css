@@ -118,6 +118,8 @@ body {
     z-index: 2;
     margin-top: 0px;
     padding-top: 0px;
+    position: absolute;
+    z-index: 2;
 
 }
 .header__points {
