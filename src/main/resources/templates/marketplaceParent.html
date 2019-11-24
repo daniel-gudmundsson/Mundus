@@ -35,8 +35,8 @@
                     <form th:action="@{/createReward}" th:object="${reward}" method="post">
                         <p>Reward name <input type="text" name="name" id="name" th:field="*{name}"/></p>
                         <p>Reward description <textarea rows="4" cols="50" type="" name="description" id="description" th:field="*{description}"/></p>
-                        <p>Price<input type="text" name="price" id="price" th:value="*{price}"/></p>
-                        <p>Level required:<input type="text" name="levelRequired" id="levelRequired"  th:value="*{levelRequired}"/></p>
+                        <p>Price<input type="number" name="price" id="price" th:value="*{price}"/></p>
+                        <p>Level required:<input type="number" name="levelRequired" id="levelRequired"  th:value="*{levelRequired}"/></p>
                         <p>Due date<input type="date" name="endDate" id="endDate"  th:value="*{endDate}"/></p>
                         <input class="button" type="submit" value="Create Reward!"/>
                     </form>

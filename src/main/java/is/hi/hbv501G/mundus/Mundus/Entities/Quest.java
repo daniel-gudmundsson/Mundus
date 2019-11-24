@@ -15,16 +15,16 @@ public class Quest {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "The quest must have a name")
     private String name; // Name of the quest
-    @NotBlank
+    @NotBlank(message = "The quest must have a description")
     private String description; // Description of the quest
-    @NotNull
+    @NotNull(message = "The quest must reward some xp")
     private int xp; // xp gained for completing the quest
-    @NotNull
+    @NotNull(message = "The quest must reward some coins")
     private int coins; // Coins gained for completing the quest
     private LocalDate dateCreated; // Breyta í data format eða e-h þannig
-    @NotNull
+    @NotNull(message = "The quest must have some deadline")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline; // Due date of the quest
     @ManyToOne

@@ -163,6 +163,7 @@ public class QuestController {
     public String createQuestPOST(@Valid Quest quest, BindingResult result, Model model, HttpSession session, @RequestParam("childId") long childId) {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
+            //return "redirect:/createQuest";
             return "createQuest2";
         }
 
