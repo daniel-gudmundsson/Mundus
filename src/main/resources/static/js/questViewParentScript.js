@@ -130,6 +130,7 @@ const text = (() => {
             assignee.querySelector('.view__assigneeButton').style = "display: block;";
             container.appendChild(assignee);
         }
+        view.style.backgroundImage = "url('../img/scrollVertical.png')";
         view.appendChild(container);
 
         /*if(setAssignee)

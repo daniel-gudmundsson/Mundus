@@ -93,11 +93,11 @@
                         <p class="quest__description" th:text="${quest.description}" hidden></p>
                         <h3 class="quest__status" hidden>Status: Available</h3>
                         <form method="POST" class = "confirm" th:action="@{/markQuestAsConfirmed}">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__confirm" style="display: none;">Confirm</button>
                         </form>
                         <form method="POST" class = "deny" th:action="@{/markQuestAsNotDone}">
-                            <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                            <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                             <button type="submit" name="submit" value="value" class="view__deny" style="display: none;">Deny</button>
                         </form>
                         <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
