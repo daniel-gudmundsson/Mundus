@@ -22,5 +22,4 @@ public interface RewardService {
     public Set<Pair<Child, Reward>> getPurchasedRewards(long parentId) throws Exception;
     public void grantReward(long rewardId, long childId) throws Exception;
 
-
 }

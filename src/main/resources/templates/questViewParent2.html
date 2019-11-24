@@ -28,7 +28,6 @@
             <div class="quests">
                 <h2 class="log__name">All Quests</h2>
                 <div class="quests__content">
-                    <div class="quests__content">
                         <div class="quest" th:each="quest : ${availableQuests}">
                             <h2 class="quest__name" th:text="${quest.name}"></h2>
                             <h3 class="quest__xp" th:text="'XP: ' + ${quest.xp}"></h3>
@@ -51,7 +50,6 @@
                             </form>
                             <!--<a th:href="@{assignQuest}" type="hidden" class ="assign"><button class="view__assign" style="display: none;">Assign to me</button></a> -->
                         </div>
-                    </div>
                 </div>
             </div>
 
