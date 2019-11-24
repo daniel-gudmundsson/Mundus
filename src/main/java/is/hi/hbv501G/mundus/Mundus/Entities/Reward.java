@@ -20,9 +20,9 @@ public class Reward implements Comparable<Reward> {
     private int price; // The price of the reward
     private int levelRequired; // Minimum level required to buy the reward
     private boolean autorenew; // Probably not going to use this
-    @NotNull
+/*    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate; // Reward expires after this date
+    private LocalDate endDate; // Reward expires after this date*/
     private Boolean visible; // Probably not going to use this
     @ManyToOne
     private Child buyer; // Don't think we are going to use this anymore
@@ -30,12 +30,12 @@ public class Reward implements Comparable<Reward> {
     @ManyToOne
     private Parent maker; // Creator of the reward
 
-    public Reward(String name, String description, int price, int levelRequired, LocalDate endDate, Parent maker) {
+    public Reward(String name, String description, int price, int levelRequired, Parent maker) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.levelRequired = levelRequired;
-        this.endDate = endDate;
+        /*this.endDate = endDate;*/
         //this.visible = visible;
         this.maker = maker;
     }
@@ -93,13 +93,13 @@ public class Reward implements Comparable<Reward> {
         this.autorenew = autorenew;
     }
 
-    public LocalDate getEndDate() {
+/*    public LocalDate getEndDate() {
         return endDate;
     }
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
-    }
+    }*/
 
     public Boolean getVisible() {
         return visible;

@@ -194,7 +194,7 @@ public class PersonController {
             Set<Quest> onGoingQuests = new HashSet<Quest>();
             Set<Child> children = parent.getChildren();
             if(children.isEmpty()){
-               return  "redirect:/createChild";
+               return "redirect:/champions";
             }
 
             for(Child child : children) {
@@ -266,7 +266,7 @@ public class PersonController {
         return "redirect:/quests";
     }
 
-    @RequestMapping(value = "/createChild", method = RequestMethod.GET)
+    @RequestMapping(value = "/champions", method = RequestMethod.GET)
     public String createChildGET(Child child, HttpSession session, Model model) {
         if (session.getAttribute("PersonIdLoggedIn") != null) {
             long personId = (long) session.getAttribute("PersonIdLoggedIn");
@@ -282,6 +282,25 @@ public class PersonController {
         }
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/removeChild", method = RequestMethod.POST)
+    public String removeChild(long childId, HttpSession session, Model model) {
+        if (session.getAttribute("PersonIdLoggedIn") != null) {
+            long personId = (long) session.getAttribute("PersonIdLoggedIn");
+            Person person = personService.findPersonById(personId);
+
+            if (person instanceof Child) {
+                return "redirect:/";
+            } else {
+                Parent parent = (Parent) person;
+                Child child = personService.findChildById(childId);
+                personService.delete(child);
+                return "redirect:/champions";
+            }
+        }
+        return "redirect:/";
+    }
+
 
 
 }
