@@ -28,7 +28,7 @@
     <div class="reward-body">
         <div class="create-reward">
             <div class="create-reward__title">
-                <h2>Create Reward</h2>
+                <h2 class="title">Create Reward</h2>
             </div>
             <div class="create-reward__form">
                 <div class="container">
@@ -46,11 +46,11 @@
 
         <div class="reward-content">
             <div class="reward-content__title">
-                <h2 class="reward-view__title">All Rewards</h2>
+                <h2 class="reward-view__title title">All Rewards</h2>
             </div>
 
             <div class="reward-container">
-                <div th:each="reward : ${allRewards}" class="reward">
+                <div th:each="reward : ${#lists.sort(allRewards)}" class="reward">
                     <h3 th:text="${reward.name}" class="reward__title"></h3>
                     <div class="reward__content">
                         <p th:text="${reward.description}" class="reward__text"></p>
@@ -70,7 +70,7 @@
         </div>
         <div class="purchased-rewards">
             <div class="purchased-rewards__title">
-                <h2>Purchased Rewards</h2>
+                <h2 class="title">Purchased Rewards</h2>
             </div>
 
             <div th:each="rewardPair : ${purchasedRewards}" class="reward__purchased">
@@ -84,7 +84,7 @@
                 <form class="reward__footer" method="POST" th:action="@{/grantReward}">
                     <input type="hidden" name="rewardId" th:value="${rewardPair.value.id}"/>
                     <input type="hidden" name="childId" th:value="${rewardPair.key.id}"/>
-                    <button class="reward__remove-button">Granted</button>
+                    <button class="reward__granted-button">Granted</button>
                     <p th:text="${rewardPair.key.name}" class="reward__purchaser"></p>
                 </form>
 

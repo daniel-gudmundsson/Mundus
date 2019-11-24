@@ -33,7 +33,7 @@ li {
     list-style: none;
 }
 
-.main {
+main {
     display: flex;
     /* margin-left: 150px; Same as the width of the sidebar */
     padding: 0px 10px;
@@ -41,23 +41,33 @@ li {
     width: 100%;
     overflow-x: hidden;
     background-color: #154074;
-   /* position: fixed;*/
+    position: fixed;
     /* background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
     /* background: rgb(2,0,36);
     background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(21,64,116,1) 0%, rgba(15,108,158,1) 100%, rgba(0,212,255,1) 100%); */
-    background-image: url("../img/wood.jpg");
+    /* background-image: url("scroll.png");
+    background-repeat: no-repeat;
     /* background-size: 1400px 900px; */
+    /* background-size: 100% 120%; */
+    /* background-position: bottom; */
+    background-image: url("../img/wood.jpg");
+    /* background-repeat: no-repeat; */
+    /* background-size: 1400px 900px; */
+    /* background-size: 100% 120%; */
+    background-position: center;
     background-size: 150px 150px;
-    background-position: bottom;
+    margin-top: 50px;
 }
 
 body {
     margin: 0px;
-    height: 100%;
+    font-family: 'Nova Flat';
+
 }
 
 .header {
     /* margin-left: 160px; Same as the width of the sidebar */
+    position: fixed;
 
     /* background: #633e10; */
     background: rgb(129,44,5);
@@ -71,7 +81,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-  /*  z-index: 2;*/
+    z-index: 2;
     margin-top: 0px;
     padding-top: 0px;
     /* padding: 10px; */
@@ -90,7 +100,8 @@ body {
 }
 
 .footer {
-    margin-top: -500px;
+    position: fixed;
+    bottom: 0;
     /* background: #633e10; */
     background: rgb(129,44,5);
     background: linear-gradient(0deg, rgba(129,44,5,1) 0%, rgba(125,55,6,1) 100%);
@@ -104,14 +115,13 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-   /* z-index: 2;*/
+    z-index: 2;
     margin-top: 0px;
     padding-top: 0px;
     position: absolute;
     z-index: 2;
 
 }
-
 .header__points {
     width: 100%;
     /* border: solid black; */
@@ -149,10 +159,15 @@ body {
 /*===========Body==========*/
 .reward-body {
     display: flex;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
     height: 80%;
+}
+
+.title{
+    color: rgb(231,162,35);
 }
 
 /*==========Create reward===========*/
@@ -235,6 +250,13 @@ body {
 
 .reward__remove-button {
     margin: auto;
+    background-color: red;
+    background-image: linear-gradient(to bottom, darkred, red);
+    border: 1px solid #c9ae34;
+    box-shadow: inset 0 1px 0 #fff6ce, inset 0 -1px 0 #e3c852, inset 0 0 0 1px #fce88d, 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-size: 20px;
 }
 
 .reward__price{
@@ -269,11 +291,25 @@ body {
     width: 200px;
     display: flex;
     flex-direction: column;
-    border-style: solid;
-    border-color: #85521f;
-    border-width: 5px;
-    border-radius: 15px;
     margin: 0 auto 15px auto;
+
+    padding: 20px;
+    background-image: url("../img/scrollVertical2.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 0.8rem;
+}
+
+.reward__granted-button{
+    margin: auto;
+    background-color: #e1b01e;
+    background-image: linear-gradient(to bottom, #fce374, #e1b01e);
+    border: 1px solid #c9ae34;
+    box-shadow: inset 0 1px 0 #fff6ce, inset 0 -1px 0 #e3c852, inset 0 0 0 1px #fce88d, 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #633e10;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-size: 20px;
 }
 
 
@@ -300,6 +336,7 @@ body {
     width: fit-content;
     background: saddlebrown;
     padding: 20px;
+    width: 80%;
 }
 .button{
     background-color: #e1b01e;

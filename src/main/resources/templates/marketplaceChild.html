@@ -29,7 +29,7 @@
 
         <div class="reward-view">
             <div class="reward-content__title">
-                <h2 class="reward-view__title">Your Rewards</h2>
+                <h2 class="reward-view__title title">Your Rewards</h2>
             </div>
 
             <div th:each="reward : ${ownrewards}" class="reward__view">
@@ -45,7 +45,7 @@
 
         <div class="reward-content">
             <div class="reward-content__title">
-                <h2 class="reward-view__title">What do you need?</h2>
+                <h2 class="reward-view__title title">What do you need?</h2>
             </div>
             <div class="reward-container">
                 <div th:each="reward : ${#lists.sort(rewards)}" class="reward">
@@ -57,7 +57,7 @@
                     </div>
                     <form class="reward__footer" method="POST" th:action="@{/purchaseReward}">
                         <input type="hidden" name="id" th:value="${reward.id}"/>
-                        <button type="submit" name="submit" value="value" class="reward__buy-button"
+                        <button  type="submit" name="submit" value="value" class="reward__buy-button button"
                                 th:text="${reward.price} + ' Coins'">
                         </button>
                     </form>

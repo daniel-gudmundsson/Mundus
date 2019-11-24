@@ -1,24 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
     <meta charset="UTF-8">
     <title>Pin</title>
+    <style>
+        html{
+            background-image: url("./img/loginBackground.png");
+            background-repeat: no-repeat;
+        }
+        h1{
+            font-family: 'Nova Flat';
+            font-size: 40px;
+            color: darkred;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .scrollContainer{
+            position: fixed; /* or absolute */
+            top: 25%;
+            left: 25%;
+            background-image: url("./img/scroll.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 1000px;
+            height: 500px;
+        }
+        .pinbuttons{
+            margin-top: 50px;
+            margin-left: 400px;
+            width: 80%;
+        }
+        .button{
+            background-color: #e1b01e;
+            background-image: linear-gradient(to bottom, #fce374, #e1b01e);
+            border: 1px solid #c9ae34;
+            box-shadow: inset 0 1px 0 #fff6ce, inset 0 -1px 0 #e3c852, inset 0 0 0 1px #fce88d, 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: #633e10;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            font-size: 40px;
+        }
+
+        .return--div{
+            display: flex;
+        }
+
+        .return__text{
+            font-family: 'Nova Flat';
+            font-size: 1.2rem;
+            margin-left: 43px;
+            color: darkred;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <form method="POST" th:action="@{/pin-page-auth}">
-        <table>
-            <tr>
-                <td>Pin</td>
-                <input type="hidden" name="id"  th:value="${id}" />
-                <td><input type="password" id="pin" name="pin"/></td>
-            </tr>
-            <tr>
-                <td><button type="submit">Login</button></td>
-            </tr>
-        </table>
-    </form>
-</div>
+<div class="scrollContainer">
+    <h1>Enter your secret code</h1>
+    <div class="return--div">
+        <a class="return__text" href="/persons">Return</a>
+    </div>
+    <div class="pinbuttons">
+        <h2 th:text="${person.name}"></h2>
+        <form method="POST" th:action="@{/pin-page-auth}">
+            <input type="hidden" name="id"  th:value="${id}" />
+            <input name="pin" type="password" placeholder="CODE" id = "pin"/>
+            <button type="submit">Enter</button>
+            <!--<button class="button" id="submit" type="submit">Submit</button>
+            <br>
+            <button class="button" id="number1" type="submit">1</button>
+            <button class="button" id="number2" type="submit">2</button>
+            <button class="button" id="number3" type="submit">3</button>
+            <br>
+            <button class="button" id="number4" type="submit">4</button>
+            <button class="button" id="number5" type="submit">5</button>
+            <button class="button" id="number6" type="submit">6</button>
+            <br>
+            <button class="button" id="number7" type="submit">7</button>
+            <button class="button" id="number8" type="submit">8</button>
+            <button class="button" id="number9" type="submit">9</button>-->
+        </form>
+        <div/>
+    </div>
 
 </body>
 </html>

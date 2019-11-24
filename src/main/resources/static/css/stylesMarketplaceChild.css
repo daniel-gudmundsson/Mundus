@@ -40,10 +40,18 @@ main {
     /* background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
     /* background: rgb(2,0,36);
     background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(21,64,116,1) 0%, rgba(15,108,158,1) 100%, rgba(0,212,255,1) 100%); */
-    background-image: url("../img/wood.jpg");
+    /* background-image: url("scroll.png");
+    background-repeat: no-repeat;
     /* background-size: 1400px 900px; */
-    background-size: 100% 120%;
-    background-position: bottom;
+    /* background-size: 100% 120%; */
+    /* background-position: bottom; */
+    background-image: url("../img/wood.jpg");
+    /* background-repeat: no-repeat; */
+    /* background-size: 1400px 900px; */
+    /* background-size: 100% 120%; */
+    background-position: center;
+    background-size: 150px 150px;
+    margin-top: 50px;
 }
 
 body {
@@ -107,7 +115,6 @@ body {
     padding-top: 0px;
 
 }
-
 .header__points {
     width: 100%;
     /* border: solid black; */
@@ -144,10 +151,15 @@ body {
 
 .reward-body {
     display: flex;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
     height: 80%;
+}
+
+.title{
+    color: rgb(231,162,35);
 }
 
 .reward-content {
@@ -170,9 +182,12 @@ body {
     width: 180px;
     display: flex;
     flex-direction: column;
-    border-style: solid;
-    border-color: #85521f;
-    border-width: 5px;
+    background-image: url("../img/scrollVertical2.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 0.8rem;
+    padding: 20px;
 }
 
 .reward-view {
@@ -211,15 +226,13 @@ body {
     width: 200px;
     display: flex;
     flex-direction: column;
-    /*border-style: solid;*/
-    /*border-color: #85521f;*/
-    border-width: 5px;
-    border-radius: 15px;
-    margin: 0px 15px 15px 15px;
-    background-image: url("../img/scrollVertical.png");
+    margin: 0px 5px 5px 5px;
+    padding: 20px;
+    background-image: url("../img/scrollVertical2.png");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+    font-size: 0.8rem;
 }
 
 .reward__title {
@@ -261,6 +274,17 @@ body {
     margin: auto;
 }
 
+.button{
+    background-color: #e1b01e;
+    background-image: linear-gradient(to bottom, #fce374, #e1b01e);
+    border: 1px solid #c9ae34;
+    box-shadow: inset 0 1px 0 #fff6ce, inset 0 -1px 0 #e3c852, inset 0 0 0 1px #fce88d, 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #633e10;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+}
+
 .reward-view__title {
     align-self: center;
 }
+

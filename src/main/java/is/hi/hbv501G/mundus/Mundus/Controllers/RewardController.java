@@ -54,7 +54,7 @@ public class RewardController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return "marketplaceChild2";
+            return "marketplaceChild";
         } else if (person instanceof Parent) {
             try {
                 Parent parent = personService.findParentById(personId);
