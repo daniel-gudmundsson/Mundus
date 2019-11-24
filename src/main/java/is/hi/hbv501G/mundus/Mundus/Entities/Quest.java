@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class Quest {
+public class Quest implements Comparable<Quest> {
     @Id //Segir að id eigi að vera aðalykillinn í töflunni okkar
     @Column(name = "QuestId")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Java býr til nýtt gildi sjálfkrafa þegar nú mynd er búinn til
@@ -156,5 +156,10 @@ public class Quest {
 
     public void setIsConfirmed(Boolean confirmed) {
         isConfirmed = confirmed;
+    }
+
+    @Override
+    public int compareTo(@org.jetbrains.annotations.NotNull Quest o) {
+        return 0;
     }
 }

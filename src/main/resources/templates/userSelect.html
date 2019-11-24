@@ -12,6 +12,7 @@
         html {
             background-image: url("./img/loginBackground.png");
             background-repeat: no-repeat;
+            font-family: 'Nova Flat';
         }
 
         h1 {
@@ -40,6 +41,7 @@
             align-content: center;
             margin-right: 20px;
             margin-left: 20px;
+            width: 165px;
         }
 
         .container {
@@ -50,6 +52,14 @@
         .container-persons {
             display: flex;
             justify-content: center;
+            flex-wrap: nowrap;
+            overflow: auto;
+            margin-left: 65px;
+            margin-right: 65px;
+        }
+
+        .container-persons::-webkit-scrollbar {
+            display: none;
         }
 
         .title {
@@ -86,8 +96,35 @@
         }
 
         .button{
-            width: 50px;
-            height: 50px;
+            font-size: 40px;
+            text-align: center;
+            border-top-color: #E0BA51;border-right-color: #805D2C;border-bottom-color: #E0BA51;border-left-color: #805D2C;border-width: 8px 7px 8px 7px;border-style: solid; -webkit-border-radius: 1px; -moz-border-radius: 1px;border-radius: 1px;font-size:23px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+            background-color: #eab92d; background-image: -webkit-gradient(linear, left top, left bottom, from(#eab92d), to(#c79810));
+            background-image: -webkit-linear-gradient(top, #eab92d, #c79810);
+            background-image: -moz-linear-gradient(top, #eab92d, #c79810);
+            background-image: -ms-linear-gradient(top, #eab92d, #c79810);
+            background-image: -o-linear-gradient(top, #eab92d, #c79810);
+            background-image: linear-gradient(to bottom, #eab92d, #c79810);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eab92d, endColorstr=#c79810);
+        }
+
+        .button:hover{
+            width: 50%;
+        }
+
+        .button-add{
+            font-size: 20px;
+            text-align: center;
+            border-top-color: #E0BA51;border-right-color: #805D2C;border-bottom-color: #E0BA51;border-left-color: #805D2C;border-width: 8px 7px 8px 7px;border-style: solid; -webkit-border-radius: 1px; -moz-border-radius: 1px;border-radius: 1px;font-size:23px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+            background-color: #eab92d; background-image: -webkit-gradient(linear, left top, left bottom, from(#eab92d), to(#c79810));
+            background-image: -webkit-linear-gradient(top, #eab92d, #c79810);
+            background-image: -moz-linear-gradient(top, #eab92d, #c79810);
+            background-image: -ms-linear-gradient(top, #eab92d, #c79810);
+            background-image: -o-linear-gradient(top, #eab92d, #c79810);
+            background-image: linear-gradient(to bottom, #eab92d, #c79810);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eab92d, endColorstr=#c79810);
+        }
+
+        .button-add:hover{
+            width: 50%;
         }
 
     </style>
@@ -105,11 +142,9 @@
             <div class="container-persons">
                 <div class="person">
                     <h2 class="person__name" th:text="${parent.name}"></h2>
-                    <form method="POST" th:action="@{/pin-page}">
+                    <form class="form" method="POST" th:action="@{/pin-page}">
                         <input type="hidden" name="id" th:value="${parent.id}"/>
-                        <button><img src="./img/smile.jpg" width="50" height="50" type="submit" name="submit"
-                                     value="value"
-                                     class="link-button"></button>
+                        <button class="button" th:text="${#strings.substring(parent.name,0,1)}"  width="50" height="50"></button>
                     </form>
 
                 </div>
@@ -117,10 +152,10 @@
 
             <div class="container-persons">
                 <div class="person" th:if="${#lists.isEmpty(children)}">
-                    <h2>Add user</h2>
+                    <h2 class="person__name">Add user</h2>
                     <form class="form" method="POST" th:action="@{/pin-page}">
                         <input type="hidden" name="id" th:value="${parent.id}"/>
-                        <button><img src="./img/plus-sign.png" width="50" height="50" type="submit" name="submit"
+                        <button class="button-add"><img src="./img/plus-sign.png" width="25" height="25" type="submit" name="submit"
                                      value="value"
                                      class="link-button"></button>
                     </form>
@@ -129,7 +164,7 @@
                     <h2 class="person__name" th:text="${child.name}"></h2>
                     <form class="form" method="POST" th:action="@{/pin-page}">
                         <input type="hidden" name="id" th:value="${child.id}"/>
-                        <button class="button" th:text="${#strings.substring(child.name,0)}"  width="50" height="50"></button>
+                        <button class="button" th:text="${#strings.substring(child.name,0,1)}"  width="50" height="50"></button>
                     </form>
                 </div>
 
