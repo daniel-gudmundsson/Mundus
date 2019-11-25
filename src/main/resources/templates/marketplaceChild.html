@@ -32,7 +32,7 @@
                 <h2 class="reward-view__title title">Your Rewards</h2>
             </div>
 
-            <div th:each="reward : ${ownrewards}" class="reward__view">
+            <div th:each="reward : ${#lists.sort(ownrewards)}" class="reward__view">
                 <h3 th:text="${reward.name}" class="reward__title"></h3>
                 <div class="reward__content">
                     <p th:text="${reward.description}" class="reward__text"></p>

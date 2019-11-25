@@ -134,6 +134,6 @@ public class Reward implements Comparable<Reward> {
 
     @Override
     public int compareTo(@org.jetbrains.annotations.NotNull Reward o) {
-        return this.price - o.getPrice();
+        return (int)(this.id - o.getId());
     }
 }
