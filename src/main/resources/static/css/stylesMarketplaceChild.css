@@ -148,6 +148,13 @@ body {
     color: rgb(231,162,35);
 }
 
+.stat {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 1rem;
+}
+
+
 .header__point .Mundus {
     color: rgb(231,162,35);
     font-weight: 1500;
