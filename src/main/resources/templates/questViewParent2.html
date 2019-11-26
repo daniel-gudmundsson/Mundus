@@ -36,7 +36,7 @@
                             <p class="quest__description" th:text="${quest.description}" hidden></p>
                             <h3 class="quest__status" hidden>Status: Available</h3>
                             <form method="POST" class = "delete" th:action="@{/deleteQuest}">
-                                <input class = "quest__id" type="hidden" name="id"  th:value="${quest.id}" />
+                                <input class = "quest__id" type="hidden" name="questId"  th:value="${quest.id}" />
                                 <button type="submit" name="submit" value="value" class="view__delete" style="display: none">Delete</button>
                             </form>
                             <form method="POST" class = "assignee" th:action="@{/assignQuestParent}">

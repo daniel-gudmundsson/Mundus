@@ -127,6 +127,12 @@
             width: 50%;
         }
 
+        .create__title{
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 18px;
+        }
+
     </style>
 
 </head>
@@ -152,7 +158,7 @@
 
             <div class="container-persons">
                 <div class="person" th:if="${#lists.isEmpty(children)}">
-                    <h2 class="person__name">Add user</h2>
+                    <h2 class="create__title">Create A Champion</h2>
                     <form class="form" method="POST" th:action="@{/pin-page}">
                         <input type="hidden" name="id" th:value="${parent.id}"/>
                         <button class="button-add"><img src="./img/plus-sign.png" width="25" height="25" type="submit" name="submit"

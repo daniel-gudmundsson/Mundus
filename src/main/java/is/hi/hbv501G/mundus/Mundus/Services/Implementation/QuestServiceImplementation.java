@@ -100,6 +100,9 @@ public class QuestServiceImplementation implements QuestService {
         if (quest == null || child == null) {
             throw new Exception();
         } else {
+            if(quest.getAssignee() != null){
+                throw new Exception("Quest has an assignee.");
+            }
             child.addQuest(quest);
             quest.setAssignee(child);
             personRepository.save(child);
