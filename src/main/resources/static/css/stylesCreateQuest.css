@@ -111,6 +111,18 @@ body {
 
 }
 
+.Mundus {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 2rem;
+}
+
+.Person {
+    color: rgb(231,162,35);
+    font-weight: 1000;
+    font-size: 1.5rem;
+}
+
 .header__points {
     width: 100%;
     /* border: solid black; */
