@@ -31,49 +31,6 @@ public class PersonController {
         this.questService = questService;
     }
 
-    // Several test function
-    //create child
-    @RequestMapping("/person-test1")
-    public String test1(Model model) {
-        Child krakki = new Child("Jón", "123");
-        try {
-            personService.assignChildToParent(krakki, 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Welcome";
-    }
-
-    //Create Parent
-    @RequestMapping("/person-test3")
-    public String test3(Model model) {
-        Child child = personService.findChildById(2);
-        System.out.println(child.getParent());
-        return "Welcome";
-    }
-
-    //Get all child of parent
-//    @RequestMapping("/person-test5")
-//    public String test5(Model model) {
-//        Child child = new Child("Jon", "123");
-//        try {
-//            personService.assignChildToParent(child, 2);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "Welcome";
-//    }
-
-    //Get all child of parent
-//    @RequestMapping("/person-test6")
-//    public String test6(Model model) {
-//        Parent parent = personService.findParentById(1);
-//        for (Child c : parent.getChildren()) {
-//            System.out.println(c.getName());
-//        }
-//        return "Welcome";
-//    }
-
     /**
      * When an account has been logged into you will be redirected to the person page where you can select a person to log into
      *
@@ -140,7 +97,8 @@ public class PersonController {
         return "redirect:/";
     }
 
-    /** TODO færa kóða yfir í service
+    /**
+     * TODO færa kóða yfir í service
      * Loads all the information of a person
      *
      * @param model
@@ -151,8 +109,7 @@ public class PersonController {
     public String loadPerson(Model model, HttpSession session) {
         try {
             questService.deleteExpired();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             System.out.println("Couldn't delete expired quests");
         }
@@ -168,9 +125,8 @@ public class PersonController {
             Set<Quest> availableQuests = parent.getQuests();
             Set<Quest> allAssignedQuests = new HashSet<Quest>();
             Set<Child> allChildren = parent.getChildren();
-            for(Child c : allChildren) {
-                for(Quest q : c.getQuests())
-                {
+            for (Child c : allChildren) {
+                for (Quest q : c.getQuests()) {
                     allAssignedQuests.add(q);
                 }
             }
@@ -180,14 +136,11 @@ public class PersonController {
             availableQuests.removeAll(allAssignedQuests);
             Set<Quest> doneQuests = new HashSet<Quest>();
             Set<Quest> finishedQuests = new HashSet<Quest>(); // Don't show quests that are finished
-            for(Quest q : assignedQuests)
-            {
-                if(q.getIsDone() && !q.getIsConfirmed())
-                {
+            for (Quest q : assignedQuests) {
+                if (q.getIsDone() && !q.getIsConfirmed()) {
                     doneQuests.add(q);
                 }
-                if(q.getIsConfirmed())
-                {
+                if (q.getIsConfirmed()) {
                     finishedQuests.add(q);
                 }
             }
@@ -203,23 +156,20 @@ public class PersonController {
             Set<Quest> availableQuests = parent.getQuests();
             Set<Quest> onGoingQuests = new HashSet<Quest>();
             Set<Child> children = parent.getChildren();
-            if(children.isEmpty()){
-               return "redirect:/champions";
+            if (children.isEmpty()) {
+                return "redirect:/champions";
             }
 
-            for(Child child : children) {
+            for (Child child : children) {
                 onGoingQuests.addAll(child.getQuests());
             }
             Set<Quest> doneQuests = new HashSet<Quest>();
             Set<Quest> finishedQuests = new HashSet<Quest>();
-            for(Quest q : onGoingQuests)
-            {
-                if(q.getIsDone() && !q.getIsConfirmed())
-                {
+            for (Quest q : onGoingQuests) {
+                if (q.getIsDone() && !q.getIsConfirmed()) {
                     doneQuests.add(q);
                 }
-                if(q.getIsConfirmed())
-                {
+                if (q.getIsConfirmed()) {
                     finishedQuests.add(q);
                 }
             }
@@ -310,7 +260,6 @@ public class PersonController {
         }
         return "redirect:/";
     }
-
 
 
 }

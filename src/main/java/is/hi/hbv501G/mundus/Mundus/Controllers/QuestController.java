@@ -98,10 +98,9 @@ public class QuestController {
 
     @RequestMapping(value = "/assignQuestParent", method = RequestMethod.POST)
     public String assignQuest(@RequestParam("childId") long childId, @RequestParam("questId") long questId, Model model) {
-        if(childId == -1)
-        {
+        if (childId == -1) {
             Child assignee = questService.findById(questId).getAssignee();
-            if(assignee !=null) {
+            if (assignee != null) {
                 childId = questService.findById(questId).getAssignee().getId();
                 try {
                     questService.unassignQuest(questId, childId);
@@ -109,8 +108,7 @@ public class QuestController {
                     System.out.println("Not able to assign quest");
                 }
             }
-        }
-        else {
+        } else {
             try {
                 questService.assignQuest(questId, childId);
             } catch (Exception e) {
@@ -174,11 +172,10 @@ public class QuestController {
         try {
             long idOfParent = (long) session.getAttribute("PersonIdLoggedIn");
             Child child = personService.findChildById(childId);
-            if(childId != -1){
+            if (childId != -1) {
                 quest.setAssignee(child);
             }
             questService.createQuest(quest, idOfParent);
-
 
 
         } catch (Exception e) {
@@ -227,7 +224,7 @@ public class QuestController {
         String status = "Available";
         Parent maker = child.getParent();
 
-        Quest quest = new Quest(name,desc, xp, coins, date, maker);
+        Quest quest = new Quest(name, desc, xp, coins, date, maker);
         quest.setIsDone(true);
         child.addQuest(quest);
         maker.addQuest(quest);
@@ -235,7 +232,6 @@ public class QuestController {
 
         return "redirect:/quests";
     }
-
 
 
 }

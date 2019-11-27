@@ -58,13 +58,12 @@ public class RewardServiceImplementation implements RewardService {
      * @param buyerId
      */
     @Override
-    public boolean purchaseReward(long rewardId, long buyerId) throws Exception{
+    public boolean purchaseReward(long rewardId, long buyerId) throws Exception {
 
         Child child = personRepository.findChildById(buyerId);
         if (child == null) {
             throw new Exception();
-        }
-        else {
+        } else {
             int childLVL = child.getLevel();
             int childCoins = child.getTotalCoins();
             Reward reward = findById(rewardId);
@@ -79,7 +78,7 @@ public class RewardServiceImplementation implements RewardService {
                 return true;
             }
         }
-            return false;
+        return false;
     }
 
 
@@ -102,10 +101,11 @@ public class RewardServiceImplementation implements RewardService {
             personRepository.save(parent);
         }
     }
+
     @Override
     public Set<Reward> getChildRewardAvailable(long childId) throws Exception {
         Child child = personRepository.findChildById(childId);
-        if(child == null){
+        if (child == null) {
             throw new Exception();
         }
         Set<Reward> allRewards = new HashSet<>(child.getParent().getRewards());
@@ -115,10 +115,11 @@ public class RewardServiceImplementation implements RewardService {
         }
         return allRewards;
     }
+
     @Override
     public Set<Reward> getChildRewards(long childId) throws Exception {
         Child child = personRepository.findChildById(childId);
-        if(child == null){
+        if (child == null) {
             throw new Exception();
         }
         Set<Reward> allRewards = new HashSet<>(child.getParent().getRewards());
@@ -132,19 +133,19 @@ public class RewardServiceImplementation implements RewardService {
     @Override
     public void deleteReward(long parentId, long rewardId) throws Exception {
         Parent parent = personRepository.findParentById(parentId);
-        if(parent == null){
+        if (parent == null) {
             throw new Exception("Person not found");
         }
 
-        for(Child child : parent.getChildren()){
-                if(child.getReward().contains(rewardId)){
-                    child.removeReward(rewardId);
+        for (Child child : parent.getChildren()) {
+            if (child.getReward().contains(rewardId)) {
+                child.removeReward(rewardId);
             }
         }
         Reward reward = rewardRepository.findById(rewardId);
         parent.removeReward(reward);
         Parent parentReturn = personRepository.save(parent);
-        if(parentReturn == null){
+        if (parentReturn == null) {
             throw new Exception("Save failed");
         }
     }
@@ -152,15 +153,15 @@ public class RewardServiceImplementation implements RewardService {
     @Override
     public Set<Pair<Child, Reward>> getPurchasedRewards(long parentId) throws Exception {
         Parent parent = personRepository.findParentById(parentId);
-        if(parent == null){
+        if (parent == null) {
             throw new Exception("Person not found");
         }
 
         Set<Pair<Child, Reward>> rewardPairs = new HashSet<>();
-        for(Child child : parent.getChildren()){
+        for (Child child : parent.getChildren()) {
             System.out.println(child.getName());
             System.out.println(child.getReward());
-            for(long id : child.getReward()){
+            for (long id : child.getReward()) {
                 System.out.println(id);
                 Reward reward = rewardRepository.findById(id);
                 rewardPairs.add(new Pair<Child, Reward>(child, reward));
@@ -168,10 +169,11 @@ public class RewardServiceImplementation implements RewardService {
         }
         return rewardPairs;
     }
+
     @Override
     public void grantReward(long rewardId, long childId) throws Exception {
         Child child = personRepository.findChildById(childId);
-        if(child == null){
+        if (child == null) {
             throw new Exception("Person not found");
         }
         child.removeReward(rewardId);

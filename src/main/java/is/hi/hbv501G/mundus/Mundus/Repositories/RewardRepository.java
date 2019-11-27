@@ -9,7 +9,10 @@ import java.util.List;
 public interface RewardRepository extends JpaRepository<Reward, Long> {
 
     Reward save(Reward reward);
+
     void delete(Reward reward);
+
     List<Reward> findAll();
+
     Reward findById(long id);
 }

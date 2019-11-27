@@ -20,9 +20,9 @@ public class Reward implements Comparable<Reward> {
     private int price; // The price of the reward
     private int levelRequired; // Minimum level required to buy the reward
     private boolean autorenew; // Probably not going to use this
-/*    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate; // Reward expires after this date*/
+    /*    @NotNull
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private LocalDate endDate; // Reward expires after this date*/
     private Boolean visible; // Probably not going to use this
     @ManyToOne
     private Child buyer; // Don't think we are going to use this anymore
@@ -134,6 +134,6 @@ public class Reward implements Comparable<Reward> {
 
     @Override
     public int compareTo(@org.jetbrains.annotations.NotNull Reward o) {
-        return (int)(this.id - o.getId());
+        return (int) (this.id - o.getId());
     }
 }

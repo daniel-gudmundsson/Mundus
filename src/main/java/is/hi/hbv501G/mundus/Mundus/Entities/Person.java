@@ -26,12 +26,9 @@ public abstract class Person implements Comparable<Person> { // An abstract clas
         this.pin = pin;
     }
 
-    public Person(){
+    public Person() {
 
     }
-
-
-
 
     // Getters and Setters
     public long getId() {

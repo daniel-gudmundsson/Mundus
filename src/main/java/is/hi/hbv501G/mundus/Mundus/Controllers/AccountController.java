@@ -86,29 +86,6 @@ public class AccountController {
         return "redirect:/";
     }
 
-
-//    @RequestMapping("/test1")
-//    public String home(Model model) {
-//        if (model.containsAttribute("accountId")) {
-//            System.out.println(Long.parseLong(String.valueOf(model.asMap().get("accountId"))));
-//        } else {
-//            return "redirect:/login";
-//        }
-//        return "Welcome";
-//    }
-
-//    @RequestMapping("/test3")
-//    public String test3() {
-//        Account account = new Account("Agnar", "agnar-97@hotmail.com", "mamma", LocalDate.now());
-//        Parent parent = new Parent("Agnar", "1234");
-//        try {
-//            accountService.createAccount(account, parent);
-//        } catch (Exception e) {
-//
-//        }
-//        return "login";
-//    }
-
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUpPOST(@Valid Account account, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -129,11 +106,4 @@ public class AccountController {
         model.addAttribute("account", new Account());
         return "signUp";
     }
-
-//    @RequestMapping("/test5")
-//    public String test5(Model model, HttpSession session) {
-//        System.out.println((long)session.getAttribute("AccountIdLoggedIn"));
-//        return "Welcome";
-//    }
-
 }

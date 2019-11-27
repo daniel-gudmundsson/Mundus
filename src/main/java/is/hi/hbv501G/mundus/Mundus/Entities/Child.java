@@ -13,7 +13,7 @@ public class Child extends Person { // This class extends the abstract Person cl
     private int totalCoins; // The total amount of coins the child has. Can be used to buy rewards
     private int xp; // The total amount of xp the child has (Need xp to level up) TODO MAKE A LEVEL UP FUNCTION
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, mappedBy = "assignee",orphanRemoval = true)
+            fetch = FetchType.LAZY, mappedBy = "assignee", orphanRemoval = true)
     private Set<Quest> quests = new HashSet<>(); // Contains quests that are assigned to the child
     @ElementCollection
     private List<Long> rewards = new ArrayList<>(); // Contains the id of the rewards the child owns
@@ -27,7 +27,7 @@ public class Child extends Person { // This class extends the abstract Person cl
         this.xp = 0;
     }
 
-    public Child(){
+    public Child() {
 
     }
 
@@ -49,11 +49,11 @@ public class Child extends Person { // This class extends the abstract Person cl
         this.rewards = rewardIds;
     }
 
-    public void addReward(long rewardId){
+    public void addReward(long rewardId) {
         this.rewards.add(rewardId);
     }
 
-    public void removeReward(long rewardId){
+    public void removeReward(long rewardId) {
         this.rewards.remove(rewardId);
     }
 
@@ -68,7 +68,7 @@ public class Child extends Person { // This class extends the abstract Person cl
 
     public int getLevel() {
 
-        return xp/1000+1;
+        return xp / 1000 + 1;
     }
 
     public void addQuest(Quest quest) {
@@ -99,10 +99,12 @@ public class Child extends Person { // This class extends the abstract Person cl
     }
 
 
-    public void addXp(int xp){
-        this.xp=this.xp+xp;
+    public void addXp(int xp) {
+        this.xp = this.xp + xp;
     }
 
-    public void addCoins(int coins){this.totalCoins = this.totalCoins + coins;}
+    public void addCoins(int coins) {
+        this.totalCoins = this.totalCoins + coins;
+    }
 
 }

@@ -14,8 +14,12 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Account save(Account account);
+
     void delete(Account account);
+
     List<Account> findAll();
+
     Account findAccountById(long id);
+
     Account findAccountByEmail(String Email);
 }

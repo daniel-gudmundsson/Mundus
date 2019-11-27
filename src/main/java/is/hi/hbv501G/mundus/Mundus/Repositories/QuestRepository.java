@@ -11,12 +11,15 @@ import java.util.Optional;
 public interface QuestRepository extends JpaRepository<Quest, Long> {
 
     Quest save(Quest quest);
+
     void delete(Quest quest);
+
     List<Quest> findAll();
+
     Quest findById(long id);
 
 
-   // @Query("DELETE FROM Quest q WHERE q.deadline < ?1")
+    // @Query("DELETE FROM Quest q WHERE q.deadline < ?1")
     void deleteAllByDeadlineBefore(LocalDate date);
 
 

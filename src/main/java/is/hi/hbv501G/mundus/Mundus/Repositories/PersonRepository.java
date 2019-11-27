@@ -12,13 +12,18 @@ import java.util.Optional;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Parent save(Parent parent);
+
     Child save(Child child);
 
 
     void delete(Person person);
+
     List<Person> findAll();
+
     Child findChildById(long id);
+
     Parent findParentById(long id);
+
     Person findPersonById(long id);
 
 }

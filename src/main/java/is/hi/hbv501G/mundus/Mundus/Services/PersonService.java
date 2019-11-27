@@ -11,12 +11,19 @@ import java.util.Optional;
 public interface PersonService {
 
     Person save(Person person);
+
     void delete(Person person);
+
     List<Person> findAll();
+
     Child findChildById(long id);
+
     Parent findParentById(long id);
+
     Person findPersonById(long id);
+
     void assignChildToParent(Child child, long idOfParent) throws Exception;
+
     long authenticatePin(long childId, String pin) throws Exception;
 
 }
