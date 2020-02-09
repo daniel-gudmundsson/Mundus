@@ -19,3 +19,6 @@ The following features will be present in the initial release:
  * Children can use the earned reward points to buy rewards.
  * The children can see how much reward points they have earned
  * Parents can rate the children's work
+
+
+(Requires Java SDK 1.8)
